@@ -1,0 +1,6 @@
+{
+  "name": "Goober Dash Kaizo List",
+  "description": "Official community ranking list for the most difficult Kaizo platforming levels in Goober Dash, with direct play links, image previews, victor records, and proof submissions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

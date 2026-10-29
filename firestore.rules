@@ -1,0 +1,59 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'tomatosauceman500@gmail.com';
+    }
+    function isHelper() {
+      return request.auth != null && exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+    
+    // Helper function to get the document ID format for a user's email
+    function getUserDocId(email) {
+      return email.replace("@", "_").replace(".", "_").replace(".", "_").replace(".", "_");
+    }
+
+    match /users/{userId} {
+      // Allow user to get their own profile to verify role, or admin to list all
+      allow get: if request.auth != null && (isAdmin() || getUserDocId(request.auth.token.email) == userId);
+      allow list: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /levels/{levelId} {
+      allow read: if true;
+      allow write: if isAdmin() || isHelper();
+    }
+
+    match /submissions/{submissionId} {
+      allow read: if true;
+      allow write: if isAdmin() || isHelper();
+    }
+
+    match /players/{playerId} {
+      allow read: if true;
+      allow write: if isAdmin() || isHelper();
+    }
+
+    match /deletedLevels/{levelId} {
+      allow read: if true;
+      allow write: if isAdmin() || isHelper();
+    }
+
+    match /deletedPlayers/{playerId} {
+      allow read: if true;
+      allow write: if isAdmin() || isHelper();
+    }
+
+    match /changelog/{logId} {
+      allow read: if true;
+      allow write: if isAdmin() || isHelper();
+    }
+
+    // Default deny for unhandled paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

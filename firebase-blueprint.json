@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "Victor": {
+      "title": "Victor",
+      "description": "Information about a player who completed a level",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "videoProofUrl": { "type": "string" },
+        "verifiedByCreator": { "type": "boolean" },
+        "isVerifier": { "type": "boolean" },
+        "isWorldRecord": { "type": "boolean" }
+      },
+      "required": ["id"]
+    },
+    "KaizoLevel": {
+      "title": "KaizoLevel",
+      "description": "A ranked Goober Dash Kaizo level entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "rank": { "type": "number" },
+        "name": { "type": "string", "maxLength": 200 },
+        "creator": { "type": "string", "maxLength": 100 },
+        "verifier": { "type": "string", "maxLength": 100 },
+        "worldRecord": { "type": "string" },
+        "directPlayUrl": { "type": "string" },
+        "difficulty": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "imageFit": { "type": "string" },
+        "length": { "type": "string" },
+        "victors": { "type": "array" },
+        "isLegacy": { "type": "boolean" }
+      },
+      "required": ["id", "rank", "name", "creator", "verifier", "directPlayUrl", "difficulty"]
+    },
+    "ProofSubmission": {
+      "title": "ProofSubmission",
+      "description": "User submitted proof of level completion",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "levelId": { "type": "string" },
+        "levelName": { "type": "string" },
+        "player": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "status": { "type": "string" },
+        "submittedAt": { "type": "string" }
+      },
+      "required": ["id", "levelId", "levelName", "player", "videoUrl", "status", "submittedAt"]
+    },
+    "ChangelogItem": {
+      "title": "ChangelogItem",
+      "description": "A record of a change made to the database with helper attribution and granular diffs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "action": { "type": "string" },
+        "description": { "type": "string" },
+        "author": { "type": "string" },
+        "levelName": { "type": "string" },
+        "changes": { "type": "array" }
+      },
+      "required": ["id", "timestamp", "action", "description"]
+    },
+    "ListHelper": {
+      "title": "ListHelper",
+      "description": "An authorized list helper profile with access code and role",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "role": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["id", "name", "code", "active"]
+    }
+  },
+  "firestore": {
+    "/levels/{levelId}": {
+      "schema": "KaizoLevel",
+      "description": "Collection of rated kaizo levels in the demonlist"
+    },
+    "/submissions/{submissionId}": {
+      "schema": "ProofSubmission",
+      "description": "Submitted completion video proofs awaiting verification"
+    },
+    "/changelog/{logId}": {
+      "schema": "ChangelogItem",
+      "description": "Audit log of administrative actions and edits"
+    },
+    "/listHelpers/{helperId}": {
+      "schema": "ListHelper",
+      "description": "Authorized list helper editor credentials"
+    }
+  }
+}
