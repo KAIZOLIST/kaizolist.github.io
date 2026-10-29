@@ -113,9 +113,12 @@ export const EditListTab: React.FC<EditListTabProps> = ({
   const handleSignIn = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      onToast('Failed to sign in.');
+      const errorMessage = err?.code === 'auth/unauthorized-domain' 
+        ? 'Error: Domain not authorized in Firebase Console.' 
+        : `Sign-in failed: ${err?.message || 'Unknown error'}`;
+      onToast(errorMessage);
     }
   };
 
