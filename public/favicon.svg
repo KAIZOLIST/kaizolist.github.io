@@ -13,8 +13,8 @@
       <stop offset="100%" stop-color="#991b1b" />
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="14" fill="#0b0f17" />
-  <text x="32" y="44" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="34" text-anchor="middle" letter-spacing="-2">
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#0b0f17" />
+  <text x="32" y="38" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="21" text-anchor="middle" letter-spacing="-1">
     <tspan fill="url(#blueGrad)">G</tspan><tspan fill="url(#pinkGrad)">D</tspan><tspan fill="url(#redGrad)">KL</tspan>
   </text>
 </svg>
