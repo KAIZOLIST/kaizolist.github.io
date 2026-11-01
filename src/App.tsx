@@ -8,6 +8,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { LevelCard } from './components/LevelCard';
 import { LevelDetailModal } from './components/LevelDetailModal';
+import { PlayerProfileModal } from './components/PlayerProfileModal';
 import { SubmitProofModal } from './components/SubmitProofModal';
 import { VictorsHall } from './components/VictorsHall';
 import { RulesSection } from './components/RulesSection';
@@ -19,6 +20,7 @@ import { getSubmissions, saveSubmissions } from './utils/storage';
 import { getPointsForRank, isLevelVerified, getVerifiedPlacements, getLevelIdFromLink } from './utils/kaizoUtils';
 import {
   subscribeToLevels,
+  subscribeToLevelsBundle,
   subscribeToPlayers,
   subscribeToDeletedLevels,
   subscribeToDeletedPlayers,
@@ -38,6 +40,7 @@ export default function App() {
   // Navigation and Modal states
   const [activeTab, setActiveTab] = useState<'rankings' | 'victors' | 'rules' | 'edit-list'>('rankings');
   const [selectedLevel, setSelectedLevel] = useState<KaizoLevel | null>(null);
+  const [selectedPlayerName, setSelectedPlayerName] = useState<string | null>(null);
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [preselectedLevelId, setPreselectedLevelId] = useState<string | undefined>(undefined);
 
@@ -74,57 +77,22 @@ export default function App() {
           setDeletedPlayerIds(dSet);
         });
 
-        // Sync any missing baseline levels into Firestore
-        await syncLevelsToFirestore(initialLevelsData as KaizoLevel[]);
-
         // Subscribe to custom players
         unsubscribePlayers = subscribeToPlayers((pList) => {
           setCustomPlayers(pList);
         });
 
-        // Subscribe to real-time level collection updates from Firestore
-        unsubscribeLevels = subscribeToLevels(
-          (fireLevels) => {
-            const baselineLevels = initialLevelsData as KaizoLevel[];
-            const fireMap = new Map(fireLevels.map((l) => [l.id, l]));
-
-            const mergedMap = new Map<string, KaizoLevel>();
-
-            // Account for all baseline levels (skipping explicitly deleted levels)
-            baselineLevels.forEach((baseLvl) => {
-              if (deletedLevelIds.has(baseLvl.id)) {
-                return; // Level was deleted! Do not re-add from baseline.
-              }
-
-              const fireLvl = fireMap.get(baseLvl.id);
-              if (fireLvl) {
-                mergedMap.set(baseLvl.id, {
-                  ...baseLvl,
-                  ...fireLvl,
-                  name: fireLvl.name || baseLvl.name,
-                  verifier: fireLvl.verifier !== undefined ? fireLvl.verifier : baseLvl.verifier,
-                  thumbnailUrl: fireLvl.thumbnailUrl !== undefined ? fireLvl.thumbnailUrl : baseLvl.thumbnailUrl,
-                  rank: typeof fireLvl.rank === 'number' && fireLvl.rank < 999 ? fireLvl.rank : baseLvl.rank,
-                });
-              } else {
-                mergedMap.set(baseLvl.id, baseLvl);
-              }
-            });
-
-            // Include any additional levels in Firestore that might not be in baseline JSON
-            fireLevels.forEach((fireLvl) => {
-              if (!deletedLevelIds.has(fireLvl.id) && !mergedMap.has(fireLvl.id)) {
-                mergedMap.set(fireLvl.id, fireLvl);
-              }
-            });
-
-            const mergedList = Array.from(mergedMap.values());
-            mergedList.sort((a, b) => a.rank - b.rank);
-            setLevels(mergedList);
-            setIsFirestoreLive(true);
+        // Subscribe to real-time consolidated level bundle (1 document read for all 250+ levels!)
+        unsubscribeLevels = subscribeToLevelsBundle(
+          (bundleData) => {
+            if (bundleData && Array.isArray(bundleData.levels) && bundleData.levels.length > 0) {
+              const sorted = [...bundleData.levels].sort((a, b) => a.rank - b.rank);
+              setLevels(sorted);
+              setIsFirestoreLive(true);
+            }
           },
           (err) => {
-            console.warn('Firestore subscription notice (using fallback JSON):', err);
+            console.warn('Firestore bundle subscription notice (using fallback):', err);
           }
         );
       } catch (err) {
@@ -266,14 +234,6 @@ export default function App() {
 
             {/* Level Rankings List Container */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-extrabold text-white font-heading">
-                    Kaizo Level List
-                  </h2>
-                </div>
-              </div>
-
               {filteredLevels.length === 0 ? (
                 <div className="p-12 text-center bg-[#111927] border border-slate-800 rounded-2xl text-slate-400 space-y-3">
                   <p className="text-sm">No levels match your search or filter criteria.</p>
@@ -333,6 +293,7 @@ export default function App() {
             <VictorsHall
               levels={levels}
               onSelectLevel={(lvl) => setSelectedLevel(lvl)}
+              onSelectPlayer={(pName) => setSelectedPlayerName(pName)}
             />
           </ErrorBoundary>
         )}
@@ -355,6 +316,7 @@ export default function App() {
               customPlayers={customPlayers}
               isFirestoreLive={isFirestoreLive}
               onToast={showToast}
+              onSelectPlayer={(pName) => setSelectedPlayerName(pName)}
             />
           </ErrorBoundary>
         )}
@@ -405,8 +367,22 @@ export default function App() {
           pointsAwarded={selectedLevel && verifiedPlacements.get(selectedLevel.id) ? getPointsForRank(verifiedPlacements.get(selectedLevel.id)!) : 0}
           onClose={() => setSelectedLevel(null)}
           onSubmitProofForLevel={handleOpenSubmitForLevel}
+          onSelectPlayer={(pName) => setSelectedPlayerName(pName)}
         />
       </ErrorBoundary>
+
+      {/* Player Profile Modal */}
+      {selectedPlayerName && (
+        <ErrorBoundary fallbackTitle="Player Profile Modal Notice">
+          <PlayerProfileModal
+            playerName={selectedPlayerName}
+            levels={levels}
+            onClose={() => setSelectedPlayerName(null)}
+            onSelectLevel={(lvl) => setSelectedLevel(lvl)}
+            onQuickPlay={handleQuickPlay}
+          />
+        </ErrorBoundary>
+      )}
 
       {/* Submit Proof Modal */}
       <ErrorBoundary fallbackTitle="Submit Proof Modal Notice">

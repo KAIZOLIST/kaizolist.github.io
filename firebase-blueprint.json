@@ -77,12 +77,56 @@
         "active": { "type": "boolean" }
       },
       "required": ["id", "name", "code", "active"]
+    },
+    "LevelImage": {
+      "title": "LevelImage",
+      "description": "Image and thumbnail asset storage for a specific level document",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id"]
+    },
+    "LevelsBundle": {
+      "title": "LevelsBundle",
+      "description": "Consolidated level list document containing all levels metadata without image payloads",
+      "type": "object",
+      "properties": {
+        "count": { "type": "number" },
+        "updatedAt": { "type": "string" },
+        "description": { "type": "string" },
+        "levels": { "type": "array" }
+      },
+      "required": ["count", "updatedAt", "levels"]
+    },
+    "ImageChunk": {
+      "title": "ImageChunk",
+      "description": "Batched preview base64 images document containing up to 10 level thumbnails",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "chunkIndex": { "type": "number" },
+        "count": { "type": "number" },
+        "updatedAt": { "type": "string" },
+        "images": { "type": "object" }
+      },
+      "required": ["id", "images"]
     }
   },
   "firestore": {
+    "/image_chunks/{chunkId}": {
+      "schema": "ImageChunk",
+      "description": "Batched thumbnail preview images storing up to 10 base64 images per document"
+    },
     "/levels/{levelId}": {
-      "schema": "KaizoLevel",
-      "description": "Collection of rated kaizo levels in the demonlist"
+      "schema": "LevelImage",
+      "description": "Individual level thumbnail image assets (all main list info is stored in /bundles/levels)"
+    },
+    "/bundles/{bundleId}": {
+      "schema": "LevelsBundle",
+      "description": "Consolidated data bundles such as the all-in-one levels list without images"
     },
     "/submissions/{submissionId}": {
       "schema": "ProofSubmission",

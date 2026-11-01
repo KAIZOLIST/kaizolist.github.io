@@ -8,7 +8,7 @@
     "worldRecord": "BestEgg",
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1001-PIXEL",
     "difficulty": "Extreme Kaizo",
-    "thumbnailUrl": "/src/assets/images/pixel_perfect_hell.png",
+    "thumbnailUrl": "images/pixel_perfect_hell.png",
     "length": "0:50",
     "victors": [
       {
@@ -39,7 +39,7 @@
     "worldRecord": "Everblaze",
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1002-THESE",
     "difficulty": "Extreme Kaizo",
-    "thumbnailUrl": "/src/assets/images/second_crucible.png",
+    "thumbnailUrl": "images/second_crucible.png",
     "length": "0:50",
     "victors": [
       {
@@ -64,7 +64,7 @@
     "worldRecord": "Everblaze",
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1003-FLUOR",
     "difficulty": "Extreme Kaizo",
-    "thumbnailUrl": "/src/assets/images/fluorescence.png",
+    "thumbnailUrl": "images/fluorescence.png",
     "length": "0:50",
     "victors": [
       {
@@ -89,7 +89,7 @@
     "worldRecord": "Unlimited",
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1004-AFROZ",
     "difficulty": "Extreme Kaizo",
-    "thumbnailUrl": "/src/assets/images/frozen_galaxy.png",
+    "thumbnailUrl": "images/frozen_galaxy.png",
     "length": "0:50",
     "victors": [
       {
@@ -126,7 +126,7 @@
     "worldRecord": "Everblaze",
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1005-BULLE",
     "difficulty": "Extreme Kaizo",
-    "thumbnailUrl": "/src/assets/images/bullet_hell.png",
+    "thumbnailUrl": "images/bullet_hell.png",
     "length": "0:50",
     "victors": [
       {

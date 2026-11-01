@@ -21,6 +21,15 @@ export interface KaizoLevel {
   length: string;
   victors: Victor[];
   isLegacy?: boolean;
+  imageChunkId?: string;
+}
+
+export interface ImageChunk {
+  id: string;
+  chunkIndex: number;
+  count: number;
+  updatedAt: string;
+  images: Record<string, string>;
 }
 
 export interface ProofSubmission {
@@ -29,6 +38,8 @@ export interface ProofSubmission {
   levelName: string;
   player: string;
   videoUrl: string;
+  screenshotUrl?: string;
+  proofType?: 'video' | 'screenshot' | 'both';
   status: 'pending' | 'approved' | 'rejected';
   submittedAt: string;
 }

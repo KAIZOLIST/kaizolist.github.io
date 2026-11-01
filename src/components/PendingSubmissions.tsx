@@ -1,6 +1,6 @@
-import React from 'react';
-import { ProofSubmission, KaizoLevel, Victor, ListHelper, ChangeDetail } from '../types/kaizo';
-import { Check, X, Video } from 'lucide-react';
+import React, { useState } from 'react';
+import { ProofSubmission, KaizoLevel, Victor, ChangeDetail } from '../types/kaizo';
+import { Check, X, Video, Image as ImageIcon, ExternalLink, Eye } from 'lucide-react';
 import { updateLevelData, addChangelogItem, db } from '../lib/firebase';
 import { deleteDoc, doc } from 'firebase/firestore';
 
@@ -18,6 +18,7 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
   playerName,
 }) => {
   const pending = submissions.filter((s) => s.status === 'pending');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handleApprove = async (sub: ProofSubmission) => {
     const level = levels.find((l) => l.id === sub.levelId);
@@ -26,10 +27,11 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
       return;
     }
 
+    const proofUrl = sub.screenshotUrl || sub.videoUrl;
     const newVictor: Victor = {
       id: `vic-${Date.now()}-${sub.player.toLowerCase().replace(/[^a-z0-9]/g, '')}`,
       name: sub.player,
-      videoProofUrl: sub.videoUrl,
+      videoProofUrl: proofUrl,
     };
 
     const updatedVictors = [...(level.victors || []), newVictor];
@@ -37,41 +39,34 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
     try {
       const approveChanges: ChangeDetail[] = [
         {
-          field: 'status',
-          label: 'Submission Status',
-          oldValue: 'Pending',
-          newValue: 'Approved',
-          description: `Completion approved for ${sub.player}`,
-          type: 'modified'
-        },
-        {
-          field: 'level',
-          label: 'Level',
-          newValue: level.name,
-          description: `Level: "${level.name}" (Rank #${level.rank})`,
-          type: 'added'
-        },
-        {
-          field: 'player',
-          label: 'Player Added',
-          newValue: sub.player,
-          description: `Added to victors roster: ${sub.player}`,
+          field: 'victor',
+          label: 'Completion Added',
+          newValue: `${sub.player} (Rank #${level.rank})`,
+          description: `Added verified completion for ${sub.player} on level "${level.name}" (Rank #${level.rank})`,
           type: 'added'
         },
         {
           field: 'proof',
-          label: 'Video Proof',
-          newValue: sub.videoUrl,
-          description: `Verified footage: ${sub.videoUrl}`,
+          label: sub.proofType === 'screenshot' ? 'Screenshot Proof' : 'Proof Link',
+          newValue: proofUrl.startsWith('data:') ? 'Uploaded Screenshot Data' : proofUrl,
+          description: `Verified completion proof`,
           type: 'added'
+        },
+        {
+          field: 'status',
+          label: 'Submission Queue',
+          oldValue: 'Pending',
+          newValue: 'Approved',
+          description: `Submission queue item approved by ${playerName}`,
+          type: 'modified'
         }
       ];
 
       await updateLevelData(level.id, { victors: updatedVictors });
       await deleteDoc(doc(db, 'submissions', sub.id));
       await addChangelogItem(
-        'Approve Submission',
-        `Approved completion for ${sub.player} on level "${level.name}"`,
+        'Completion Added',
+        `Completion added for ${sub.player} on "${level.name}" (Rank #${level.rank})`,
         playerName,
         approveChanges,
         { levelId: level.id, levelName: level.name }
@@ -89,25 +84,18 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
       const rejectChanges: ChangeDetail[] = [
         {
           field: 'status',
-          label: 'Submission Status',
+          label: 'Submission Queue',
           oldValue: 'Pending',
           newValue: 'Rejected',
           description: `Submission denied for ${sub?.player || 'player'} on "${sub?.levelName || 'level'}"`,
-          type: 'removed'
-        },
-        {
-          field: 'proof',
-          label: 'Submitted Video Proof',
-          oldValue: sub?.videoUrl || 'None',
-          description: `Submitted proof link: ${sub?.videoUrl || 'None'}`,
           type: 'removed'
         }
       ];
 
       await deleteDoc(doc(db, 'submissions', subId));
       await addChangelogItem(
-        'Reject Submission',
-        `Rejected completion submission for ${sub?.player || 'player'} on "${sub?.levelName || 'level'}"`,
+        'Submission Rejected',
+        `Rejected completion submission from ${sub?.player || 'player'} on "${sub?.levelName || 'level'}"`,
         playerName,
         rejectChanges,
         { levelId: sub?.levelId, levelName: sub?.levelName }
@@ -126,31 +114,98 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
           No pending submissions.
         </div>
       ) : (
-        pending.map((sub) => (
-          <div key={sub.id} className="bg-[#111927] border border-slate-800 p-4 rounded-xl flex items-center justify-between">
-            <div>
-              <h4 className="text-white font-bold">{sub.levelName}</h4>
-              <p className="text-sm text-slate-400">Player: {sub.player}</p>
-              <a href={sub.videoUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-amber-400 flex items-center gap-1 mt-1">
-                <Video className="w-3 h-3" /> View Proof
-              </a>
+        pending.map((sub) => {
+          const isImageProof =
+            sub.proofType === 'screenshot' ||
+            sub.screenshotUrl ||
+            (sub.videoUrl && sub.videoUrl.startsWith('data:image/'));
+
+          const imageUrl = sub.screenshotUrl || (sub.videoUrl && sub.videoUrl.startsWith('data:image/') ? sub.videoUrl : null);
+
+          return (
+            <div key={sub.id} className="bg-[#111927] border border-slate-800 p-4 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3 min-w-0">
+                {isImageProof && imageUrl ? (
+                  <div
+                    onClick={() => setSelectedImage(imageUrl)}
+                    className="relative w-16 h-16 bg-slate-950 border border-slate-700 rounded-lg overflow-hidden shrink-0 cursor-pointer group hover:border-amber-400 transition-colors"
+                  >
+                    <img src={imageUrl} alt="Screenshot proof" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                      <Eye className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 bg-amber-400/10 border border-amber-400/20 rounded-lg flex items-center justify-center text-amber-400 shrink-0">
+                    <Video className="w-6 h-6" />
+                  </div>
+                )}
+
+                <div className="min-w-0">
+                  <h4 className="text-white font-bold text-sm truncate">{sub.levelName}</h4>
+                  <p className="text-xs text-slate-300">Player: <strong className="text-white">{sub.player}</strong></p>
+
+                  <div className="flex items-center gap-2 mt-1">
+                    {imageUrl ? (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedImage(imageUrl)}
+                        className="text-xs text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1"
+                      >
+                        <ImageIcon className="w-3.5 h-3.5" />
+                        <span>View Screenshot Proof</span>
+                      </button>
+                    ) : (
+                      <a
+                        href={sub.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>View Proof Link</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                <button
+                  type="button"
+                  onClick={() => handleApprove(sub)}
+                  className="px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg font-bold text-xs flex items-center gap-1 transition-colors"
+                >
+                  <Check className="w-4 h-4" />
+                  <span>Approve</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleReject(sub.id)}
+                  className="px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 rounded-lg font-bold text-xs flex items-center gap-1 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                  <span>Reject</span>
+                </button>
+              </div>
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => handleApprove(sub)}
-                className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg hover:bg-emerald-500/20"
-              >
-                <Check className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => handleReject(sub.id)}
-                className="p-2 bg-rose-500/10 text-rose-400 rounded-lg hover:bg-rose-500/20"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+          );
+        })
+      )}
+
+      {/* FULL SCREENSHOT MODAL */}
+      {selectedImage && (
+        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
+          <div className="relative max-w-4xl max-h-[90vh] bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden p-2">
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 bg-slate-950/80 text-white p-2 rounded-xl hover:bg-rose-500 transition-colors z-10"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <img src={selectedImage} alt="Full screenshot proof" className="w-full h-full max-h-[85vh] object-contain rounded-xl" />
           </div>
-        ))
+        </div>
       )}
     </div>
   );

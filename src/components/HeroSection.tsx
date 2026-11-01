@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Flame, ShieldCheck, SlidersHorizontal } from 'lucide-react';
+import { Search, ShieldCheck, SlidersHorizontal } from 'lucide-react';
 import { KaizoLevel } from '../types/kaizo';
 import { isLevelVerified } from '../utils/kaizoUtils';
 
@@ -79,19 +79,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-[#0b0f17]/70 to-transparent" />
         
         {/* Banner Content Overlay */}
-        <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 flex flex-col justify-end items-center pb-8 text-center">
-          <div className="max-w-3xl flex flex-col items-center">
-            <div className="flex items-center justify-center gap-2 text-xs font-semibold tracking-wider uppercase text-amber-400 mb-2">
-              <Flame className="w-4 h-4 text-amber-400 animate-pulse" />
-              <span>Official Community List</span>
-              <span aria-hidden="true" className="text-slate-500">·</span>
-              <span className="text-slate-300">Extreme Platforming Demonlist</span>
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-heading leading-tight">
-              Goober Dash Kaizo List
+        <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 flex flex-col justify-end items-center pb-8 text-center overflow-visible">
+          <div className="max-w-3xl flex flex-col items-center overflow-visible">
+            <h1 className="flex flex-wrap items-center justify-center gap-x-2 sm:gap-x-2.5 gap-y-2 text-4xl sm:text-6xl font-black tracking-tighter py-3 px-6 select-none font-heading overflow-visible">
+              <span className="inline-block bg-gradient-to-b from-blue-300 to-blue-600 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(96,165,250,0.25)] pr-3">Goober</span>
+              <span className="inline-block bg-gradient-to-b from-pink-300 to-pink-600 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(244,114,182,0.25)] pr-3">Dash</span>
+              <span className="inline-block bg-gradient-to-b from-white via-slate-100 to-slate-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(255,255,255,0.45)] pr-3">Kaizo</span>
+              <span className="inline-block bg-gradient-to-b from-white via-slate-100 to-slate-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(255,255,255,0.45)] pr-3">List</span>
             </h1>
             <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed text-center">
-              Tracking the most merciless, pixel-perfect user-made levels in Goober Dash. Review level mechanics, launch directly into courses, and submit your verified completion records.
+              The official list of the hardest levels beaten in Goober Dash. Check out the levels and submit your completions to our list team!
             </p>
           </div>
         </div>
@@ -104,7 +101,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <span className="text-xs text-slate-400 block font-medium">Ranked Levels</span>
             <div className="flex items-baseline gap-2 mt-1">
               <span className="text-2xl font-bold text-white tabular-nums">{safeLevels.length}</span>
-              <span className="text-xs text-slate-500 font-mono">active gauntlets</span>
+              <span className="text-xs text-slate-500 font-mono">active kaizos</span>
             </div>
           </div>
 
@@ -120,7 +117,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <span className="text-xs text-slate-400 block font-medium">Individual Creators</span>
             <div className="flex items-baseline gap-2 mt-1">
               <span className="text-2xl font-bold text-amber-400 tabular-nums">{uniqueCreators.length}</span>
-              <span className="text-xs text-slate-500 font-mono">unique authors</span>
+              <span className="text-xs text-slate-500 font-mono">unique creators</span>
             </div>
             {/* Hover dropdown list of creators */}
             <div className="absolute left-0 right-0 top-full mt-1 bg-[#111927] border border-slate-700 rounded-xl p-3 shadow-2xl z-50 hidden group-hover:block max-h-60 overflow-y-auto">

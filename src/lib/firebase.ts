@@ -9,9 +9,11 @@ import {
   onSnapshot,
   getDocFromServer,
   writeBatch,
-  getDoc
+  getDoc,
+  updateDoc,
+  deleteField
 } from 'firebase/firestore';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from 'firebase/auth';
 import firebaseConfig from '../../firebase-applet-config.json';
 import { KaizoLevel, ProofSubmission, PlayerProfile, ChangelogItem, ListHelper, ChangeDetail, User } from '../types/kaizo';
 
@@ -133,7 +135,7 @@ export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 
-export { signInWithPopup, signOut, onAuthStateChanged };
+export { signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged };
 
 export async function isUserAuthorized(email: string | null): Promise<boolean> {
   if (!email) return false;
@@ -217,122 +219,366 @@ const baselineLevelsMap = new Map<string, KaizoLevel>(
   (initialLevelsData as KaizoLevel[]).map((lvl) => [lvl.id, lvl])
 );
 
-// Subscribe to Levels real-time with automatic field sanitization and baseline defaults
-export function subscribeToLevels(
-  onUpdate: (levels: KaizoLevel[]) => void,
+export interface LevelsBundleData {
+  id: string;
+  description: string;
+  count: number;
+  updatedAt: string;
+  levels: KaizoLevel[];
+}
+
+// In-memory cache for level thumbnail images to prevent redundant Firestore reads
+const thumbnailMemoryCache = new Map<string, string | null>();
+// Level ID to chunk ID mapping (populated from bundle)
+const levelToChunkMap = new Map<string, string>();
+// In-memory cache for level metadata
+const cachedLevelsMap = new Map<string, KaizoLevel>();
+// In-flight chunk loading promises to coalesce parallel requests into 1 read
+const chunkFetchPromises = new Map<string, Promise<void>>();
+// Track chunk IDs that have ALREADY been fetched from Firestore in this session
+const loadedImageChunksSet = new Set<string>();
+
+// In-memory cache for levels bundle data
+let cachedLevelsBundle: LevelsBundleData | null = null;
+let levelsBundlePromise: Promise<LevelsBundleData | null> | null = null;
+
+/**
+ * Determine the chunk ID for a level (e.g. 'chunk-1' for ranks 1-10, max 10 per chunk).
+ */
+export function getChunkIdForLevel(levelId: string, rank?: number, chunkId?: string): string {
+  if (chunkId && typeof chunkId === 'string' && chunkId.trim().length > 0) {
+    return chunkId.trim();
+  }
+  const cached = cachedLevelsMap.get(levelId);
+  if (cached?.imageChunkId && cached.imageChunkId.trim().length > 0) {
+    return cached.imageChunkId.trim();
+  }
+  if (levelToChunkMap.has(levelId)) {
+    return levelToChunkMap.get(levelId)!;
+  }
+  const effectiveRank = rank ?? cached?.rank;
+  if (effectiveRank && effectiveRank > 0) {
+    return `chunk-${Math.floor(Math.max(0, effectiveRank - 1) / 10) + 1}`;
+  }
+  return 'chunk-1';
+}
+
+export async function getChunkIdForLevelAsync(levelId: string, rank?: number, chunkId?: string): Promise<string> {
+  if (chunkId && typeof chunkId === 'string' && chunkId.trim().length > 0) {
+    return chunkId.trim();
+  }
+  const syncChunk = getChunkIdForLevel(levelId, rank, chunkId);
+  if (syncChunk !== 'chunk-1' || (rank && rank <= 10)) {
+    return syncChunk;
+  }
+  const bundle = await fetchLevelsBundle();
+  if (bundle && Array.isArray(bundle.levels)) {
+    const found = bundle.levels.find(l => l.id === levelId);
+    if (found?.imageChunkId && found.imageChunkId.trim().length > 0) {
+      return found.imageChunkId.trim();
+    }
+    if (found?.rank && found.rank > 0) {
+      return `chunk-${Math.floor((found.rank - 1) / 10) + 1}`;
+    }
+  }
+  return syncChunk;
+}
+
+/**
+ * Fetches an entire chunk of up to 10 preview images in 1 single Firestore read.
+ * All 10 images are populated directly into `thumbnailMemoryCache`.
+ * Already-fetched chunks return immediately from memory with 0 Firestore reads.
+ */
+export async function fetchImageChunk(chunkId: string): Promise<void> {
+  if (loadedImageChunksSet.has(chunkId)) {
+    return;
+  }
+  if (chunkFetchPromises.has(chunkId)) {
+    await chunkFetchPromises.get(chunkId);
+    return;
+  }
+  const promise = (async () => {
+    try {
+      const chunkDocRef = doc(db, 'image_chunks', chunkId);
+      const snap = await getDoc(chunkDocRef);
+      loadedImageChunksSet.add(chunkId);
+      if (snap.exists()) {
+        const data = snap.data();
+        const images: Record<string, string> = data?.images || {};
+        for (const [lvlId, imgUrl] of Object.entries(images)) {
+          if (typeof imgUrl === 'string') {
+            thumbnailMemoryCache.set(lvlId, imgUrl);
+          }
+        }
+      }
+    } catch (err) {
+      console.warn(`Notice loading image chunk ${chunkId}:`, err);
+    } finally {
+      chunkFetchPromises.delete(chunkId);
+    }
+  })();
+
+  chunkFetchPromises.set(chunkId, promise);
+  await promise;
+}
+
+/**
+ * Fetch a single level thumbnail image on demand from image_chunks/{chunkId}.
+ * Batches 10 level images together per chunk document so 1 read serves 10 levels.
+ * Results are cached in memory so subsequent views cost 0 Firestore reads.
+ */
+export async function fetchLevelThumbnail(
+  levelId: string,
+  rank?: number,
+  chunkId?: string
+): Promise<string | null> {
+  if (!levelId) return null;
+
+  // 1. Return from in-memory cache if checked previously (handles both valid URL and null)
+  if (thumbnailMemoryCache.has(levelId)) {
+    return thumbnailMemoryCache.get(levelId) || null;
+  }
+
+  // 2. Determine 1-indexed primary chunk ID
+  const targetChunkId = await getChunkIdForLevelAsync(levelId, rank, chunkId);
+  await fetchImageChunk(targetChunkId);
+
+  if (thumbnailMemoryCache.has(levelId)) {
+    return thumbnailMemoryCache.get(levelId) || null;
+  }
+
+  // 3. Fallback: Try 0-indexed chunk ID ONLY if fallback chunk hasn't been fetched yet
+  if (rank && rank > 0) {
+    const fallback0 = `chunk-${Math.floor(Math.max(0, rank - 1) / 10)}`;
+    if (fallback0 !== targetChunkId && !loadedImageChunksSet.has(fallback0)) {
+      await fetchImageChunk(fallback0);
+      if (thumbnailMemoryCache.has(levelId)) {
+        return thumbnailMemoryCache.get(levelId) || null;
+      }
+    }
+  }
+
+  // 4. Fallback: Check custom chunk formatting ONLY if alternative chunk hasn't been fetched yet
+  if (targetChunkId.startsWith('chunk-')) {
+    const rawNum = targetChunkId.replace('chunk-', '');
+    if (rawNum && !isNaN(Number(rawNum))) {
+      const altChunk = `chunk${rawNum}`;
+      if (!loadedImageChunksSet.has(altChunk)) {
+        await fetchImageChunk(altChunk);
+        if (thumbnailMemoryCache.has(levelId)) {
+          return thumbnailMemoryCache.get(levelId) || null;
+        }
+      }
+    }
+  }
+
+  // Mark as null in memory so we never query Firestore for this level again in this session
+  thumbnailMemoryCache.set(levelId, null);
+  return null;
+}
+
+const thumbnailSubscribers = new Map<string, Set<(url: string | null) => void>>();
+
+export function subscribeToLevelThumbnail(levelId: string, callback: (url: string | null) => void): () => void {
+  if (!thumbnailSubscribers.has(levelId)) {
+    thumbnailSubscribers.set(levelId, new Set());
+  }
+  thumbnailSubscribers.get(levelId)!.add(callback);
+
+  if (thumbnailMemoryCache.has(levelId)) {
+    callback(thumbnailMemoryCache.get(levelId) || null);
+  }
+
+  return () => {
+    const subs = thumbnailSubscribers.get(levelId);
+    if (subs) {
+      subs.delete(callback);
+      if (subs.size === 0) {
+        thumbnailSubscribers.delete(levelId);
+      }
+    }
+  };
+}
+
+export function notifyThumbnailUpdated(levelId: string, url: string | null) {
+  thumbnailMemoryCache.set(levelId, url || null);
+  const subs = thumbnailSubscribers.get(levelId);
+  if (subs) {
+    for (const cb of subs) {
+      cb(url || null);
+    }
+  }
+}
+
+/**
+ * Update level thumbnail preview image (URL or Base64 data string).
+ * Writes into the chunk file (image_chunks/{chunkId}) storing up to 10 images per chunk.
+ */
+export async function updateLevelThumbnail(
+  levelId: string,
+  thumbnailUrl: string | null,
+  rank?: number,
+  chunkId?: string
+): Promise<void> {
+  const targetChunkId = await getChunkIdForLevelAsync(levelId, rank, chunkId);
+  notifyThumbnailUpdated(levelId, thumbnailUrl);
+
+  if (cachedLevelsMap.has(levelId)) {
+    const cached = cachedLevelsMap.get(levelId)!;
+    cached.thumbnailUrl = thumbnailUrl;
+    cached.imageChunkId = targetChunkId;
+  }
+  levelToChunkMap.set(levelId, targetChunkId);
+  loadedImageChunksSet.add(targetChunkId);
+
+  const chunkRef = doc(db, 'image_chunks', targetChunkId);
+  try {
+    if (!thumbnailUrl) {
+      await updateDoc(chunkRef, {
+        [`images.${levelId}`]: deleteField(),
+        updatedAt: new Date().toISOString()
+      }).catch(() => {});
+    } else {
+      try {
+        await updateDoc(chunkRef, {
+          [`images.${levelId}`]: thumbnailUrl,
+          updatedAt: new Date().toISOString()
+        });
+      } catch (updateErr) {
+        await setDoc(chunkRef, {
+          id: targetChunkId,
+          updatedAt: new Date().toISOString(),
+          images: {
+            [levelId]: thumbnailUrl
+          }
+        });
+      }
+    }
+  } catch (error) {
+    handleFirestoreError(error, OperationType.UPDATE, `image_chunks/${targetChunkId}`);
+    throw error;
+  }
+}
+
+function registerLevelsInCache(levels: KaizoLevel[]) {
+  if (!Array.isArray(levels)) return;
+  levelToChunkMap.clear();
+  cachedLevelsMap.clear();
+  for (const lvl of levels) {
+    cachedLevelsMap.set(lvl.id, lvl);
+    if (lvl.imageChunkId && lvl.imageChunkId.trim().length > 0) {
+      levelToChunkMap.set(lvl.id, lvl.imageChunkId.trim());
+    } else if (lvl.rank && lvl.rank > 0) {
+      levelToChunkMap.set(lvl.id, `chunk-${Math.floor((lvl.rank - 1) / 10) + 1}`);
+    }
+  }
+}
+
+// Fetch the consolidated level bundle (1 single read for all levels without images)
+export async function fetchLevelsBundle(): Promise<LevelsBundleData | null> {
+  if (cachedLevelsBundle) {
+    return cachedLevelsBundle;
+  }
+  if (levelsBundlePromise) {
+    return levelsBundlePromise;
+  }
+
+  const bundleRef = doc(db, 'bundles', 'levels');
+  levelsBundlePromise = (async () => {
+    try {
+      const snap = await getDoc(bundleRef);
+      if (snap.exists()) {
+        const data = snap.data() as LevelsBundleData;
+        cachedLevelsBundle = data;
+        if (data && Array.isArray(data.levels)) {
+          registerLevelsInCache(data.levels);
+        }
+        return data;
+      }
+      return null;
+    } catch (error) {
+      handleFirestoreError(error, OperationType.GET, 'bundles/levels');
+      return null;
+    } finally {
+      levelsBundlePromise = null;
+    }
+  })();
+
+  return levelsBundlePromise;
+}
+
+// Subscribe to real-time updates for the consolidated level bundle
+export function subscribeToLevelsBundle(
+  onUpdate: (data: LevelsBundleData) => void,
   onError?: (err: Error) => void
 ) {
-  const levelsCollection = collection(db, 'levels');
+  const bundleRef = doc(db, 'bundles', 'levels');
   return onSnapshot(
-    levelsCollection,
+    bundleRef,
     (snapshot) => {
-      const levels: KaizoLevel[] = [];
-      snapshot.forEach((docSnap) => {
-        const data = docSnap.data() as Partial<KaizoLevel>;
-        if (data && typeof data === 'object') {
-          const docId = docSnap.id;
-          const baseline = baselineLevelsMap.get(docId) || baselineLevelsMap.get(data.id || '');
-
-          const sanitizedLevel: KaizoLevel = {
-            id: docId || data.id || baseline?.id || 'unknown',
-            rank: typeof data.rank === 'number' ? data.rank : (baseline?.rank ?? 999),
-            name: data.name || baseline?.name || 'Untitled Level',
-            creator: data.creator || baseline?.creator || 'Unknown Creator',
-            verifier: data.verifier !== undefined ? data.verifier : (baseline?.verifier ?? ''),
-            worldRecord: data.worldRecord || baseline?.worldRecord || '-',
-            directPlayUrl: data.directPlayUrl || baseline?.directPlayUrl || 'https://jellycade.com/games/goober-dash',
-            difficulty: data.difficulty || baseline?.difficulty || 'Entry Kaizo',
-            thumbnailUrl: data.thumbnailUrl !== undefined ? data.thumbnailUrl : (baseline?.thumbnailUrl || null),
-            imageFit: data.imageFit || baseline?.imageFit || 'cover',
-            length: data.length || baseline?.length || 'Short',
-            victors: Array.isArray(data.victors) && data.victors.length > 0 ? data.victors : (baseline?.victors || []),
-            isLegacy: data.isLegacy !== undefined ? Boolean(data.isLegacy) : (baseline?.isLegacy || false)
-          };
-          levels.push(sanitizedLevel);
+      if (snapshot.exists()) {
+        const data = snapshot.data() as LevelsBundleData;
+        cachedLevelsBundle = data;
+        if (data && Array.isArray(data.levels)) {
+          registerLevelsInCache(data.levels);
         }
-      });
-      // Sort levels by rank ascending
-      levels.sort((a, b) => a.rank - b.rank);
-      onUpdate(levels);
+        onUpdate(data);
+      }
     },
     (error) => {
-      console.warn('Failed to subscribe to levels:', error);
-      handleFirestoreError(error, OperationType.LIST, 'levels');
+      console.warn('Bundle subscription notice:', error);
+      handleFirestoreError(error, OperationType.GET, 'bundles/levels');
       if (onError) onError(error);
     }
   );
 }
 
-// Sync/seed levels to Firestore: check for missing documents or incomplete documents and update them in Firestore
-export async function syncLevelsToFirestore(initialLevels: KaizoLevel[]): Promise<number> {
+// Update the consolidated levels bundle in Firestore (strips images)
+export async function updateLevelsBundleInFirestore(levels: KaizoLevel[]): Promise<void> {
+  const bundleRef = doc(db, 'bundles', 'levels');
+  const sorted = [...levels].sort((a, b) => a.rank - b.rank);
+  const levelsWithoutImages = sorted.map((lvl) => {
+    const { thumbnailUrl: _omitted, ...rest } = lvl;
+    return rest as KaizoLevel;
+  });
+
+  const payload: LevelsBundleData = {
+    id: 'levels',
+    description: 'Goober Dash Kaizo List - Consolidated Level Data (without images)',
+    updatedAt: new Date().toISOString(),
+    count: levelsWithoutImages.length,
+    levels: levelsWithoutImages
+  };
+
   try {
-    const levelsCol = collection(db, 'levels');
-    const snapshot = await getDocs(levelsCol);
-    const existingDocsMap = new Map(
-      snapshot.docs.map((docSnap) => [docSnap.id, docSnap.data() as Partial<KaizoLevel>])
-    );
-
-    let updatedCount = 0;
-    const docsToUpdate: { id: string; data: KaizoLevel }[] = [];
-
-    for (const lvl of initialLevels) {
-      const existingData = existingDocsMap.get(lvl.id);
-      if (!existingData) {
-        // Missing entirely in Firestore -> add complete baseline level
-        docsToUpdate.push({ id: lvl.id, data: lvl });
-        updatedCount++;
-      } else {
-        // Document exists, check if required fields like rank or creator are missing
-        const isMissingFields =
-          typeof existingData.rank !== 'number' ||
-          !existingData.creator ||
-          !existingData.difficulty;
-
-        if (isMissingFields) {
-          const mergedData: KaizoLevel = {
-            ...lvl,
-            ...existingData,
-            id: lvl.id,
-            rank: typeof existingData.rank === 'number' ? existingData.rank : lvl.rank,
-            name: existingData.name || lvl.name,
-            creator: existingData.creator || lvl.creator,
-            verifier: existingData.verifier !== undefined ? existingData.verifier : lvl.verifier,
-            difficulty: existingData.difficulty || lvl.difficulty,
-            directPlayUrl: existingData.directPlayUrl || lvl.directPlayUrl || 'https://jellycade.com/games/goober-dash',
-            thumbnailUrl: existingData.thumbnailUrl !== undefined ? existingData.thumbnailUrl : lvl.thumbnailUrl,
-            victors: Array.isArray(existingData.victors) && existingData.victors.length > 0 ? existingData.victors : lvl.victors,
-          };
-          docsToUpdate.push({ id: lvl.id, data: mergedData });
-          updatedCount++;
-        }
-      }
-    }
-
-    if (docsToUpdate.length > 0) {
-      console.log(`Syncing/restoring ${docsToUpdate.length} levels in Firestore...`);
-      for (let i = 0; i < docsToUpdate.length; i += 400) {
-        const batch = writeBatch(db);
-        const chunk = docsToUpdate.slice(i, i + 400);
-        chunk.forEach((item) => {
-          const docRef = doc(db, 'levels', item.id);
-          batch.set(docRef, sanitizeFirestoreData(item.data), { merge: true });
-        });
-        await batch.commit();
-      }
-      console.log(`Successfully synced ${docsToUpdate.length} levels in Firestore!`);
-      return docsToUpdate.length;
-    }
-    return 0;
+    await setDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true });
   } catch (error) {
-    console.warn('Notice during level sync to Firestore:', error);
-    return 0;
+    handleFirestoreError(error, OperationType.WRITE, 'bundles/levels');
+    throw error;
   }
 }
 
-// Legacy alias for seeding initial levels
-export async function seedLevelsIfEmpty(initialLevels: KaizoLevel[]): Promise<boolean> {
-  const count = await syncLevelsToFirestore(initialLevels);
-  return count > 0;
+// Subscribe to Levels real-time: reads from the consolidated big file (bundles/levels) with 1 document read!
+export function subscribeToLevels(
+  onUpdate: (levels: KaizoLevel[]) => void,
+  onError?: (err: Error) => void
+) {
+  return subscribeToLevelsBundle((bundleData) => {
+    if (bundleData && Array.isArray(bundleData.levels)) {
+      registerLevelsInCache(bundleData.levels);
+      const sorted = [...bundleData.levels].sort((a, b) => a.rank - b.rank);
+      onUpdate(sorted);
+    }
+  }, onError);
+}
+
+// Sync/seed levels: bundles/levels is the single authoritative source of truth
+export async function syncLevelsToFirestore(_initialLevels: KaizoLevel[]): Promise<number> {
+  return 0;
+}
+
+export async function seedLevelsIfEmpty(_initialLevels: KaizoLevel[]): Promise<boolean> {
+  return false;
 }
 
 /**
@@ -363,49 +609,89 @@ export function sanitizeFirestoreData<T>(obj: T): T {
   return obj;
 }
 
-// Update level name
-export async function updateLevelName(levelId: string, newName: string) {
-  const levelRef = doc(db, 'levels', levelId);
+// Update level name directly in the consolidated big file (bundles/levels)
+export async function updateLevelName(levelId: string, newName: string): Promise<void> {
+  await updateLevelData(levelId, { name: newName });
+}
+
+/**
+ * Generic update for level fields.
+ * Writes directly to the consolidated big file (bundles/levels).
+ * If thumbnailUrl is updated, writes to chunked image document (image_chunks/{chunkId}).
+ */
+export async function updateLevelData(levelId: string, data: Partial<KaizoLevel>): Promise<void> {
   try {
-    await setDoc(levelRef, sanitizeFirestoreData({ name: newName }), { merge: true });
+    let targetRank = data.rank;
+    let targetChunkId = data.imageChunkId;
+
+    if (targetRank === undefined || !targetChunkId) {
+      const cached = cachedLevelsMap.get(levelId);
+      if (cached) {
+        targetRank = targetRank ?? cached.rank;
+        targetChunkId = targetChunkId ?? cached.imageChunkId;
+      }
+      if (targetRank === undefined || !targetChunkId) {
+        const bundle = await fetchLevelsBundle();
+        if (bundle && Array.isArray(bundle.levels)) {
+          const found = bundle.levels.find(l => l.id === levelId);
+          if (found) {
+            targetRank = targetRank ?? found.rank;
+            targetChunkId = targetChunkId ?? found.imageChunkId;
+          }
+        }
+      }
+    }
+
+    // 1. If an image is updated, write to chunked image document
+    if (data.thumbnailUrl !== undefined) {
+      await updateLevelThumbnail(levelId, data.thumbnailUrl, targetRank, targetChunkId);
+    }
+
+    // 2. Write all other level list info directly to the big file (bundles/levels)
+    const { thumbnailUrl: _omitted, ...listFields } = data;
+    if (Object.keys(listFields).length > 0) {
+      const currentBundle = await fetchLevelsBundle();
+      if (currentBundle && Array.isArray(currentBundle.levels)) {
+        const updatedLevels = currentBundle.levels.map((lvl) => {
+          if (lvl.id === levelId) {
+            return { ...lvl, ...listFields };
+          }
+          return lvl;
+        });
+        await updateLevelsBundleInFirestore(updatedLevels);
+      }
+    }
   } catch (error) {
-    handleFirestoreError(error, OperationType.UPDATE, `levels/${levelId}`);
+    handleFirestoreError(error, OperationType.UPDATE, `bundles/levels`);
     throw error;
   }
 }
 
-// Update level thumbnail preview image (URL or Base64 data string)
-export async function updateLevelThumbnail(levelId: string, thumbnailUrl: string | null) {
-  const levelRef = doc(db, 'levels', levelId);
-  try {
-    await setDoc(levelRef, sanitizeFirestoreData({ thumbnailUrl: thumbnailUrl || null }), { merge: true });
-  } catch (error) {
-    handleFirestoreError(error, OperationType.UPDATE, `levels/${levelId}`);
-    throw error;
-  }
-}
-
-// Generic update for level fields
-export async function updateLevelData(levelId: string, data: Partial<KaizoLevel>) {
-  const levelRef = doc(db, 'levels', levelId);
-  try {
-    const sanitizedPayload = sanitizeFirestoreData(data);
-    await setDoc(levelRef, sanitizedPayload, { merge: true });
-  } catch (error) {
-    handleFirestoreError(error, OperationType.UPDATE, `levels/${levelId}`);
-    throw error;
-  }
-}
-
-// Delete a level document from Firestore and register in deletedLevels
-export async function deleteLevelFromFirestore(levelId: string) {
-  const levelRef = doc(db, 'levels', levelId);
+// Delete a level document: removes from bundles/levels and purges from image chunk
+export async function deleteLevelFromFirestore(levelId: string): Promise<void> {
+  const targetChunkId = getChunkIdForLevel(levelId);
   const deletedRef = doc(db, 'deletedLevels', levelId);
   try {
-    await deleteDoc(levelRef);
+    thumbnailMemoryCache.delete(levelId);
+    const chunkRef = doc(db, 'image_chunks', targetChunkId);
+    await updateDoc(chunkRef, {
+      [`images.${levelId}`]: deleteField(),
+      updatedAt: new Date().toISOString()
+    }).catch(() => {});
     await setDoc(deletedRef, { id: levelId, deletedAt: new Date().toISOString() });
   } catch (error) {
-    handleFirestoreError(error, OperationType.DELETE, `levels/${levelId}`);
+    handleFirestoreError(error, OperationType.DELETE, `image_chunks/${targetChunkId}`);
+  }
+
+  try {
+    const currentBundle = await fetchLevelsBundle();
+    if (currentBundle && Array.isArray(currentBundle.levels)) {
+      const filtered = currentBundle.levels.filter((l) => l.id !== levelId);
+      const reindexed = filtered.map((lvl, idx) => ({ ...lvl, rank: idx + 1 }));
+      await updateLevelsBundleInFirestore(reindexed);
+    }
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, `bundles/levels`);
     throw error;
   }
 }
@@ -446,25 +732,21 @@ export function subscribeToDeletedPlayers(onUpdate: (deletedIds: Set<string>) =>
   );
 }
 
-// Save reordered level ranks to Firestore in batch
+// Save reordered level ranks directly to bundles/levels in 1 single write
 export async function saveReorderedLevelsToFirestore(reorderedLevels: KaizoLevel[]): Promise<void> {
   try {
-    const updatedLevels = reorderedLevels.map((lvl, idx) => ({
-      ...lvl,
-      rank: idx + 1
-    }));
-
-    for (let i = 0; i < updatedLevels.length; i += 400) {
-      const batch = writeBatch(db);
-      const chunk = updatedLevels.slice(i, i + 400);
-      chunk.forEach((lvl) => {
-        const docRef = doc(db, 'levels', lvl.id);
-        batch.set(docRef, sanitizeFirestoreData(lvl), { merge: true });
-      });
-      await batch.commit();
-    }
+    const updatedLevels = reorderedLevels.map((lvl, idx) => {
+      const newRank = idx + 1;
+      const expectedChunkId = `chunk-${Math.floor((newRank - 1) / 10) + 1}`;
+      return {
+        ...lvl,
+        rank: newRank,
+        imageChunkId: lvl.imageChunkId || expectedChunkId
+      };
+    });
+    await updateLevelsBundleInFirestore(updatedLevels);
   } catch (error) {
-    handleFirestoreError(error, OperationType.WRITE, 'levels');
+    handleFirestoreError(error, OperationType.WRITE, 'bundles/levels');
     throw error;
   }
 }
@@ -477,10 +759,20 @@ export async function addLevelToFirestore(
 ): Promise<string> {
   try {
     const newId = `level-${Date.now()}`;
+    const targetChunkId = `chunk-${Math.floor(Math.max(0, placementRank - 1) / 10) + 1}`;
+    
+    // 1. If image was provided, store in the chunk
+    if (newLevelData.thumbnailUrl) {
+      await updateLevelThumbnail(newId, newLevelData.thumbnailUrl, placementRank, targetChunkId);
+    }
+
+    const { thumbnailUrl: _omitted, ...cleanData } = newLevelData;
     const levelToAdd: KaizoLevel = {
-      ...newLevelData,
+      ...cleanData,
       id: newId,
-      rank: placementRank
+      rank: placementRank,
+      imageChunkId: targetChunkId,
+      thumbnailUrl: null
     };
 
     // Clone and insert new level at placementRank - 1
@@ -489,11 +781,11 @@ export async function addLevelToFirestore(
 
     sortedExisting.splice(targetIdx, 0, levelToAdd);
 
-    // Save all updated level ranks to Firestore
+    // Save all updated level ranks directly to bundles/levels
     await saveReorderedLevelsToFirestore(sortedExisting);
     return newId;
   } catch (error) {
-    handleFirestoreError(error, OperationType.WRITE, 'levels');
+    handleFirestoreError(error, OperationType.WRITE, 'bundles/levels');
     throw error;
   }
 }
@@ -541,6 +833,86 @@ export async function addPlayerToFirestore(player: PlayerProfile) {
   }
 }
 
+// Update Player Profile identity (Name, ID, Country) and update matching level victors across Firestore
+export async function updatePlayerIdentity(
+  oldPlayerId: string,
+  oldPlayerName: string,
+  newPlayerId: string,
+  newPlayerName: string,
+  newCountry?: string
+): Promise<void> {
+  const cleanNewId = newPlayerId.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '') || oldPlayerId;
+  const cleanNewName = newPlayerName.trim();
+  const cleanCountry = (newCountry || '').trim().toUpperCase();
+
+  try {
+    // 1. If player ID changed, delete old player document
+    if (oldPlayerId !== cleanNewId) {
+      const oldPlayerRef = doc(db, 'players', oldPlayerId);
+      await deleteDoc(oldPlayerRef);
+    }
+
+    // 2. Write/update new player document
+    const newPlayerRef = doc(db, 'players', cleanNewId);
+    await setDoc(
+      newPlayerRef,
+      sanitizeFirestoreData({
+        id: cleanNewId,
+        name: cleanNewName,
+        country: cleanCountry,
+        addedAt: new Date().toISOString()
+      }),
+      { merge: true }
+    );
+
+    // 3. Update matching victors across bundles/levels in a single write
+    const currentBundle = await fetchLevelsBundle();
+    if (currentBundle && Array.isArray(currentBundle.levels)) {
+      const oldIdLower = oldPlayerId.toLowerCase();
+      const oldNameLower = oldPlayerName.toLowerCase().trim();
+      let modified = false;
+
+      const updatedLevels = currentBundle.levels.map((lvl) => {
+        if (!Array.isArray(lvl.victors) || lvl.victors.length === 0) return lvl;
+        let levelVictorsChanged = false;
+
+        const updatedVictors = lvl.victors.map((v) => {
+          const vSlug = (v.id || '').replace(/^vic-\d+-/, '').toLowerCase();
+          const vName = (v.name || '').toLowerCase().trim();
+
+          const matches =
+            vSlug === oldIdLower ||
+            (v.id && v.id.toLowerCase() === oldIdLower) ||
+            (oldNameLower && vName === oldNameLower);
+
+          if (matches) {
+            levelVictorsChanged = true;
+            return {
+              ...v,
+              name: cleanNewName,
+              id: `vic-${lvl.id}-${cleanNewId}`
+            };
+          }
+          return v;
+        });
+
+        if (levelVictorsChanged) {
+          modified = true;
+          return { ...lvl, victors: updatedVictors };
+        }
+        return lvl;
+      });
+
+      if (modified) {
+        await updateLevelsBundleInFirestore(updatedLevels);
+      }
+    }
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, `players/${cleanNewId}`);
+    throw error;
+  }
+}
+
 // Delete Player profile from Firestore and purge from deletedPlayers registry
 export async function deletePlayerFromFirestore(playerId: string, playerName?: string) {
   const playerRef = doc(db, 'players', playerId);
@@ -549,18 +921,15 @@ export async function deletePlayerFromFirestore(playerId: string, playerName?: s
     await deleteDoc(playerRef);
     await setDoc(deletedRef, { id: playerId, name: playerName || '', deletedAt: new Date().toISOString() });
 
-    // Also purge victor entries matching this player from Firestore levels collection
-    const levelsCol = collection(db, 'levels');
-    const snapshot = await getDocs(levelsCol);
-    const pKey = playerId.toLowerCase();
-    const pNameLower = (playerName || '').toLowerCase().trim();
+    // Also purge victor entries matching this player from bundles/levels directly
+    const currentBundle = await fetchLevelsBundle();
+    if (currentBundle && Array.isArray(currentBundle.levels)) {
+      const pKey = playerId.toLowerCase();
+      const pNameLower = (playerName || '').toLowerCase().trim();
+      let modified = false;
 
-    const batch = writeBatch(db);
-    let modified = false;
-
-    snapshot.docs.forEach((docSnap) => {
-      const lvl = docSnap.data() as KaizoLevel;
-      if (Array.isArray(lvl.victors) && lvl.victors.length > 0) {
+      const updatedLevels = currentBundle.levels.map((lvl) => {
+        if (!Array.isArray(lvl.victors) || lvl.victors.length === 0) return lvl;
         const filteredVictors = lvl.victors.filter((v) => {
           const vSlug = (v.id || '').replace(/^vic-\d+-/, '').toLowerCase();
           const vName = (v.name || '').toLowerCase().trim();
@@ -572,13 +941,14 @@ export async function deletePlayerFromFirestore(playerId: string, playerName?: s
 
         if (filteredVictors.length !== lvl.victors.length) {
           modified = true;
-          batch.set(docSnap.ref, sanitizeFirestoreData({ ...lvl, victors: filteredVictors }), { merge: true });
+          return { ...lvl, victors: filteredVictors };
         }
-      }
-    });
+        return lvl;
+      });
 
-    if (modified) {
-      await batch.commit();
+      if (modified) {
+        await updateLevelsBundleInFirestore(updatedLevels);
+      }
     }
   } catch (error) {
     handleFirestoreError(error, OperationType.DELETE, `players/${playerId}`);
@@ -614,3 +984,4 @@ export function subscribeToPlayers(
     }
   );
 }
+

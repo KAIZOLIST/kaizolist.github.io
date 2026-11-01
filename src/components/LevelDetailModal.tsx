@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
   Play,
@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { KaizoLevel } from '../types/kaizo';
 import { getPointsForRank, sortVictors, getVictorName, isLevelVerified, getLevelIdFromLink } from '../utils/kaizoUtils';
+import { fetchLevelThumbnail } from '../lib/firebase';
 
 interface LevelDetailModalProps {
   level: KaizoLevel | null;
@@ -19,6 +20,7 @@ interface LevelDetailModalProps {
   pointsAwarded?: number;
   onClose: () => void;
   onSubmitProofForLevel: (level: KaizoLevel) => void;
+  onSelectPlayer?: (playerName: string) => void;
 }
 
 export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
@@ -26,11 +28,30 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
   displayRank,
   pointsAwarded,
   onClose,
-  onSubmitProofForLevel
+  onSubmitProofForLevel,
+  onSelectPlayer
 }) => {
   const [copiedCode, setCopiedCode] = useState(false);
   const [isZoomedImage, setIsZoomedImage] = useState(false);
   const [isAutofit, setIsAutofit] = useState(level?.imageFit !== 'cover');
+  const [thumbnail, setThumbnail] = useState<string | null>(level?.thumbnailUrl || null);
+
+  useEffect(() => {
+    if (!level) return;
+    if (level.thumbnailUrl) {
+      setThumbnail(level.thumbnailUrl);
+      return;
+    }
+    let isMounted = true;
+    fetchLevelThumbnail(level.id, level.rank, level.imageChunkId).then((thumb) => {
+      if (isMounted && thumb) {
+        setThumbnail(thumb);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, [level?.id, level?.rank, level?.imageChunkId, level?.thumbnailUrl]);
 
   if (!level) return null;
 
@@ -106,7 +127,16 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
               <p className="text-xs text-slate-400 mt-0.5">
                 Created by <strong className="text-slate-200">{level.creator}</strong>
                 {verified ? (
-                  <> · Verified by <strong className="text-slate-200">{level.verifier}</strong></>
+                  <> · Verified by{' '}
+                    <button
+                      type="button"
+                      onClick={() => onSelectPlayer?.(level.verifier)}
+                      className="text-slate-200 font-bold hover:text-amber-400 hover:underline transition-colors"
+                      title={`View ${level.verifier}'s profile`}
+                    >
+                      {level.verifier}
+                    </button>
+                  </>
                 ) : (
                   <> · <strong className="text-amber-400">Unverified</strong></>
                 )}
@@ -133,12 +163,12 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
           {/* Level Preview Image & Direct Play Action Area */}
           <div className="space-y-4">
             <div className="relative w-full aspect-video sm:aspect-21/9 max-h-[400px] rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shadow-inner group flex items-center justify-center">
-              {level.thumbnailUrl ? (
+              {thumbnail ? (
                 <>
                   {isAutofit ? (
                     <>
                       <img
-                        src={level.thumbnailUrl}
+                        src={thumbnail}
                         alt=""
                         aria-hidden="true"
                         referrerPolicy="no-referrer"
@@ -146,7 +176,7 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
                       />
                       <div className="absolute inset-0 bg-black/25 pointer-events-none" />
                       <img
-                        src={level.thumbnailUrl}
+                        src={thumbnail}
                         alt={`${level.name} full preview`}
                         referrerPolicy="no-referrer"
                         className="relative z-10 max-w-[96%] max-h-[96%] object-contain object-center drop-shadow-xl"
@@ -154,7 +184,7 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
                     </>
                   ) : (
                     <img
-                      src={level.thumbnailUrl}
+                      src={thumbnail}
                       alt={`${level.name} full preview`}
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover object-center"
@@ -236,7 +266,7 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
                   className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 active:scale-95 transition-all rounded-lg shadow-sm"
                 >
                   <Play className="w-4 h-4 fill-current" />
-                  <span>Play Level Directly</span>
+                  <span>Play Level</span>
                   <ExternalLink className="w-3.5 h-3.5 opacity-80" />
                 </a>
               </div>
@@ -310,9 +340,14 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
 
                         <div className="min-w-0">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-sm font-bold text-white">
+                            <button
+                              type="button"
+                              onClick={() => onSelectPlayer?.(vName)}
+                              className="text-sm font-bold text-white hover:text-amber-400 hover:underline transition-colors text-left cursor-pointer"
+                              title={`View ${vName}'s full player profile`}
+                            >
                               {vName}
-                            </span>
+                            </button>
                             {isVerifier && (
                               <span className="text-[11px] px-2 py-0.2 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 font-medium">
                                 Verifier (+10%)
@@ -365,7 +400,7 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
       </div>
 
       {/* Lightbox / Zoomed Image Modal */}
-      {isZoomedImage && level.thumbnailUrl && (
+      {isZoomedImage && thumbnail && (
         <div
           className="fixed inset-0 z-60 bg-black/95 flex flex-col items-center justify-center p-4 animate-in fade-in"
           onClick={() => setIsZoomedImage(false)}
@@ -377,7 +412,7 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
             <X className="w-6 h-6" />
           </button>
           <img
-            src={level.thumbnailUrl}
+            src={thumbnail}
             alt={`${level.name} full view`}
             className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
           />

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Trophy, Medal, ChevronDown, ChevronUp } from 'lucide-react';
+import { Trophy, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react';
 import { KaizoLevel } from '../types/kaizo';
 import { getPointsForRank, getVictorName, getVerifiedPlacements } from '../utils/kaizoUtils';
-
 
 interface VictorsHallProps {
   levels: KaizoLevel[];
   onSelectLevel: (level: KaizoLevel) => void;
+  onSelectPlayer?: (playerName: string) => void;
 }
 
 interface PlayerStats {
@@ -27,7 +27,7 @@ interface PlayerStats {
   }>;
 }
 
-export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel }) => {
+export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel, onSelectPlayer }) => {
   const [expandedPlayer, setExpandedPlayer] = useState<string | null>(null);
   const [playerSearch, setPlayerSearch] = useState('');
 
@@ -66,8 +66,15 @@ export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel 
     return count;
   };
 
-  // Verified placements map for accurate point calculation and hardest completion tracking
   const verifiedPlacements = getVerifiedPlacements(levels);
+
+  const getHardestLevelColor = (rank?: number): string => {
+    if (!rank || rank <= 0) return 'text-slate-400';
+    if (rank <= 3) return 'text-amber-400'; // Gold (Top 3)
+    if (rank <= 10) return 'text-sky-400'; // Blue (Top 10)
+    if (rank <= 25) return 'text-amber-600'; // Bronze (Top 25)
+    return 'text-slate-400'; // Gray
+  };
 
   const isBetterVerifiedLevel = (newLevel: KaizoLevel, currentHardest: KaizoLevel | null): boolean => {
     const newVerifiedRank = verifiedPlacements.get(newLevel.id);
@@ -245,9 +252,9 @@ export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel 
     });
   });
 
-  const sortedPlayers = Array.from(playerMap.values()).sort(
-    (a, b) => b.finalScore - a.finalScore || b.totalCompletions - a.totalCompletions
-  );
+  const sortedPlayers = Array.from(playerMap.values())
+    .sort((a, b) => b.finalScore - a.finalScore || b.totalCompletions - a.totalCompletions)
+    .map((p, idx) => ({ ...p, overallRank: idx + 1 }));
 
   const filteredPlayers = sortedPlayers.filter((p) => p.name.toLowerCase().includes(playerSearch.toLowerCase()));
 
@@ -282,8 +289,8 @@ export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel 
         </div>
       ) : (
         <div className="divide-y divide-slate-800/80 border border-slate-800 rounded-2xl overflow-hidden bg-[#111927]/90 shadow-md">
-          {filteredPlayers.map((player, idx) => {
-            const rank = idx + 1;
+          {filteredPlayers.map((player) => {
+            const rank = player.overallRank;
             const isExpanded = expandedPlayer === player.name;
             const createdCount = player.createdCount;
             return (
@@ -310,12 +317,17 @@ export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel 
 
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h4 className="text-base sm:text-lg font-bold text-white font-heading truncate">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectPlayer?.(player.name);
+                          }}
+                          className="text-base sm:text-lg font-bold text-white font-heading truncate hover:text-amber-400 hover:underline transition-colors text-left cursor-pointer"
+                          title={`Click to view ${player.name}'s profile`}
+                        >
                           {player.name}
-                        </h4>
-                        {rank <= 3 && (
-                          <Medal className="w-4 h-4 text-amber-400 shrink-0" />
-                        )}
+                        </button>
                         {player.verifierCount > 0 && (
                           <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 font-medium">
                             {player.verifierCount} Verified
@@ -341,7 +353,7 @@ export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel 
                                 e.stopPropagation();
                                 onSelectLevel(player.hardestLevel!);
                               }}
-                              className="text-amber-400 hover:underline font-semibold"
+                              className={`${getHardestLevelColor(verifiedPlacements.get(player.hardestLevel.id))} hover:underline font-semibold`}
                             >
                               {player.hardestLevel.name} (#{verifiedPlacements.get(player.hardestLevel.id)})
                             </button>
@@ -353,7 +365,20 @@ export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel 
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 shrink-0">
+                  <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectPlayer?.(player.name);
+                      }}
+                      className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 text-xs font-semibold transition-colors"
+                      title="View full player profile & personalized checklist"
+                    >
+                      <span>Profile</span>
+                      <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                    </button>
+
                     <div className="text-right">
                       <span className="text-base sm:text-xl font-bold text-amber-400 block tabular-nums font-heading">
                         {player.finalScore.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 2 })} pts
@@ -394,7 +419,7 @@ export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel 
                         >
                           <div className="min-w-0 pr-2">
                             <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="font-mono text-amber-400 font-bold shrink-0">
+                              <span className="font-mono text-white font-bold shrink-0">
                                 #{verifiedPlacements.get(comp.level.id) ?? comp.level.rank}
                               </span>
                               <button

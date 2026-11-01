@@ -23,54 +23,54 @@ export const RulesSection: React.FC<RulesSectionProps> = ({ onOpenSubmitModal })
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Requirement 1: Video Proof */}
+        {/* Requirement 1: Completion Proof */}
         <div className="p-5 bg-[#111927] border border-slate-800 rounded-xl space-y-3">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
               <CheckCircle2 className="w-4 h-4" />
             </div>
             <h3 className="text-base font-bold text-white font-heading">
-              1. Completion Proof
+              Completion Proof
             </h3>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
-            For most completions, a simple screenshot of the end screen showing your victory is sufficient. Video proof is highly recommended for hard levels. For Top 1 completions, a continuous, uncut video recording along with raw footage is strictly required to verify the record.
+            For most completions, a simple screenshot of the end screen showing your victory is sufficient. All completions must be on the original level and be completed in time trials.
           </p>
         </div>
 
-        {/* Requirement 2: End Screen & Level Code */}
+        {/* Requirement 2: Video Proof */}
         <div className="p-5 bg-[#111927] border border-slate-800 rounded-xl space-y-3">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
               <CheckCircle2 className="w-4 h-4" />
             </div>
             <h3 className="text-base font-bold text-white font-heading">
-              2. End Screen
+              Video Proof
             </h3>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
-            The final victory screen displaying the completion time should be clearly visible in your submitted screenshot or video.
+            Video proof or an in-game replay is recommended for very difficult levels, and a completion of the top 1 level always requires video proof (starting November 1st 2026)
           </p>
         </div>
 
-        {/* Prohibited: Cheats & Hacks */}
+        {/* Prohibited: Strictly Prohibited */}
         <div className="p-5 bg-[#111927] border border-rose-900/30 rounded-xl space-y-3">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-400 flex items-center justify-center font-bold">
               <AlertOctagon className="w-4 h-4" />
             </div>
             <h3 className="text-base font-bold text-white font-heading">
-              3. Strictly Prohibited
+              Strictly Prohibited
             </h3>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
             Any modification that alters gameplay physics or gives artificial advantage is forbidden.
           </p>
           <ul className="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
-            <li>Speedhacks, cheat engines, or tick rate manipulation.</li>
-            <li>Hitbox visualizers or collision-mask indicators.</li>
-            <li>Macro-assisted runs or automated key injection scripts.</li>
-            <li>Savestates or checkpoint restores during the run.</li>
+            <li>Speedhacks or physics modifications</li>
+            <li>Hitbox visualizers or unapproved texture packs</li>
+            <li>Use of macros, scripts, or TAS tools</li>
+            <li>Using artificial savestates during the run</li>
           </ul>
         </div>
 
@@ -81,7 +81,7 @@ export const RulesSection: React.FC<RulesSectionProps> = ({ onOpenSubmitModal })
               <FileText className="w-4 h-4" />
             </div>
             <h3 className="text-base font-bold text-white font-heading">
-              4. Bonus Points
+              Bonus points
             </h3>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
@@ -102,7 +102,7 @@ export const RulesSection: React.FC<RulesSectionProps> = ({ onOpenSubmitModal })
             Conquered a ranked Kaizo level?
           </h4>
           <p className="text-xs text-slate-300 mt-0.5">
-            Submit your YouTube or Twitch proof link to claim your spot in the Hall of Fame!
+            Submit your completion screenshot to us to be added to the list!
           </p>
         </div>
         <button

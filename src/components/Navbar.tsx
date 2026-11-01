@@ -20,7 +20,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => setActiveTab('rankings')}
           className="group relative flex items-center transition-all duration-300 hover:scale-105 active:scale-95 py-1"
         >
-          <div className="flex items-baseline text-6xl font-black italic tracking-tighter leading-none select-none py-1">
+          <div className="flex items-baseline text-6xl font-black tracking-tighter leading-none select-none py-1">
             <span className="relative z-30 bg-gradient-to-b from-blue-300 to-blue-600 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(96,165,250,0.4)] pr-2 -mr-2">G</span>
             <span className="relative z-20 bg-gradient-to-b from-pink-300 to-pink-600 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(244,114,182,0.4)] pr-2 -mr-2">D</span>
             <span className="relative z-20 bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(239,68,68,0.6)] pr-4 -mr-4">K</span>

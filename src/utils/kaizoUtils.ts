@@ -78,17 +78,53 @@ export function getVictorName(victor?: { id?: string; name?: string }): string {
 }
 
 /**
- * Calculates point value dynamically based on level rank placement.
- * Rank 1 = 350, Rank 2 = 325, scaling down smoothly to 1 pt.
+ * Preset point values for ranks 1 to 200.
+ * Any verified rank beyond 200 awards 1 point.
+ */
+export const RANK_POINTS_PRESET: number[] = [
+  350, 325, 300, 275, 250, 230, 220, 210, 200, 190,
+  180, 175, 170, 165, 160, 155, 150, 145, 140, 135,
+  130, 125, 120, 115, 110, 105,
+  100, 100, 100, 100,
+  90, 90, 90, 90, 90,
+  80, 80, 80, 80, 80,
+  70, 70, 70, 70, 70,
+  67,
+  65, 65, 65, 65,
+  60, 60, 60, 60, 60,
+  55, 55, 55, 55, 55,
+  50, 50, 50, 50, 50,
+  45, 45, 45, 45, 45,
+  40, 40, 40, 40, 40,
+  35, 35, 35, 35, 35,
+  30, 30, 30, 30, 30,
+  25, 25, 25, 25, 25,
+  20, 20, 20, 20, 20,
+  15, 15, 15, 15, 15,
+  10, 10, 10, 10, 10,
+  9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
+  8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+  6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+  5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+  4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+  3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+  2, 2, 2, 2, 2
+];
+
+/**
+ * Calculates point value based on level rank placement according to the official preset table.
+ * Ranks 1-200 map to the preset table, and any rank beyond 200 awards 1 point.
  */
 export function getPointsForRank(rank: number): number {
-  if (typeof rank !== 'number' || rank <= 0) return 0;
-  if (rank === 1) return 350;
-  if (rank === 2) return 325;
-  if (rank <= 10) return Math.max(190, 325 - (rank - 2) * 15);
-  if (rank <= 50) return Math.max(25, Math.round(200 - (rank - 10) * 3.375));
-  if (rank <= 100) return Math.max(10, Math.round(65 - (rank - 50) * 1.0));
-  return Math.max(1, Math.round(15 - (rank - 100) * 0.107));
+  if (typeof rank !== 'number' || rank <= 0 || isNaN(rank)) return 0;
+  const index = Math.floor(rank) - 1;
+  if (index < RANK_POINTS_PRESET.length) {
+    return RANK_POINTS_PRESET[index];
+  }
+  return 1;
 }
 
 /**

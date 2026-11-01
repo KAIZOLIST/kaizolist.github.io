@@ -5,13 +5,16 @@ service cloud.firestore {
     function isAdmin() {
       return request.auth != null && request.auth.token.email == 'tomatosauceman500@gmail.com';
     }
-    function isHelper() {
-      return request.auth != null && exists(/databases/$(database)/documents/users/$(request.auth.uid));
-    }
-    
     // Helper function to get the document ID format for a user's email
     function getUserDocId(email) {
       return email.replace("@", "_").replace(".", "_").replace(".", "_").replace(".", "_");
+    }
+
+    function isHelper() {
+      return request.auth != null && (
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) ||
+        (request.auth.token.email != null && exists(/databases/$(database)/documents/users/$(getUserDocId(request.auth.token.email))))
+      );
     }
 
     match /users/{userId} {
@@ -22,6 +25,16 @@ service cloud.firestore {
     }
 
     match /levels/{levelId} {
+      allow read: if true;
+      allow write: if isAdmin() || isHelper();
+    }
+
+    match /image_chunks/{chunkId} {
+      allow read: if true;
+      allow write: if isAdmin() || isHelper();
+    }
+
+    match /bundles/{bundleId} {
       allow read: if true;
       allow write: if isAdmin() || isHelper();
     }

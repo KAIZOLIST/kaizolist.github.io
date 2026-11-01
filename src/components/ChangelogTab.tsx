@@ -20,7 +20,9 @@ import {
   XCircle,
   UserPlus,
   UserMinus,
-  Info
+  Info,
+  Award,
+  Video
 } from 'lucide-react';
 
 export const ChangelogTab: React.FC = () => {
@@ -65,11 +67,13 @@ export const ChangelogTab: React.FC = () => {
     return changelog.filter((item) => {
       // Action filter
       if (selectedFilter !== 'All') {
-        if (selectedFilter === 'Updates' && !item.action.toLowerCase().includes('update')) return false;
-        if (selectedFilter === 'Additions' && !item.action.toLowerCase().includes('add')) return false;
-        if (selectedFilter === 'Deletions' && !item.action.toLowerCase().includes('delete')) return false;
-        if (selectedFilter === 'Reorders' && !item.action.toLowerCase().includes('reorder')) return false;
-        if (selectedFilter === 'Submissions' && !item.action.toLowerCase().includes('submission')) return false;
+        const act = item.action.toLowerCase();
+        if (selectedFilter === 'Completions' && !act.includes('completion') && !act.includes('proof')) return false;
+        if (selectedFilter === 'Moves' && !act.includes('move') && !act.includes('reorder') && !act.includes('swap')) return false;
+        if (selectedFilter === 'Updates' && !act.includes('update') && !act.includes('renamed') && !act.includes('details') && !act.includes('difficulty') && !act.includes('verifier') && !act.includes('creator')) return false;
+        if (selectedFilter === 'Additions' && !act.includes('add') && !act.includes('register')) return false;
+        if (selectedFilter === 'Deletions' && !act.includes('delete') && !act.includes('remove')) return false;
+        if (selectedFilter === 'Submissions' && !act.includes('submission')) return false;
       }
 
       // Query filter
@@ -99,28 +103,52 @@ export const ChangelogTab: React.FC = () => {
   // Action badge styling and icon mapping
   const getActionMeta = (action: string) => {
     const act = action.toLowerCase();
-    if (act.includes('update')) {
+    if (act.includes('completion added')) {
       return {
-        icon: <Pencil className="w-3.5 h-3.5 text-amber-400" />,
-        badgeBg: 'bg-amber-400/10 text-amber-400 border-amber-400/30'
+        icon: <Award className="w-3.5 h-3.5 text-emerald-400" />,
+        badgeBg: 'bg-emerald-400/10 text-emerald-400 border-emerald-400/30'
       };
     }
-    if (act.includes('add level')) {
+    if (act.includes('completion removed')) {
+      return {
+        icon: <XCircle className="w-3.5 h-3.5 text-rose-400" />,
+        badgeBg: 'bg-rose-400/10 text-rose-400 border-rose-400/30'
+      };
+    }
+    if (act.includes('proof updated')) {
+      return {
+        icon: <Video className="w-3.5 h-3.5 text-cyan-400" />,
+        badgeBg: 'bg-cyan-400/10 text-cyan-400 border-cyan-400/30'
+      };
+    }
+    if (act.includes('move') || act.includes('reorder') || act.includes('swapped')) {
+      return {
+        icon: <ArrowUpDown className="w-3.5 h-3.5 text-cyan-400" />,
+        badgeBg: 'bg-cyan-400/10 text-cyan-400 border-cyan-400/30'
+      };
+    }
+    if (act.includes('level added') || act.includes('add level')) {
       return {
         icon: <PlusCircle className="w-3.5 h-3.5 text-emerald-400" />,
         badgeBg: 'bg-emerald-400/10 text-emerald-400 border-emerald-400/30'
       };
     }
-    if (act.includes('delete level')) {
+    if (act.includes('level deleted') || act.includes('delete level')) {
       return {
         icon: <Trash2 className="w-3.5 h-3.5 text-rose-400" />,
         badgeBg: 'bg-rose-400/10 text-rose-400 border-rose-400/30'
       };
     }
-    if (act.includes('reorder')) {
+    if (act.includes('difficulty')) {
       return {
-        icon: <ArrowUpDown className="w-3.5 h-3.5 text-cyan-400" />,
-        badgeBg: 'bg-cyan-400/10 text-cyan-400 border-cyan-400/30'
+        icon: <Sparkles className="w-3.5 h-3.5 text-fuchsia-400" />,
+        badgeBg: 'bg-fuchsia-400/10 text-fuchsia-400 border-fuchsia-400/30'
+      };
+    }
+    if (act.includes('renamed') || act.includes('verifier') || act.includes('creator') || act.includes('details') || act.includes('thumbnail') || act.includes('update')) {
+      return {
+        icon: <Pencil className="w-3.5 h-3.5 text-amber-400" />,
+        badgeBg: 'bg-amber-400/10 text-amber-400 border-amber-400/30'
       };
     }
     if (act.includes('approve')) {
@@ -135,16 +163,22 @@ export const ChangelogTab: React.FC = () => {
         badgeBg: 'bg-rose-400/10 text-rose-400 border-rose-400/30'
       };
     }
-    if (act.includes('add player')) {
+    if (act.includes('player added') || act.includes('add player') || act.includes('player registered')) {
       return {
         icon: <UserPlus className="w-3.5 h-3.5 text-indigo-400" />,
         badgeBg: 'bg-indigo-400/10 text-indigo-400 border-indigo-400/30'
       };
     }
-    if (act.includes('delete player')) {
+    if (act.includes('player removed') || act.includes('delete player')) {
       return {
         icon: <UserMinus className="w-3.5 h-3.5 text-rose-400" />,
         badgeBg: 'bg-rose-400/10 text-rose-400 border-rose-400/30'
+      };
+    }
+    if (act.includes('helper')) {
+      return {
+        icon: <ShieldCheck className="w-3.5 h-3.5 text-purple-400" />,
+        badgeBg: 'bg-purple-400/10 text-purple-400 border-purple-400/30'
       };
     }
     return {
@@ -214,7 +248,7 @@ export const ChangelogTab: React.FC = () => {
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1 mr-1">
             <Filter className="w-3 h-3" /> Filter:
           </span>
-          {['All', 'Updates', 'Additions', 'Deletions', 'Reorders', 'Submissions'].map((filterKey) => (
+          {['All', 'Completions', 'Moves', 'Updates', 'Additions', 'Deletions', 'Submissions'].map((filterKey) => (
             <button
               key={filterKey}
               type="button"
