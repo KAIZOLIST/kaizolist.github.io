@@ -96,13 +96,13 @@ export const LevelCard: React.FC<LevelCardProps> = ({
       <div className="flex md:hidden flex-col w-full">
         <div className="flex items-stretch">
           {/* Thumbnail with absolute rank badge overlay */}
-          <div className="relative w-28 sm:w-36 shrink-0 self-stretch min-h-[110px] bg-slate-900 border-r border-slate-700/40 select-none">
+          <div className="relative w-28 sm:w-36 shrink-0 self-stretch min-h-[110px] bg-slate-900 border-r border-slate-700/40 overflow-hidden select-none">
             {thumbnail ? (
               <img
                 src={thumbnail}
                 alt={`${level.name || 'Level'} preview`}
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-contain object-center transition-transform duration-300"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-slate-500 font-mono text-xs p-2 text-center">
@@ -191,12 +191,12 @@ export const LevelCard: React.FC<LevelCardProps> = ({
       <div className="hidden md:flex items-center flex-1 min-w-0 h-full">
         {/* Full-height diagonal thumbnail container */}
         {thumbnail ? (
-          <div className="relative w-64 shrink-0 self-stretch h-full overflow-hidden select-none bg-slate-900 border-r border-slate-700/40">
+          <div className="relative w-64 shrink-0 self-stretch h-full overflow-hidden select-none [clip-path:polygon(0_0,100%_0,calc(100%-28px)_100%,0_100%)] bg-slate-900 border-r border-slate-700/40">
             <img
               src={thumbnail}
               alt={`${level.name || 'Level'} preview`}
               referrerPolicy="no-referrer"
-              className="w-full h-full object-contain object-center transition-transform duration-300 filter brightness-95 group-hover:brightness-105"
+              className="w-full h-full object-cover object-center scale-110 group-hover:scale-125 transition-transform duration-300 filter brightness-95 group-hover:brightness-105"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/35 pointer-events-none" />
           </div>
