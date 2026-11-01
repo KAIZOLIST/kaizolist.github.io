@@ -96,7 +96,7 @@ export const LevelCard: React.FC<LevelCardProps> = ({
       <div className="flex md:hidden flex-col w-full">
         <div className="flex items-stretch">
           {/* Thumbnail with absolute rank badge overlay */}
-          <div className="relative w-28 sm:w-36 shrink-0 self-stretch min-h-[110px] bg-slate-900 border-r border-slate-700/40 overflow-hidden select-none">
+          <div className="relative w-28 sm:w-36 shrink-0 self-stretch min-h-[110px] bg-slate-900 border-r border-slate-700/40 select-none">
             {thumbnail ? (
               <img
                 src={thumbnail}
@@ -191,7 +191,7 @@ export const LevelCard: React.FC<LevelCardProps> = ({
       <div className="hidden md:flex items-center flex-1 min-w-0 h-full">
         {/* Full-height diagonal thumbnail container */}
         {thumbnail ? (
-          <div className="relative w-64 shrink-0 self-stretch h-full overflow-hidden select-none [clip-path:polygon(0_0,100%_0,calc(100%-28px)_100%,0_100%)] bg-slate-900 border-r border-slate-700/40">
+          <div className="relative w-64 shrink-0 self-stretch h-full overflow-hidden select-none bg-slate-900 border-r border-slate-700/40">
             <img
               src={thumbnail}
               alt={`${level.name || 'Level'} preview`}
