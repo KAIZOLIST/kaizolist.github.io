@@ -102,7 +102,7 @@ export const LevelCard: React.FC<LevelCardProps> = ({
                 src={thumbnail}
                 alt={`${level.name || 'Level'} preview`}
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-contain object-center transition-transform duration-300"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-slate-500 font-mono text-xs p-2 text-center">
@@ -196,7 +196,7 @@ export const LevelCard: React.FC<LevelCardProps> = ({
               src={thumbnail}
               alt={`${level.name || 'Level'} preview`}
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover object-center scale-110 group-hover:scale-125 transition-transform duration-300 filter brightness-95 group-hover:brightness-105"
+              className="w-full h-full object-contain object-center transition-transform duration-300 filter brightness-95 group-hover:brightness-105"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/35 pointer-events-none" />
           </div>
