@@ -68,11 +68,38 @@ export const PLAYER_SLUG_NAME_MAP: Record<string, string> = {
   'soomies': 'Soomies'
 };
 
+/**
+ * Robustly extracts the canonical player slug / identifier from a victor object or ID string.
+ * Strips prefixes like "vic-1-", "vic-level-28-", "vic-" etc.
+ */
+export function extractPlayerSlug(victorOrId?: { id?: string; name?: string } | string): string {
+  if (!victorOrId) return '';
+  const idStr = typeof victorOrId === 'string' ? victorOrId : (victorOrId.id || '');
+  const nameStr = typeof victorOrId === 'string' ? '' : (victorOrId.name || '');
+
+  if (idStr) {
+    const stripped = idStr
+      .replace(/^vic-(?:level-)?\w+-/i, '')
+      .replace(/^vic-/i, '')
+      .trim()
+      .toLowerCase();
+    if (stripped && stripped !== 'unknown') {
+      return stripped;
+    }
+  }
+
+  if (nameStr) {
+    return nameStr.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
+  }
+
+  return '';
+}
+
 export function getVictorName(victor?: { id?: string; name?: string }): string {
   if (!victor) return 'Unknown Player';
   if (victor.name && victor.name.trim()) return victor.name;
   if (!victor.id) return 'Unknown Player';
-  const slug = victor.id.replace(/^vic-\d+-/, '');
+  const slug = extractPlayerSlug(victor);
   if (PLAYER_SLUG_NAME_MAP[slug]) return PLAYER_SLUG_NAME_MAP[slug];
   return slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : 'Unknown Player';
 }

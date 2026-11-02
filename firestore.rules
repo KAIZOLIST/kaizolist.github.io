@@ -3,23 +3,28 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     function isAdmin() {
-      return request.auth != null && request.auth.token.email == 'tomatosauceman500@gmail.com';
+      return request.auth != null && (
+        request.auth.token.email != null && 
+        request.auth.token.email.lower() == 'tomatosauceman500@gmail.com'
+      );
     }
-    // Helper function to get the document ID format for a user's email
+    
+    // Helper function to format email to document ID format
     function getUserDocId(email) {
-      return email.replace("@", "_").replace(".", "_").replace(".", "_").replace(".", "_");
+      return email.lower().replace("@", "_").replace(".", "_").replace(".", "_").replace(".", "_").replace(".", "_");
     }
 
     function isHelper() {
-      return request.auth != null && (
+      return request.auth != null && request.auth.token.email != null && (
+        isAdmin() ||
         exists(/databases/$(database)/documents/users/$(request.auth.uid)) ||
-        (request.auth.token.email != null && exists(/databases/$(database)/documents/users/$(getUserDocId(request.auth.token.email))))
+        exists(/databases/$(database)/documents/users/$(getUserDocId(request.auth.token.email)))
       );
     }
 
     match /users/{userId} {
-      // Allow user to get their own profile to verify role, or admin to list all
-      allow get: if request.auth != null && (isAdmin() || getUserDocId(request.auth.token.email) == userId);
+      // Allow authenticated user to get their user profile to verify role, or admin to list/write
+      allow get: if request.auth != null;
       allow list: if isAdmin();
       allow write: if isAdmin();
     }
@@ -41,7 +46,8 @@ service cloud.firestore {
 
     match /submissions/{submissionId} {
       allow read: if true;
-      allow write: if isAdmin() || isHelper();
+      allow create: if true;
+      allow update, delete: if isAdmin() || isHelper();
     }
 
     match /players/{playerId} {
@@ -59,9 +65,8 @@ service cloud.firestore {
       allow write: if isAdmin() || isHelper();
     }
 
-    match /changelog/{logId} {
-      allow read: if true;
-      allow write: if isAdmin() || isHelper();
+    match /test/{docId} {
+      allow read, write: if true;
     }
 
     // Default deny for unhandled paths

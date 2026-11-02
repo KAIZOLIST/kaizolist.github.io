@@ -113,6 +113,17 @@
         "images": { "type": "object" }
       },
       "required": ["id", "images"]
+    },
+    "ChangelogBundle": {
+      "title": "ChangelogBundle",
+      "description": "Consolidated changelog entries bundle containing audit trail items in a single document",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "items": { "type": "array" }
+      },
+      "required": ["id", "updatedAt", "items"]
     }
   },
   "firestore": {
@@ -126,15 +137,11 @@
     },
     "/bundles/{bundleId}": {
       "schema": "LevelsBundle",
-      "description": "Consolidated data bundles such as the all-in-one levels list without images"
+      "description": "Consolidated data bundles such as levels (/bundles/levels) and changelog (/bundles/changelog)"
     },
     "/submissions/{submissionId}": {
       "schema": "ProofSubmission",
       "description": "Submitted completion video proofs awaiting verification"
-    },
-    "/changelog/{logId}": {
-      "schema": "ChangelogItem",
-      "description": "Audit log of administrative actions and edits"
     },
     "/listHelpers/{helperId}": {
       "schema": "ListHelper",

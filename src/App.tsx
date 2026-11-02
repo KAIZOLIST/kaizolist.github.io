@@ -61,52 +61,37 @@ export default function App() {
 
   // Connect to Firebase Firestore on boot
   useEffect(() => {
-    let unsubscribeLevels: (() => void) | undefined;
-    let unsubscribePlayers: (() => void) | undefined;
-    let unsubscribeDelLevels: (() => void) | undefined;
-    let unsubscribeDelPlayers: (() => void) | undefined;
+    // Synchronously attach listeners so cleanups are reliable
+    const unsubscribeDelLevels = subscribeToDeletedLevels((dSet) => {
+      setDeletedLevelIds(dSet);
+    });
 
-    const initFirestore = async () => {
-      try {
-        // Subscribe to deleted registries first
-        unsubscribeDelLevels = subscribeToDeletedLevels((dSet) => {
-          setDeletedLevelIds(dSet);
-        });
+    const unsubscribeDelPlayers = subscribeToDeletedPlayers((dSet) => {
+      setDeletedPlayerIds(dSet);
+    });
 
-        unsubscribeDelPlayers = subscribeToDeletedPlayers((dSet) => {
-          setDeletedPlayerIds(dSet);
-        });
+    const unsubscribePlayers = subscribeToPlayers((pList) => {
+      setCustomPlayers(pList);
+    });
 
-        // Subscribe to custom players
-        unsubscribePlayers = subscribeToPlayers((pList) => {
-          setCustomPlayers(pList);
-        });
-
-        // Subscribe to real-time consolidated level bundle (1 document read for all 250+ levels!)
-        unsubscribeLevels = subscribeToLevelsBundle(
-          (bundleData) => {
-            if (bundleData && Array.isArray(bundleData.levels) && bundleData.levels.length > 0) {
-              const sorted = [...bundleData.levels].sort((a, b) => a.rank - b.rank);
-              setLevels(sorted);
-              setIsFirestoreLive(true);
-            }
-          },
-          (err) => {
-            console.warn('Firestore bundle subscription notice (using fallback):', err);
-          }
-        );
-      } catch (err) {
-        console.warn('Notice connecting to Firestore:', err);
+    const unsubscribeLevels = subscribeToLevelsBundle(
+      (bundleData) => {
+        if (bundleData && Array.isArray(bundleData.levels) && bundleData.levels.length > 0) {
+          const sorted = [...bundleData.levels].sort((a, b) => a.rank - b.rank);
+          setLevels(sorted);
+          setIsFirestoreLive(true);
+        }
+      },
+      (err) => {
+        console.warn('Firestore bundle subscription notice (using fallback):', err);
       }
-    };
-
-    initFirestore();
+    );
 
     return () => {
-      if (unsubscribeLevels) unsubscribeLevels();
-      if (unsubscribePlayers) unsubscribePlayers();
-      if (unsubscribeDelLevels) unsubscribeDelLevels();
-      if (unsubscribeDelPlayers) unsubscribeDelPlayers();
+      unsubscribeDelLevels();
+      unsubscribeDelPlayers();
+      unsubscribePlayers();
+      unsubscribeLevels();
     };
   }, []);
 

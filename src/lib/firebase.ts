@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
   collection,
   doc,
   getDocs,
@@ -11,44 +13,542 @@ import {
   writeBatch,
   getDoc,
   updateDoc,
-  deleteField
+  deleteField,
+  DocumentReference,
+  CollectionReference,
+  Query,
+  QuerySnapshot,
+  DocumentSnapshot
 } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged } from 'firebase/auth';
 import firebaseConfig from '../../firebase-applet-config.json';
 import { KaizoLevel, ProofSubmission, PlayerProfile, ChangelogItem, ListHelper, ChangeDetail, User } from '../types/kaizo';
+import initialLevelsData from '../data/kaizoLevels.json';
+import { firestoreMonitor } from '../utils/firestoreMonitor';
 
-// Subscribe to Authorized Users (Helpers/Admins)
-export function subscribeToUsers(onUpdate: (users: User[]) => void) {
-  const usersCollection = collection(db, 'users');
-  return onSnapshot(
-    usersCollection,
-    (snapshot) => {
-      const users: User[] = [];
-      snapshot.forEach((docSnap) => {
-        users.push(docSnap.data() as User);
-      });
-      onUpdate(users);
+// Re-export firestoreMonitor
+export { firestoreMonitor };
+
+// Tracked Wrapper for getDoc
+export async function trackedGetDoc(docRef: DocumentReference, caller?: string): Promise<DocumentSnapshot> {
+  const path = docRef.path;
+  const snap = await getDoc(docRef);
+  firestoreMonitor.logRead('getDoc', path, 1, caller);
+  return snap;
+}
+
+// Tracked Wrapper for getDocs
+export async function trackedGetDocs(colRefOrQuery: CollectionReference | Query, caller?: string): Promise<QuerySnapshot> {
+  const path = (colRefOrQuery as any).path || (colRefOrQuery as any)._query?.path?.toString() || 'collection';
+  const snap = await getDocs(colRefOrQuery);
+  const count = Math.max(1, snap.docs.length);
+  firestoreMonitor.logRead('getDocs', path, count, caller);
+  return snap;
+}
+
+// Tracked Wrapper for onSnapshot
+export function trackedOnSnapshot(
+  refOrQuery: any,
+  onNext: (snapshot: any) => void,
+  onError?: (error: any) => void,
+  caller?: string
+): () => void {
+  const path = refOrQuery.path || refOrQuery._query?.path?.toString() || 'subscription';
+  firestoreMonitor.trackListenerAttach(path);
+  let isFirst = true;
+
+  const unsubscribe = onSnapshot(
+    refOrQuery,
+    (snapshot: any) => {
+      let readCount = 0;
+      if (typeof snapshot.docs !== 'undefined') {
+        // QuerySnapshot
+        if (isFirst) {
+          readCount = snapshot.docs.length;
+        } else {
+          const changes = snapshot.docChanges ? snapshot.docChanges() : [];
+          readCount = changes.filter((c: any) => c.type === 'added' || c.type === 'modified').length;
+        }
+      } else {
+        // DocumentSnapshot
+        readCount = 1;
+      }
+
+      if (readCount > 0) {
+        firestoreMonitor.logRead('onSnapshot', path, readCount, caller, isFirst);
+      }
+      isFirst = false;
+
+      onNext(snapshot);
     },
     (error) => {
-      console.warn('Users subscription notice:', error);
+      if (onError) onError(error);
     }
   );
+
+  return () => {
+    firestoreMonitor.trackListenerDetach(path);
+    unsubscribe();
+  };
+}
+
+// Tracked Wrapper for setDoc
+export async function trackedSetDoc(
+  docRef: any,
+  data: any,
+  options?: any,
+  caller?: string
+): Promise<void> {
+  const path = docRef.path || 'document';
+  if (options) {
+    await setDoc(docRef, data, options);
+  } else {
+    await setDoc(docRef, data);
+  }
+  firestoreMonitor.logWrite('setDoc', path, 1, caller);
+}
+
+// Tracked Wrapper for updateDoc
+export async function trackedUpdateDoc(
+  docRef: any,
+  data: any,
+  caller?: string
+): Promise<void> {
+  const path = docRef.path || 'document';
+  await updateDoc(docRef, data);
+  firestoreMonitor.logWrite('updateDoc', path, 1, caller);
+}
+
+// Tracked Wrapper for deleteDoc
+export async function trackedDeleteDoc(
+  docRef: any,
+  caller?: string
+): Promise<void> {
+  const path = docRef.path || 'document';
+  await deleteDoc(docRef);
+  firestoreMonitor.logWrite('deleteDoc', path, 1, caller);
+}
+
+// Initialize Firebase App
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firestore with persistent local cache across tabs & reloads (0 reads on refresh)
+export const db = initializeFirestore(
+  app,
+  {
+    localCache: persistentLocalCache({
+      tabManager: persistentMultipleTabManager()
+    })
+  },
+  firebaseConfig.firestoreDatabaseId
+);
+
+export const auth = getAuth(app);
+export const googleProvider = new GoogleAuthProvider();
+
+export { signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged };
+
+// In-Memory User Auth and Info Caches
+const userAuthCache = new Map<string, { role: string; name: string }>();
+
+export async function getCachedUserInfo(email: string | null): Promise<{ isAuthorized: boolean; role: string; name: string } | null> {
+  if (!email) return null;
+  const cleanEmail = email.toLowerCase().trim();
+  if (cleanEmail === 'tomatosauceman500@gmail.com') {
+    return { isAuthorized: true, role: 'admin', name: 'Admin' };
+  }
+
+  if (userAuthCache.has(cleanEmail)) {
+    const cached = userAuthCache.get(cleanEmail)!;
+    return {
+      isAuthorized: cached.role === 'helper' || cached.role === 'admin',
+      role: cached.role,
+      name: cached.name
+    };
+  }
+
+  try {
+    const userId = cleanEmail.replace(/[@.]/g, '_');
+    const docRef = doc(db, 'users', userId);
+    const docSnap = await trackedGetDoc(docRef, 'isUserAuthorizedCheck');
+    if (!docSnap.exists()) {
+      return { isAuthorized: false, role: 'none', name: 'List Helper' };
+    }
+    const data = docSnap.data();
+    const role = data?.role || 'none';
+    const name = data?.name || 'List Helper';
+    userAuthCache.set(cleanEmail, { role, name });
+    return {
+      isAuthorized: role === 'helper' || role === 'admin',
+      role,
+      name
+    };
+  } catch (err) {
+    console.warn('Error checking user authorization:', err);
+    return null;
+  }
+}
+
+export async function isUserAuthorized(email: string | null): Promise<boolean> {
+  const info = await getCachedUserInfo(email);
+  return info ? info.isAuthorized : false;
+}
+
+export async function getPlayerNameByEmail(email: string | null): Promise<string> {
+  const info = await getCachedUserInfo(email);
+  return info ? info.name : 'List Helper';
+}
+
+// --- SHARED PERSISTENT BUNDLE SUBSCRIPTION MANAGERS ---
+// Prevents re-subscribing and re-reading whole collections when switching tabs or refreshing
+
+// 1. Users Subscription Manager
+let cachedUsersList: User[] | null = null;
+const usersSubscribers = new Set<(users: User[]) => void>();
+let usersUnsubscribeRef: (() => void) | null = null;
+
+export function subscribeToUsers(onUpdate: (users: User[]) => void) {
+  usersSubscribers.add(onUpdate);
+  if (cachedUsersList) {
+    onUpdate(cachedUsersList);
+  }
+
+  if (!usersUnsubscribeRef) {
+    const usersCollection = collection(db, 'users');
+    usersUnsubscribeRef = trackedOnSnapshot(
+      usersCollection,
+      (snapshot) => {
+        const users: User[] = [];
+        snapshot.forEach((docSnap: any) => {
+          users.push(docSnap.data() as User);
+        });
+        cachedUsersList = users;
+        for (const sub of usersSubscribers) {
+          sub(users);
+        }
+      },
+      (error) => console.warn('Users subscription notice:', error),
+      'subscribeToUsers'
+    );
+  }
+
+  return () => {
+    usersSubscribers.delete(onUpdate);
+  };
+}
+
+export interface ChangelogBundleData {
+  id: string;
+  updatedAt: string;
+  items: ChangelogItem[];
+}
+
+let cachedChangelogBundle: ChangelogBundleData | null = null;
+let changelogBundlePromise: Promise<ChangelogBundleData | null> | null = null;
+
+export async function fetchChangelogBundle(): Promise<ChangelogBundleData | null> {
+  if (cachedChangelogBundle) {
+    return cachedChangelogBundle;
+  }
+  if (changelogBundlePromise) {
+    return changelogBundlePromise;
+  }
+
+  const bundleRef = doc(db, 'bundles', 'changelog');
+  changelogBundlePromise = (async () => {
+    try {
+      const snap = await trackedGetDoc(bundleRef, 'fetchChangelogBundle');
+      if (snap.exists()) {
+        const data = snap.data() as ChangelogBundleData;
+        cachedChangelogBundle = data;
+        if (data && Array.isArray(data.items)) {
+          cachedChangelogList = data.items;
+        }
+        return data;
+      }
+      return null;
+    } catch (error) {
+      handleFirestoreError(error, OperationType.GET, 'bundles/changelog');
+      return null;
+    } finally {
+      changelogBundlePromise = null;
+    }
+  })();
+
+  return changelogBundlePromise;
+}
+
+// 2. Changelog Subscription Manager
+let cachedChangelogList: ChangelogItem[] | null = null;
+const changelogSubscribers = new Set<(changelog: ChangelogItem[]) => void>();
+let changelogUnsubscribeRef: (() => void) | null = null;
+
+export function subscribeToChangelog(onUpdate: (changelog: ChangelogItem[]) => void) {
+  changelogSubscribers.add(onUpdate);
+  if (cachedChangelogList) {
+    onUpdate(cachedChangelogList);
+  }
+
+  if (!changelogUnsubscribeRef) {
+    const bundleRef = doc(db, 'bundles', 'changelog');
+    changelogUnsubscribeRef = trackedOnSnapshot(
+      bundleRef,
+      (snapshot: any) => {
+        let items: ChangelogItem[] = [];
+        if (snapshot.exists()) {
+          const data = snapshot.data() as ChangelogBundleData;
+          cachedChangelogBundle = data;
+          if (Array.isArray(data.items)) {
+            items = data.items;
+          }
+        }
+        items.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+        cachedChangelogList = items;
+        for (const sub of changelogSubscribers) {
+          sub(items);
+        }
+      },
+      (error) => console.warn('Changelog subscription notice:', error),
+      'subscribeToChangelog'
+    );
+  }
+
+  return () => {
+    changelogSubscribers.delete(onUpdate);
+  };
+}
+
+// 3. Submissions Subscription Manager (reads from single document bundles/submissions)
+export interface SubmissionsBundleData {
+  id: string;
+  updatedAt: string;
+  submissions: ProofSubmission[];
+}
+
+let cachedSubmissionsList: ProofSubmission[] | null = null;
+const submissionsSubscribers = new Set<(subs: ProofSubmission[]) => void>();
+let submissionsUnsubscribeRef: (() => void) | null = null;
+
+export function subscribeToSubmissions(onUpdate: (submissions: ProofSubmission[]) => void) {
+  submissionsSubscribers.add(onUpdate);
+  if (cachedSubmissionsList) {
+    onUpdate(cachedSubmissionsList);
+  }
+
+  if (!submissionsUnsubscribeRef) {
+    const bundleRef = doc(db, 'bundles', 'submissions');
+    submissionsUnsubscribeRef = trackedOnSnapshot(
+      bundleRef,
+      (snapshot: any) => {
+        let subs: ProofSubmission[] = [];
+        if (snapshot.exists()) {
+          const data = snapshot.data() as SubmissionsBundleData;
+          if (Array.isArray(data.submissions)) {
+            subs = data.submissions;
+          }
+        }
+        cachedSubmissionsList = subs;
+        for (const sub of submissionsSubscribers) {
+          sub(subs);
+        }
+      },
+      (error) => {
+        console.warn('Submissions bundle subscription notice:', error);
+      },
+      'subscribeToSubmissions'
+    );
+  }
+
+  return () => {
+    submissionsSubscribers.delete(onUpdate);
+  };
+}
+
+// 4. Players Subscription Manager (reads from single document bundles/players)
+export interface PlayersBundleData {
+  id: string;
+  updatedAt: string;
+  players: PlayerProfile[];
+}
+
+let cachedPlayersList: PlayerProfile[] | null = null;
+const playersSubscribers = new Set<(players: PlayerProfile[]) => void>();
+let playersUnsubscribeRef: (() => void) | null = null;
+
+export function subscribeToPlayers(onUpdate: (players: PlayerProfile[]) => void) {
+  playersSubscribers.add(onUpdate);
+  if (cachedPlayersList) {
+    onUpdate(cachedPlayersList);
+  }
+
+  if (!playersUnsubscribeRef) {
+    const bundleRef = doc(db, 'bundles', 'players');
+    playersUnsubscribeRef = trackedOnSnapshot(
+      bundleRef,
+      (snapshot: any) => {
+        let players: PlayerProfile[] = [];
+        if (snapshot.exists()) {
+          const data = snapshot.data() as PlayersBundleData;
+          if (Array.isArray(data.players)) {
+            players = data.players;
+          }
+        }
+        cachedPlayersList = players;
+        for (const sub of playersSubscribers) {
+          sub(players);
+        }
+      },
+      (error) => {
+        console.warn('Players bundle subscription notice:', error);
+      },
+      'subscribeToPlayers'
+    );
+  }
+
+  return () => {
+    playersSubscribers.delete(onUpdate);
+  };
+}
+
+export async function updatePlayersBundleInFirestore(players: PlayerProfile[]): Promise<void> {
+  const bundleRef = doc(db, 'bundles', 'players');
+  cachedPlayersList = players;
+  const payload: PlayersBundleData = {
+    id: 'players',
+    updatedAt: new Date().toISOString(),
+    players
+  };
+  try {
+    await trackedSetDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true }, 'updatePlayersBundleInFirestore');
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, 'bundles/players');
+    throw error;
+  }
+}
+
+// 5. Deleted Levels & Players Subscription Managers (reads from bundles/deletedLevels & bundles/deletedPlayers)
+export interface DeletedBundleData {
+  id: string;
+  updatedAt: string;
+  ids: string[];
+}
+
+let cachedDeletedLevelsSet: Set<string> | null = null;
+const deletedLevelsSubscribers = new Set<(dSet: Set<string>) => void>();
+let deletedLevelsUnsubscribeRef: (() => void) | null = null;
+
+export function subscribeToDeletedLevels(onUpdate: (deletedIds: Set<string>) => void) {
+  deletedLevelsSubscribers.add(onUpdate);
+  if (cachedDeletedLevelsSet) {
+    onUpdate(cachedDeletedLevelsSet);
+  }
+
+  if (!deletedLevelsUnsubscribeRef) {
+    const bundleRef = doc(db, 'bundles', 'deletedLevels');
+    deletedLevelsUnsubscribeRef = trackedOnSnapshot(
+      bundleRef,
+      (snapshot: any) => {
+        const set = new Set<string>();
+        if (snapshot.exists()) {
+          const data = snapshot.data() as DeletedBundleData;
+          if (Array.isArray(data.ids)) {
+            data.ids.forEach((id) => set.add(id));
+          }
+        }
+        cachedDeletedLevelsSet = set;
+        for (const sub of deletedLevelsSubscribers) {
+          sub(set);
+        }
+      },
+      (error) => console.warn('Deleted levels bundle notice:', error),
+      'subscribeToDeletedLevels'
+    );
+  }
+
+  return () => {
+    deletedLevelsSubscribers.delete(onUpdate);
+  };
+}
+
+export async function addDeletedLevelIdToBundle(levelId: string): Promise<void> {
+  const bundleRef = doc(db, 'bundles', 'deletedLevels');
+  const currentSet = cachedDeletedLevelsSet || new Set<string>();
+  currentSet.add(levelId);
+  cachedDeletedLevelsSet = currentSet;
+  const payload: DeletedBundleData = {
+    id: 'deletedLevels',
+    updatedAt: new Date().toISOString(),
+    ids: Array.from(currentSet)
+  };
+  await trackedSetDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true }, 'addDeletedLevelIdToBundle');
+}
+
+let cachedDeletedPlayersSet: Set<string> | null = null;
+const deletedPlayersSubscribers = new Set<(dSet: Set<string>) => void>();
+let deletedPlayersUnsubscribeRef: (() => void) | null = null;
+
+export function subscribeToDeletedPlayers(onUpdate: (deletedIds: Set<string>) => void) {
+  deletedPlayersSubscribers.add(onUpdate);
+  if (cachedDeletedPlayersSet) {
+    onUpdate(cachedDeletedPlayersSet);
+  }
+
+  if (!deletedPlayersUnsubscribeRef) {
+    const bundleRef = doc(db, 'bundles', 'deletedPlayers');
+    deletedPlayersUnsubscribeRef = trackedOnSnapshot(
+      bundleRef,
+      (snapshot: any) => {
+        const set = new Set<string>();
+        if (snapshot.exists()) {
+          const data = snapshot.data() as DeletedBundleData;
+          if (Array.isArray(data.ids)) {
+            data.ids.forEach((id) => set.add(id));
+          }
+        }
+        cachedDeletedPlayersSet = set;
+        for (const sub of deletedPlayersSubscribers) {
+          sub(set);
+        }
+      },
+      (error) => console.warn('Deleted players bundle notice:', error),
+      'subscribeToDeletedPlayers'
+    );
+  }
+
+  return () => {
+    deletedPlayersSubscribers.delete(onUpdate);
+  };
+}
+
+export async function addDeletedPlayerIdToBundle(playerId: string): Promise<void> {
+  const bundleRef = doc(db, 'bundles', 'deletedPlayers');
+  const currentSet = cachedDeletedPlayersSet || new Set<string>();
+  currentSet.add(playerId);
+  cachedDeletedPlayersSet = currentSet;
+  const payload: DeletedBundleData = {
+    id: 'deletedPlayers',
+    updatedAt: new Date().toISOString(),
+    ids: Array.from(currentSet)
+  };
+  await trackedSetDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true }, 'addDeletedPlayerIdToBundle');
 }
 
 // Grant or update helper access
 export async function updateAuthorizedUser(email: string, name: string, role: 'helper' | 'admin' = 'helper') {
-  const userId = email.toLowerCase().replace(/[@.]/g, '_');
+  const cleanEmail = email.toLowerCase().trim();
+  const userId = cleanEmail.replace(/[@.]/g, '_');
+  userAuthCache.set(cleanEmail, { role, name: name.trim() });
   const userRef = doc(db, 'users', userId);
   const userData: User = {
     id: userId,
-    email: email.toLowerCase().trim(),
+    email: cleanEmail,
     name: name.trim(),
     role,
     addedAt: new Date().toISOString()
   };
   
   try {
-    await setDoc(userRef, sanitizeFirestoreData(userData), { merge: true });
+    await trackedSetDoc(userRef, sanitizeFirestoreData(userData), { merge: true }, 'updateAuthorizedUser');
   } catch (error) {
     handleFirestoreError(error, OperationType.UPDATE, `users/${userId}`);
     throw error;
@@ -57,17 +557,19 @@ export async function updateAuthorizedUser(email: string, name: string, role: 'h
 
 // Revoke access
 export async function removeAuthorizedUser(email: string) {
-  const userId = email.toLowerCase().replace(/[@.]/g, '_');
+  const cleanEmail = email.toLowerCase().trim();
+  const userId = cleanEmail.replace(/[@.]/g, '_');
+  userAuthCache.delete(cleanEmail);
   const userRef = doc(db, 'users', userId);
   try {
-    await deleteDoc(userRef);
+    await trackedDeleteDoc(userRef, 'removeAuthorizedUser');
   } catch (error) {
     handleFirestoreError(error, OperationType.DELETE, `users/${userId}`);
     throw error;
   }
 }
 
-// Add changelog item with rich metadata & change tracking
+// Add changelog item with rich metadata & change tracking directly to bundles/changelog in 1 write
 export async function addChangelogItem(
   action: string,
   description: string,
@@ -75,7 +577,6 @@ export async function addChangelogItem(
   changesOrMeta?: ChangeDetail[] | { levelId?: string; levelName?: string },
   meta?: { levelId?: string; levelName?: string } | ChangeDetail[]
 ) {
-  const changelogRef = doc(collection(db, 'changelog'), `log-${Date.now()}`);
   try {
     let changesList: ChangeDetail[] | undefined = undefined;
     let levelNameVal: string | undefined = undefined;
@@ -92,81 +593,40 @@ export async function addChangelogItem(
       if (meta.levelName) levelNameVal = meta.levelName;
     }
 
-    const payload = sanitizeFirestoreData({
-      id: changelogRef.id,
+    const newItem: ChangelogItem = {
+      id: `log-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
       timestamp: new Date().toISOString(),
       action,
       description,
       author: author || 'List Helper',
-      levelName: levelNameVal || null,
-      changes: changesList || null
-    });
-    await setDoc(changelogRef, payload);
+      levelName: levelNameVal || undefined,
+      changes: changesList || undefined
+    };
+
+    let currentItems: ChangelogItem[] = cachedChangelogList || [];
+    if (!cachedChangelogList) {
+      const bundle = await fetchChangelogBundle();
+      if (bundle && Array.isArray(bundle.items)) {
+        currentItems = bundle.items;
+      }
+    }
+
+    // Prepend new item and cap at top 1000 items to preserve full history while keeping document lightweight
+    const updatedItems = [newItem, ...currentItems.filter((i) => i.id !== newItem.id)].slice(0, 1000);
+    cachedChangelogList = updatedItems;
+
+    const bundleRef = doc(db, 'bundles', 'changelog');
+    const payload: ChangelogBundleData = {
+      id: 'changelog',
+      updatedAt: new Date().toISOString(),
+      items: updatedItems
+    };
+
+    await trackedSetDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true }, 'addChangelogItem');
   } catch (error) {
     console.warn('Failed to log changelog item:', error);
   }
 }
-
-// Subscribe to Changelog
-export function subscribeToChangelog(onUpdate: (changelog: ChangelogItem[]) => void) {
-  const colRef = collection(db, 'changelog');
-  // Order by timestamp descending
-  return onSnapshot(
-    colRef,
-    (snapshot) => {
-      const items: ChangelogItem[] = [];
-      snapshot.forEach((docSnap) => {
-        items.push(docSnap.data() as ChangelogItem);
-      });
-      items.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-      onUpdate(items);
-    },
-    (error) => {
-      console.warn('Changelog subscription notice:', error);
-    }
-  );
-}
-
-// Initialize Firebase App
-const app = initializeApp(firebaseConfig);
-
-// Initialize Firestore specifying the dedicated database ID
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
-
-export { signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged };
-
-export async function isUserAuthorized(email: string | null): Promise<boolean> {
-  if (!email) return false;
-  if (email === 'tomatosauceman500@gmail.com') return true;
-  
-  try {
-    const docRef = doc(db, 'users', email.toLowerCase().replace(/[@.]/g, '_'));
-    const docSnap = await getDoc(docRef);
-    return docSnap.exists() && docSnap.data().role === 'helper';
-  } catch (err) {
-    console.warn('Error checking authorization:', err);
-    return false;
-  }
-}
-
-export async function getPlayerNameByEmail(email: string | null): Promise<string> {
-  if (!email) return 'List Helper';
-  if (email === 'tomatosauceman500@gmail.com') return 'Admin';
-  
-  try {
-    const docRef = doc(db, 'users', email.toLowerCase().replace(/[@.]/g, '_'));
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      return docSnap.data().name || 'List Helper';
-    }
-  } catch (err) {
-    console.warn('Error fetching player name:', err);
-  }
-  return 'List Helper';
-}
-
 
 export enum OperationType {
   CREATE = 'create',
@@ -201,23 +661,7 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
   return errInfo;
 }
 
-// Test Connection on load
-async function testConnection() {
-  try {
-    await getDocFromServer(doc(db, 'test', 'connection'));
-  } catch (error) {
-    if (error instanceof Error && error.message.includes('the client is offline')) {
-      console.warn('Firebase client is offline or waiting for connection.');
-    }
-  }
-}
-testConnection();
-
-import initialLevelsData from '../data/kaizoLevels.json';
-
-const baselineLevelsMap = new Map<string, KaizoLevel>(
-  (initialLevelsData as KaizoLevel[]).map((lvl) => [lvl.id, lvl])
-);
+// Consolidated bundle helper for error logging
 
 export interface LevelsBundleData {
   id: string;
@@ -300,15 +744,28 @@ export async function fetchImageChunk(chunkId: string): Promise<void> {
   const promise = (async () => {
     try {
       const chunkDocRef = doc(db, 'image_chunks', chunkId);
-      const snap = await getDoc(chunkDocRef);
+      const snap = await trackedGetDoc(chunkDocRef, `fetchImageChunk:${chunkId}`);
       loadedImageChunksSet.add(chunkId);
-      if (snap.exists()) {
-        const data = snap.data();
-        const images: Record<string, string> = data?.images || {};
-        for (const [lvlId, imgUrl] of Object.entries(images)) {
-          if (typeof imgUrl === 'string') {
-            thumbnailMemoryCache.set(lvlId, imgUrl);
-          }
+
+      const images: Record<string, string> = snap.exists() ? (snap.data()?.images || {}) : {};
+
+      // 1. Store loaded thumbnail image URLs
+      for (const [lvlId, imgUrl] of Object.entries(images)) {
+        if (typeof imgUrl === 'string' && imgUrl.trim().length > 0) {
+          thumbnailMemoryCache.set(lvlId, imgUrl);
+        }
+      }
+
+      // 2. Mark null in thumbnailMemoryCache for all levels mapped to this chunk that have no image in Firestore
+      for (const [lvlId, mappedChunk] of levelToChunkMap.entries()) {
+        if (mappedChunk === chunkId && !thumbnailMemoryCache.has(lvlId)) {
+          thumbnailMemoryCache.set(lvlId, null);
+        }
+      }
+      for (const [lvlId, lvl] of cachedLevelsMap.entries()) {
+        const cId = getChunkIdForLevel(lvlId, lvl.rank, lvl.imageChunkId);
+        if (cId === chunkId && !thumbnailMemoryCache.has(lvlId)) {
+          thumbnailMemoryCache.set(lvlId, null);
         }
       }
     } catch (err) {
@@ -334,42 +791,17 @@ export async function fetchLevelThumbnail(
 ): Promise<string | null> {
   if (!levelId) return null;
 
-  // 1. Return from in-memory cache if checked previously (handles both valid URL and null)
+  // 1. Return from in-memory cache if checked previously
   if (thumbnailMemoryCache.has(levelId)) {
     return thumbnailMemoryCache.get(levelId) || null;
   }
 
-  // 2. Determine 1-indexed primary chunk ID
+  // 2. Determine primary chunk ID and fetch chunk document once
   const targetChunkId = await getChunkIdForLevelAsync(levelId, rank, chunkId);
   await fetchImageChunk(targetChunkId);
 
   if (thumbnailMemoryCache.has(levelId)) {
     return thumbnailMemoryCache.get(levelId) || null;
-  }
-
-  // 3. Fallback: Try 0-indexed chunk ID ONLY if fallback chunk hasn't been fetched yet
-  if (rank && rank > 0) {
-    const fallback0 = `chunk-${Math.floor(Math.max(0, rank - 1) / 10)}`;
-    if (fallback0 !== targetChunkId && !loadedImageChunksSet.has(fallback0)) {
-      await fetchImageChunk(fallback0);
-      if (thumbnailMemoryCache.has(levelId)) {
-        return thumbnailMemoryCache.get(levelId) || null;
-      }
-    }
-  }
-
-  // 4. Fallback: Check custom chunk formatting ONLY if alternative chunk hasn't been fetched yet
-  if (targetChunkId.startsWith('chunk-')) {
-    const rawNum = targetChunkId.replace('chunk-', '');
-    if (rawNum && !isNaN(Number(rawNum))) {
-      const altChunk = `chunk${rawNum}`;
-      if (!loadedImageChunksSet.has(altChunk)) {
-        await fetchImageChunk(altChunk);
-        if (thumbnailMemoryCache.has(levelId)) {
-          return thumbnailMemoryCache.get(levelId) || null;
-        }
-      }
-    }
   }
 
   // Mark as null in memory so we never query Firestore for this level again in this session
@@ -434,24 +866,24 @@ export async function updateLevelThumbnail(
   const chunkRef = doc(db, 'image_chunks', targetChunkId);
   try {
     if (!thumbnailUrl) {
-      await updateDoc(chunkRef, {
+      await trackedUpdateDoc(chunkRef, {
         [`images.${levelId}`]: deleteField(),
         updatedAt: new Date().toISOString()
-      }).catch(() => {});
+      }, 'updateLevelThumbnail').catch(() => {});
     } else {
       try {
-        await updateDoc(chunkRef, {
+        await trackedUpdateDoc(chunkRef, {
           [`images.${levelId}`]: thumbnailUrl,
           updatedAt: new Date().toISOString()
-        });
+        }, 'updateLevelThumbnail');
       } catch (updateErr) {
-        await setDoc(chunkRef, {
+        await trackedSetDoc(chunkRef, {
           id: targetChunkId,
           updatedAt: new Date().toISOString(),
           images: {
             [levelId]: thumbnailUrl
           }
-        });
+        }, undefined, 'updateLevelThumbnail');
       }
     }
   } catch (error) {
@@ -486,7 +918,7 @@ export async function fetchLevelsBundle(): Promise<LevelsBundleData | null> {
   const bundleRef = doc(db, 'bundles', 'levels');
   levelsBundlePromise = (async () => {
     try {
-      const snap = await getDoc(bundleRef);
+      const snap = await trackedGetDoc(bundleRef, 'fetchLevelsBundle');
       if (snap.exists()) {
         const data = snap.data() as LevelsBundleData;
         cachedLevelsBundle = data;
@@ -507,30 +939,54 @@ export async function fetchLevelsBundle(): Promise<LevelsBundleData | null> {
   return levelsBundlePromise;
 }
 
-// Subscribe to real-time updates for the consolidated level bundle
+// 6. Levels Bundle Subscription Manager
+const levelsBundleSubscribers = new Set<{
+  onUpdate: (data: LevelsBundleData) => void;
+  onError?: (err: Error) => void;
+}>();
+let levelsBundleUnsubscribeRef: (() => void) | null = null;
+
 export function subscribeToLevelsBundle(
   onUpdate: (data: LevelsBundleData) => void,
   onError?: (err: Error) => void
 ) {
-  const bundleRef = doc(db, 'bundles', 'levels');
-  return onSnapshot(
-    bundleRef,
-    (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.data() as LevelsBundleData;
-        cachedLevelsBundle = data;
-        if (data && Array.isArray(data.levels)) {
-          registerLevelsInCache(data.levels);
+  const handlerObj = { onUpdate, onError };
+  levelsBundleSubscribers.add(handlerObj);
+
+  if (cachedLevelsBundle) {
+    onUpdate(cachedLevelsBundle);
+  }
+
+  if (!levelsBundleUnsubscribeRef) {
+    const bundleRef = doc(db, 'bundles', 'levels');
+    levelsBundleUnsubscribeRef = trackedOnSnapshot(
+      bundleRef,
+      (snapshot: any) => {
+        if (snapshot.exists()) {
+          const data = snapshot.data() as LevelsBundleData;
+          cachedLevelsBundle = data;
+          if (data && Array.isArray(data.levels)) {
+            registerLevelsInCache(data.levels);
+          }
+          for (const sub of levelsBundleSubscribers) {
+            sub.onUpdate(data);
+          }
         }
-        onUpdate(data);
-      }
-    },
-    (error) => {
-      console.warn('Bundle subscription notice:', error);
-      handleFirestoreError(error, OperationType.GET, 'bundles/levels');
-      if (onError) onError(error);
-    }
-  );
+      },
+      (error: any) => {
+        console.warn('Bundle subscription notice:', error);
+        handleFirestoreError(error, OperationType.GET, 'bundles/levels');
+        for (const sub of levelsBundleSubscribers) {
+          if (sub.onError) sub.onError(error);
+        }
+      },
+      'subscribeToLevelsBundle'
+    );
+  }
+
+  return () => {
+    levelsBundleSubscribers.delete(handlerObj);
+  };
 }
 
 // Update the consolidated levels bundle in Firestore (strips images)
@@ -551,7 +1007,7 @@ export async function updateLevelsBundleInFirestore(levels: KaizoLevel[]): Promi
   };
 
   try {
-    await setDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true });
+    await trackedSetDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true }, 'updateLevelsBundleInFirestore');
   } catch (error) {
     handleFirestoreError(error, OperationType.WRITE, 'bundles/levels');
     throw error;
@@ -674,11 +1130,11 @@ export async function deleteLevelFromFirestore(levelId: string): Promise<void> {
   try {
     thumbnailMemoryCache.delete(levelId);
     const chunkRef = doc(db, 'image_chunks', targetChunkId);
-    await updateDoc(chunkRef, {
+    await trackedUpdateDoc(chunkRef, {
       [`images.${levelId}`]: deleteField(),
       updatedAt: new Date().toISOString()
-    }).catch(() => {});
-    await setDoc(deletedRef, { id: levelId, deletedAt: new Date().toISOString() });
+    }, 'deleteLevelFromFirestore').catch(() => {});
+    await trackedSetDoc(deletedRef, { id: levelId, deletedAt: new Date().toISOString() }, undefined, 'deleteLevelFromFirestore');
   } catch (error) {
     handleFirestoreError(error, OperationType.DELETE, `image_chunks/${targetChunkId}`);
   }
@@ -694,42 +1150,6 @@ export async function deleteLevelFromFirestore(levelId: string): Promise<void> {
     handleFirestoreError(error, OperationType.WRITE, `bundles/levels`);
     throw error;
   }
-}
-
-// Subscribe to Deleted Level IDs
-export function subscribeToDeletedLevels(onUpdate: (deletedIds: Set<string>) => void) {
-  const colRef = collection(db, 'deletedLevels');
-  return onSnapshot(
-    colRef,
-    (snapshot) => {
-      const set = new Set<string>();
-      snapshot.forEach((docSnap) => {
-        set.add(docSnap.id);
-      });
-      onUpdate(set);
-    },
-    (error) => {
-      console.warn('Deleted levels notice:', error);
-    }
-  );
-}
-
-// Subscribe to Deleted Player IDs
-export function subscribeToDeletedPlayers(onUpdate: (deletedIds: Set<string>) => void) {
-  const colRef = collection(db, 'deletedPlayers');
-  return onSnapshot(
-    colRef,
-    (snapshot) => {
-      const set = new Set<string>();
-      snapshot.forEach((docSnap) => {
-        set.add(docSnap.id);
-      });
-      onUpdate(set);
-    },
-    (error) => {
-      console.warn('Deleted players notice:', error);
-    }
-  );
 }
 
 // Save reordered level ranks directly to bundles/levels in 1 single write
@@ -790,47 +1210,30 @@ export async function addLevelToFirestore(
   }
 }
 
-// Save submission to Firestore
+// Save submission to Firestore in bundles/submissions
 export async function addSubmissionToFirestore(submission: ProofSubmission) {
-  const subRef = doc(db, 'submissions', submission.id);
+  const current = cachedSubmissionsList || [];
+  const updated = [submission, ...current.filter((s) => s.id !== submission.id)];
+  cachedSubmissionsList = updated;
+  const bundleRef = doc(db, 'bundles', 'submissions');
+  const payload: SubmissionsBundleData = {
+    id: 'submissions',
+    updatedAt: new Date().toISOString(),
+    submissions: updated
+  };
   try {
-    await setDoc(subRef, sanitizeFirestoreData(submission));
+    await trackedSetDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true }, 'addSubmissionToFirestore');
   } catch (error) {
-    handleFirestoreError(error, OperationType.WRITE, `submissions/${submission.id}`);
+    handleFirestoreError(error, OperationType.WRITE, 'bundles/submissions');
     throw error;
   }
 }
 
-// Subscribe to Submissions
-export function subscribeToSubmissions(
-  onUpdate: (submissions: ProofSubmission[]) => void
-) {
-  const subCol = collection(db, 'submissions');
-  return onSnapshot(
-    subCol,
-    (snapshot) => {
-      const subs: ProofSubmission[] = [];
-      snapshot.forEach((docSnap) => {
-        subs.push(docSnap.data() as ProofSubmission);
-      });
-      onUpdate(subs);
-    },
-    (error) => {
-      console.warn('Submissions subscription notice:', error);
-      handleFirestoreError(error, OperationType.LIST, 'submissions');
-    }
-  );
-}
-
-// Add/update Player profile in Firestore
+// Add/update Player profile in Firestore (writes to bundles/players in 1 write)
 export async function addPlayerToFirestore(player: PlayerProfile) {
-  const playerRef = doc(db, 'players', player.id);
-  try {
-    await setDoc(playerRef, sanitizeFirestoreData(player), { merge: true });
-  } catch (error) {
-    handleFirestoreError(error, OperationType.WRITE, `players/${player.id}`);
-    throw error;
-  }
+  const current = cachedPlayersList || [];
+  const updated = [player, ...current.filter((p) => p.id !== player.id)];
+  await updatePlayersBundleInFirestore(updated);
 }
 
 // Update Player Profile identity (Name, ID, Country) and update matching level victors across Firestore
@@ -846,26 +1249,24 @@ export async function updatePlayerIdentity(
   const cleanCountry = (newCountry || '').trim().toUpperCase();
 
   try {
-    // 1. If player ID changed, delete old player document
-    if (oldPlayerId !== cleanNewId) {
-      const oldPlayerRef = doc(db, 'players', oldPlayerId);
-      await deleteDoc(oldPlayerRef);
-    }
-
-    // 2. Write/update new player document
-    const newPlayerRef = doc(db, 'players', cleanNewId);
-    await setDoc(
-      newPlayerRef,
-      sanitizeFirestoreData({
+    const currentPlayers = cachedPlayersList || [];
+    const updatedPlayers = currentPlayers.map((p) => {
+      if (p.id === oldPlayerId) {
+        return { ...p, id: cleanNewId, name: cleanNewName, country: cleanCountry };
+      }
+      return p;
+    });
+    if (!updatedPlayers.some((p) => p.id === cleanNewId)) {
+      updatedPlayers.push({
         id: cleanNewId,
         name: cleanNewName,
         country: cleanCountry,
         addedAt: new Date().toISOString()
-      }),
-      { merge: true }
-    );
+      });
+    }
+    await updatePlayersBundleInFirestore(updatedPlayers);
 
-    // 3. Update matching victors across bundles/levels in a single write
+    // Update matching victors across bundles/levels in a single write
     const currentBundle = await fetchLevelsBundle();
     if (currentBundle && Array.isArray(currentBundle.levels)) {
       const oldIdLower = oldPlayerId.toLowerCase();
@@ -889,8 +1290,7 @@ export async function updatePlayerIdentity(
             levelVictorsChanged = true;
             return {
               ...v,
-              name: cleanNewName,
-              id: `vic-${lvl.id}-${cleanNewId}`
+              name: cleanNewName
             };
           }
           return v;
@@ -908,18 +1308,18 @@ export async function updatePlayerIdentity(
       }
     }
   } catch (error) {
-    handleFirestoreError(error, OperationType.WRITE, `players/${cleanNewId}`);
+    handleFirestoreError(error, OperationType.WRITE, `bundles/players`);
     throw error;
   }
 }
 
 // Delete Player profile from Firestore and purge from deletedPlayers registry
 export async function deletePlayerFromFirestore(playerId: string, playerName?: string) {
-  const playerRef = doc(db, 'players', playerId);
-  const deletedRef = doc(db, 'deletedPlayers', playerId);
   try {
-    await deleteDoc(playerRef);
-    await setDoc(deletedRef, { id: playerId, name: playerName || '', deletedAt: new Date().toISOString() });
+    const current = cachedPlayersList || [];
+    const updated = current.filter((p) => p.id !== playerId);
+    await updatePlayersBundleInFirestore(updated);
+    await addDeletedPlayerIdToBundle(playerId);
 
     // Also purge victor entries matching this player from bundles/levels directly
     const currentBundle = await fetchLevelsBundle();
@@ -951,37 +1351,7 @@ export async function deletePlayerFromFirestore(playerId: string, playerName?: s
       }
     }
   } catch (error) {
-    handleFirestoreError(error, OperationType.DELETE, `players/${playerId}`);
+    handleFirestoreError(error, OperationType.DELETE, `bundles/players`);
     throw error;
   }
 }
-
-// Subscribe to Players real-time
-export function subscribeToPlayers(
-  onUpdate: (players: PlayerProfile[]) => void
-) {
-  const playersCol = collection(db, 'players');
-  return onSnapshot(
-    playersCol,
-    (snapshot) => {
-      const players: PlayerProfile[] = [];
-      snapshot.forEach((docSnap) => {
-        const data = docSnap.data() as PlayerProfile;
-        if (data && data.name) {
-          players.push({
-            id: docSnap.id || data.id,
-            name: data.name,
-            country: data.country || '',
-            addedAt: data.addedAt || new Date().toISOString()
-          });
-        }
-      });
-      onUpdate(players);
-    },
-    (error) => {
-      console.warn('Players subscription notice:', error);
-      handleFirestoreError(error, OperationType.LIST, 'players');
-    }
-  );
-}
-

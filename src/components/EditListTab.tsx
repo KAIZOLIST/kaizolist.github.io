@@ -24,13 +24,15 @@ import {
   fetchLevelThumbnail,
   subscribeToLevelThumbnail,
   notifyThumbnailUpdated,
+  getChunkIdForLevel,
   LevelsBundleData,
   auth,
   googleProvider
 } from '../lib/firebase';
 import { ChangelogTab } from './ChangelogTab';
 import { PendingSubmissions } from './PendingSubmissions';
-import { PLAYER_SLUG_NAME_MAP, getPointsForRank, getVictorName, isLevelVerified, getVerifiedPlacements, getLevelIdFromLink } from '../utils/kaizoUtils';
+import { FirestoreReadMonitor } from './FirestoreReadMonitor';
+import { PLAYER_SLUG_NAME_MAP, getPointsForRank, getVictorName, extractPlayerSlug, isLevelVerified, getVerifiedPlacements, getLevelIdFromLink } from '../utils/kaizoUtils';
 import {
   Pencil,
   Image as ImageIcon,
@@ -316,8 +318,10 @@ export const EditListTab: React.FC<EditListTabProps> = ({
   };
 
   useEffect(() => {
-    return subscribeToSubmissions(setSubmissions);
-  }, []);
+    if (activeSubTab === 'submissions') {
+      return subscribeToSubmissions(setSubmissions);
+    }
+  }, [activeSubTab]);
 
   // Search & Filter state for levels
   const [levelSearch, setLevelSearch] = useState('');
@@ -684,7 +688,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
         length: editLength.trim() || '0:50',
         victors: editVictors,
         rank: currentLevel?.rank,
-        imageChunkId: currentLevel?.imageChunkId || (currentLevel?.rank ? `chunk-${Math.floor((currentLevel.rank - 1) / 10)}` : 'chunk-0'),
+        imageChunkId: currentLevel?.imageChunkId || getChunkIdForLevel(levelId, currentLevel?.rank),
         ...(editImageModified ? { thumbnailUrl: finalThumbnail } : {})
       };
 
@@ -3249,6 +3253,11 @@ export const EditListTab: React.FC<EditListTabProps> = ({
               </div>
             </div>
           )}
+
+          {/* FIRESTORE READ TELEMETRY MONITOR */}
+          <div className="pt-2">
+            <FirestoreReadMonitor />
+          </div>
         </div>
       )}
     </div>

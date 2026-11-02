@@ -12,6 +12,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   onOpenSubmitModal
 }) => {
+
   return (
     <header className="sticky top-0 z-40 bg-[#0b0f17]/90 backdrop-blur-md border-b border-slate-800/80">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-8 px-4 sm:px-6 py-3.5">
@@ -27,11 +28,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="relative z-10 bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(239,68,68,0.6)] ml-[3px]">L</span>
           </div>
 
-          {/* Dynamic Background Aura - more subtle without card */}
           <div className="absolute -inset-x-4 -inset-y-2 bg-gradient-to-r from-blue-500/0 via-pink-500/0 to-red-500/0 blur-2xl opacity-0 group-hover:opacity-20 group-hover:from-blue-600/30 group-hover:via-pink-600/30 group-hover:to-red-700/30 transition-all duration-700 rounded-full" />
         </button>
 
-        {/* Zone 2: Concise single-line text navigation links */}
+        {/* Zone 2: Text navigation links */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
           <button
             onClick={() => setActiveTab('rankings')}
@@ -76,8 +76,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </nav>
 
-        {/* Zone 3: 1 primary action */}
-        <div className="flex items-center gap-3 shrink-0">
+        {/* Zone 3: Actions */}
+        <div className="flex items-center gap-2.5 shrink-0">
           <button
             onClick={onOpenSubmitModal}
             className="flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-950 bg-amber-400 hover:bg-amber-300 active:scale-95 transition-all rounded-lg shadow-sm whitespace-nowrap shrink-0"
@@ -127,4 +127,3 @@ export const Navbar: React.FC<NavbarProps> = ({
     </header>
   );
 };
-
