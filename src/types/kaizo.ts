@@ -18,7 +18,8 @@ export interface KaizoLevel {
   difficulty: 'Impossible Kaizo' | 'Silent Kaizo' | 'Extreme Kaizo' | 'Insane Kaizo' | 'High Kaizo' | 'Mid Kaizo' | 'Entry Kaizo';
   thumbnailUrl: string | null;
   imageFit?: 'contain' | 'cover';
-  length: string;
+  skills?: string;
+  length?: string;
   victors: Victor[];
   isLegacy?: boolean;
   imageChunkId?: string;

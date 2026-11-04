@@ -168,9 +168,18 @@ export async function getCachedUserInfo(email: string | null): Promise<{ isAutho
   }
 
   try {
-    const userId = cleanEmail.replace(/[@.]/g, '_');
-    const docRef = doc(db, 'users', userId);
-    const docSnap = await trackedGetDoc(docRef, 'isUserAuthorizedCheck');
+    const userId1 = cleanEmail;
+    const userId2 = cleanEmail.replace(/[@.]/g, '_');
+    const uid = auth.currentUser?.email?.toLowerCase().trim() === cleanEmail ? auth.currentUser.uid : null;
+
+    let docSnap = await trackedGetDoc(doc(db, 'users', userId1), 'isUserAuthorizedCheck');
+    if (!docSnap.exists()) {
+      docSnap = await trackedGetDoc(doc(db, 'users', userId2), 'isUserAuthorizedCheck');
+    }
+    if (!docSnap.exists() && uid) {
+      docSnap = await trackedGetDoc(doc(db, 'users', uid), 'isUserAuthorizedCheck');
+    }
+
     if (!docSnap.exists()) {
       return { isAuthorized: false, role: 'none', name: 'List Helper' };
     }
@@ -218,10 +227,20 @@ export function subscribeToUsers(onUpdate: (users: User[]) => void) {
     usersUnsubscribeRef = trackedOnSnapshot(
       usersCollection,
       (snapshot) => {
-        const users: User[] = [];
+        const userMap = new Map<string, User>();
         snapshot.forEach((docSnap: any) => {
-          users.push(docSnap.data() as User);
+          const data = docSnap.data() as User;
+          if (data && data.email) {
+            const cleanEmail = data.email.toLowerCase().trim();
+            const existing = userMap.get(cleanEmail);
+            if (!existing) {
+              userMap.set(cleanEmail, { ...data, email: cleanEmail });
+            } else if (data.name && data.name !== 'List Helper' && existing.name === 'List Helper') {
+              userMap.set(cleanEmail, { ...existing, name: data.name });
+            }
+          }
         });
+        const users = Array.from(userMap.values());
         cachedUsersList = users;
         for (const sub of usersSubscribers) {
           sub(users);
@@ -536,21 +555,25 @@ export async function addDeletedPlayerIdToBundle(playerId: string): Promise<void
 // Grant or update helper access
 export async function updateAuthorizedUser(email: string, name: string, role: 'helper' | 'admin' = 'helper') {
   const cleanEmail = email.toLowerCase().trim();
-  const userId = cleanEmail.replace(/[@.]/g, '_');
   userAuthCache.set(cleanEmail, { role, name: name.trim() });
-  const userRef = doc(db, 'users', userId);
+  
   const userData: User = {
-    id: userId,
+    id: cleanEmail,
     email: cleanEmail,
     name: name.trim(),
     role,
     addedAt: new Date().toISOString()
   };
-  
+
+  const keys = [cleanEmail, cleanEmail.replace(/[@.]/g, '_'), cleanEmail.replace('@', '_')];
+
   try {
-    await trackedSetDoc(userRef, sanitizeFirestoreData(userData), { merge: true }, 'updateAuthorizedUser');
+    for (const key of keys) {
+      const userRef = doc(db, 'users', key);
+      await trackedSetDoc(userRef, sanitizeFirestoreData({ ...userData, id: key }), { merge: true }, 'updateAuthorizedUser');
+    }
   } catch (error) {
-    handleFirestoreError(error, OperationType.UPDATE, `users/${userId}`);
+    handleFirestoreError(error, OperationType.UPDATE, `users/${cleanEmail}`);
     throw error;
   }
 }
@@ -558,13 +581,15 @@ export async function updateAuthorizedUser(email: string, name: string, role: 'h
 // Revoke access
 export async function removeAuthorizedUser(email: string) {
   const cleanEmail = email.toLowerCase().trim();
-  const userId = cleanEmail.replace(/[@.]/g, '_');
   userAuthCache.delete(cleanEmail);
-  const userRef = doc(db, 'users', userId);
+  const keys = [cleanEmail, cleanEmail.replace(/[@.]/g, '_'), cleanEmail.replace('@', '_')];
   try {
-    await trackedDeleteDoc(userRef, 'removeAuthorizedUser');
+    for (const key of keys) {
+      const userRef = doc(db, 'users', key);
+      await trackedDeleteDoc(userRef, 'removeAuthorizedUser').catch(() => {});
+    }
   } catch (error) {
-    handleFirestoreError(error, OperationType.DELETE, `users/${userId}`);
+    handleFirestoreError(error, OperationType.DELETE, `users/${cleanEmail}`);
     throw error;
   }
 }
@@ -1355,3 +1380,25 @@ export async function deletePlayerFromFirestore(playerId: string, playerName?: s
     throw error;
   }
 }
+
+export async function syncUserUidMapping(currentUser: any) {
+  if (!currentUser || !currentUser.email) return;
+  const cleanEmail = currentUser.email.toLowerCase().trim();
+  const info = await getCachedUserInfo(cleanEmail);
+  if (info && info.isAuthorized) {
+    try {
+      const userRef = doc(db, 'users', currentUser.uid);
+      const userData: User = {
+        id: currentUser.uid,
+        email: cleanEmail,
+        name: info.name || 'List Helper',
+        role: info.role as any || 'helper',
+        addedAt: new Date().toISOString()
+      };
+      await trackedSetDoc(userRef, sanitizeFirestoreData(userData), { merge: true }, 'syncUserUidMapping');
+    } catch (err) {
+      console.warn('Could not sync user UID mapping:', err);
+    }
+  }
+}
+

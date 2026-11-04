@@ -252,8 +252,8 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
                 </div>
 
                 <div className="flex items-center gap-1.5">
-                  <span className="text-slate-500">Est. Duration:</span>
-                  <span className="font-medium text-slate-200 tabular-nums">{level.length}</span>
+                  <span className="text-slate-500">Skills:</span>
+                  <span className="font-medium text-slate-200">{level.skills || level.length || 'None'}</span>
                 </div>
               </div>
 

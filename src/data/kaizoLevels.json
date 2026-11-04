@@ -9,7 +9,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1001-PIXEL",
     "difficulty": "Extreme Kaizo",
     "thumbnailUrl": "images/pixel_perfect_hell.png",
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-1-everblaze",
@@ -28,7 +27,8 @@
       {
         "id": "vic-1-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-2",
@@ -40,7 +40,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1002-THESE",
     "difficulty": "Extreme Kaizo",
     "thumbnailUrl": "images/second_crucible.png",
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-2-breadfish",
@@ -53,7 +52,8 @@
       {
         "id": "vic-2-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-3",
@@ -65,7 +65,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1003-FLUOR",
     "difficulty": "Extreme Kaizo",
     "thumbnailUrl": "images/fluorescence.png",
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-3-everblaze",
@@ -78,7 +77,8 @@
       {
         "id": "vic-3-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-4",
@@ -90,7 +90,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1004-AFROZ",
     "difficulty": "Extreme Kaizo",
     "thumbnailUrl": "images/frozen_galaxy.png",
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-4-breadfish",
@@ -115,7 +114,8 @@
       {
         "id": "vic-4-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-5",
@@ -127,14 +127,14 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1005-BULLE",
     "difficulty": "Extreme Kaizo",
     "thumbnailUrl": "images/bullet_hell.png",
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-5-everblaze",
         "isVerifier": true,
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-6",
@@ -146,7 +146,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1006-RIPTI",
     "difficulty": "Extreme Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-6-everblaze",
@@ -160,7 +159,8 @@
         "id": "vic-6-unlimited",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-7",
@@ -172,7 +172,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1007-DRAGO",
     "difficulty": "Extreme Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-7-shadowsurf",
@@ -188,7 +187,8 @@
       {
         "id": "vic-7-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-8",
@@ -200,7 +200,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1008-BLACK",
     "difficulty": "Extreme Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-8-nebula",
@@ -213,7 +212,8 @@
       {
         "id": "vic-8-everblaze"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-9",
@@ -225,14 +225,14 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1009-TOWER",
     "difficulty": "Extreme Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-9-breadfish",
         "isVerifier": true,
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-10",
@@ -244,7 +244,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1010-RAHHH",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-10-breadfish",
@@ -254,7 +253,8 @@
         "id": "vic-10-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-11",
@@ -266,14 +266,14 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1011-SUPER",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-11-breadfish",
         "isVerifier": true,
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-12",
@@ -285,7 +285,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1012-UNNER",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-12-breadfish",
@@ -298,7 +297,8 @@
       {
         "id": "vic-12-petbobo"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-13",
@@ -310,7 +310,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1013-SUPER",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-13-breadfish",
@@ -320,7 +319,8 @@
         "id": "vic-13-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-14",
@@ -332,14 +332,14 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1014-NEUTR",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-14-breadfish",
         "isVerifier": true,
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-15",
@@ -351,7 +351,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1015-PALAC",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-15-breadfish",
@@ -364,7 +363,8 @@
       {
         "id": "vic-15-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-16",
@@ -376,7 +376,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1016-KRAZY",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-16-sigmundfreud",
@@ -389,7 +388,8 @@
         "id": "vic-16-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-17",
@@ -401,7 +401,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1017-MOREI",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-17-breadfish",
@@ -411,7 +410,8 @@
         "id": "vic-17-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-18",
@@ -423,7 +423,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1018-OBELI",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-18-everblaze",
@@ -436,7 +435,8 @@
       {
         "id": "vic-18-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-19",
@@ -448,7 +448,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1019-NARWH",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-19-breadfish",
@@ -458,7 +457,8 @@
         "id": "vic-19-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-20",
@@ -470,7 +470,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1020-KAIYO",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-20-breadfish",
@@ -480,7 +479,8 @@
         "id": "vic-20-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-21",
@@ -492,7 +492,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1021-6ROOM",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-21-breadfish",
@@ -513,7 +512,8 @@
       {
         "id": "vic-21-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-22",
@@ -525,7 +525,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1022-CASTL",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-22-breadfish",
@@ -550,7 +549,8 @@
       {
         "id": "vic-22-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-23",
@@ -562,14 +562,14 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1023-GREEN",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-23-dantheman",
         "isVerifier": true,
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-24",
@@ -581,7 +581,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1024-KAIZO",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-24-gamingbeast",
@@ -612,7 +611,8 @@
       {
         "id": "vic-24-xsetdantesandwic"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-25",
@@ -624,7 +624,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1025-ECHOE",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-25-worldx",
@@ -646,7 +645,8 @@
       {
         "id": "vic-25-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-26",
@@ -658,7 +658,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1026-THE5G",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-26-breadfish",
@@ -674,7 +673,8 @@
       {
         "id": "vic-26-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-27",
@@ -686,7 +686,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1027-NOTIM",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-27-breadfish",
@@ -707,7 +706,8 @@
       {
         "id": "vic-27-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-28",
@@ -719,7 +719,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1028-OUTOF",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-28-worldx",
@@ -744,7 +743,8 @@
       {
         "id": "vic-28-unlimited"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-29",
@@ -756,7 +756,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1029-WHIPL",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-29-yoyble",
@@ -775,7 +774,8 @@
       {
         "id": "vic-29-omegagodzilla"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-30",
@@ -787,7 +787,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1030-EXTRE",
     "difficulty": "Insane Kaizo",
     "thumbnailUrl": null,
-    "length": "0:50",
     "victors": [
       {
         "id": "vic-30-27"
@@ -820,7 +819,8 @@
       {
         "id": "vic-30-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-31",
@@ -832,7 +832,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1031-JUDIO",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-31-27",
@@ -868,7 +867,8 @@
       {
         "id": "vic-31-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-32",
@@ -880,7 +880,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1032-SAKUP",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-32-worldx",
@@ -908,7 +907,8 @@
       {
         "id": "vic-32-unlimited"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-33",
@@ -920,7 +920,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1033-CLIMB",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-33-breadfish",
@@ -936,7 +935,8 @@
       {
         "id": "vic-33-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-34",
@@ -948,7 +948,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1034-SLAUG",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-34-everblaze",
@@ -964,7 +963,8 @@
       {
         "id": "vic-34-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-35",
@@ -976,7 +976,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1035-GAMIN",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-35-isr",
@@ -992,7 +991,8 @@
       {
         "id": "vic-35-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-36",
@@ -1004,7 +1004,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1036-PIXEL",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-36-leaffy",
@@ -1020,7 +1019,8 @@
       {
         "id": "vic-36-everblaze"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-37",
@@ -1032,7 +1032,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1037-THEFI",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-37-breadfish"
@@ -1059,7 +1058,8 @@
       {
         "id": "vic-37-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-38",
@@ -1071,7 +1071,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1038-THEVO",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-38-breadfish"
@@ -1079,7 +1078,8 @@
       {
         "id": "vic-38-everblaze"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-39",
@@ -1091,7 +1091,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1039-LVL",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-39-shadowsurf",
@@ -1110,7 +1109,8 @@
       {
         "id": "vic-39-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-40",
@@ -1122,7 +1122,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1040-KRUSH",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-40-matrixical",
@@ -1132,7 +1131,8 @@
       {
         "id": "vic-40-breadfish"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-41",
@@ -1144,7 +1144,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1041-ELEGA",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-41-breadfish",
@@ -1175,7 +1174,8 @@
       {
         "id": "vic-41-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-42",
@@ -1187,7 +1187,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1042-PATHO",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-42-shadowsurf",
@@ -1203,7 +1202,8 @@
       {
         "id": "vic-42-omegagodzilla"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-43",
@@ -1215,7 +1215,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1043-21PLA",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-43-breadfish",
@@ -1225,7 +1224,8 @@
         "id": "vic-43-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-44",
@@ -1237,7 +1237,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1044-SUPER",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-44-breadfish"
@@ -1249,7 +1248,8 @@
       {
         "id": "vic-44-goobernut"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-45",
@@ -1261,7 +1261,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1045-BRIAN",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-45-leaffy",
@@ -1283,7 +1282,8 @@
       {
         "id": "vic-45-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-46",
@@ -1295,7 +1295,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1046-LONGR",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-46-leaffy",
@@ -1329,7 +1328,8 @@
       {
         "id": "vic-46-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-47",
@@ -1341,7 +1341,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1047-JOURN",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-47-shadowsurf",
@@ -1354,7 +1353,8 @@
         "id": "vic-47-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-48",
@@ -1366,7 +1366,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1048-SINGL",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-48-shadowsurf",
@@ -1379,7 +1378,8 @@
         "id": "vic-48-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-49",
@@ -1391,7 +1391,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1049-TMTSJ",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-49-shadowsurf",
@@ -1404,7 +1403,8 @@
         "id": "vic-49-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-50",
@@ -1416,7 +1416,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1050-KAIZO",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-50-everblaze",
@@ -1425,7 +1424,8 @@
       {
         "id": "vic-50-breadfish"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-51",
@@ -1437,7 +1437,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1051-TWILI",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-51-everblaze",
@@ -1471,7 +1470,8 @@
       {
         "id": "vic-51-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-52",
@@ -1483,7 +1483,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1052-THEPI",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-52-shadowsurf",
@@ -1499,7 +1498,8 @@
       {
         "id": "vic-52-omegagodzilla"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-53",
@@ -1511,7 +1511,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1053-VULTU",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-53-breadfish"
@@ -1529,7 +1528,8 @@
         "id": "vic-53-unlimited",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-54",
@@ -1541,7 +1541,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1054-TOWER",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-54-shadowsurf",
@@ -1557,7 +1556,8 @@
       {
         "id": "vic-54-lecksibbi"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-55",
@@ -1569,7 +1569,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1055-MYCOR",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-55-breadfish",
@@ -1579,7 +1578,8 @@
         "id": "vic-55-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-56",
@@ -1591,7 +1591,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1056-WINDT",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-56-breadfish",
@@ -1604,7 +1603,8 @@
       {
         "id": "vic-56-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-57",
@@ -1616,7 +1616,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1057-MINUS",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-57-worldx",
@@ -1629,7 +1628,8 @@
         "id": "vic-57-everblaze",
         "isWorldRecord": true
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-58",
@@ -1641,7 +1641,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1058-THETA",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-58-breadfish",
@@ -1654,7 +1653,8 @@
       {
         "id": "vic-58-omegagodzilla"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-59",
@@ -1666,7 +1666,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1059-ARAHR",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-59-breadfish",
@@ -1691,7 +1690,8 @@
       {
         "id": "vic-59-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-60",
@@ -1703,7 +1703,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1060-CIRCU",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-60-sheerfails",
@@ -1719,7 +1718,8 @@
       {
         "id": "vic-60-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-61",
@@ -1731,7 +1731,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1061-V14TH",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-61-breadfish",
@@ -1774,7 +1773,8 @@
       {
         "id": "vic-61-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-62",
@@ -1786,7 +1786,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1062-SLAUG",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-62-shadowsurf",
@@ -1802,7 +1801,8 @@
       {
         "id": "vic-62-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-63",
@@ -1814,7 +1814,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1063-VULTU",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-63-breadfish",
@@ -1832,7 +1831,8 @@
       {
         "id": "vic-63-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-64",
@@ -1844,7 +1844,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1064-FALLE",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-64-breadfish",
@@ -1872,7 +1871,8 @@
       {
         "id": "vic-64-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-65",
@@ -1884,7 +1884,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1065-KAIZO",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-65-everblaze",
@@ -1912,7 +1911,8 @@
       {
         "id": "vic-65-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-66",
@@ -1924,7 +1924,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1066-EXTRE",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-66-everblaze",
@@ -1955,7 +1954,8 @@
       {
         "id": "vic-66-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-67",
@@ -1967,7 +1967,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1067-KAIZO",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-67-everblaze",
@@ -1998,7 +1997,8 @@
       {
         "id": "vic-67-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-68",
@@ -2010,7 +2010,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1068-THECL",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-68-everblaze",
@@ -2059,7 +2058,8 @@
       {
         "id": "vic-68-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-69",
@@ -2071,7 +2071,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1069-THINK",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-69-shadowsurf",
@@ -2087,7 +2086,8 @@
       {
         "id": "vic-69-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-70",
@@ -2099,7 +2099,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1070-TILTE",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-70-shadowsurf",
@@ -2115,7 +2114,8 @@
       {
         "id": "vic-70-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-71",
@@ -2127,7 +2127,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1071-GENES",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-71-everblaze",
@@ -2143,7 +2142,8 @@
       {
         "id": "vic-71-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-72",
@@ -2155,7 +2155,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1072-VALKY",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-72-yoyble",
@@ -2174,7 +2173,8 @@
       {
         "id": "vic-72-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-73",
@@ -2186,7 +2186,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1073-TOWER",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-73-twilightphi",
@@ -2208,7 +2207,8 @@
       {
         "id": "vic-73-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-74",
@@ -2220,7 +2220,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1074-MINIT",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-74-shadowsurf",
@@ -2241,7 +2240,8 @@
       {
         "id": "vic-74-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-75",
@@ -2253,7 +2253,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1075-SOUL",
     "difficulty": "High Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-75-sheerfails",
@@ -2272,7 +2271,8 @@
       {
         "id": "vic-75-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-76",
@@ -2284,7 +2284,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1076-KAIZO",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-76-breadfish"
@@ -2302,7 +2301,8 @@
       {
         "id": "vic-76-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-77",
@@ -2314,7 +2314,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1077-SAWTO",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-77-bestegg"
@@ -2359,7 +2358,8 @@
       {
         "id": "vic-77-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-78",
@@ -2371,7 +2371,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1078-METAD",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-78-everblaze",
@@ -2423,7 +2422,8 @@
       {
         "id": "vic-78-twilightphi"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-79",
@@ -2435,7 +2435,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1079-THEAC",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-79-breadfish",
@@ -2451,7 +2450,8 @@
       {
         "id": "vic-79-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-80",
@@ -2463,7 +2463,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1080-EXALT",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-80-twilightphi",
@@ -2515,7 +2514,8 @@
       {
         "id": "vic-80-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-81",
@@ -2527,7 +2527,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1081-MY26T",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-81-leaffy",
@@ -2579,7 +2578,8 @@
       {
         "id": "vic-81-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-82",
@@ -2591,7 +2591,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1082-GOOBE",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-82-nebula",
@@ -2619,7 +2618,8 @@
       {
         "id": "vic-82-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-83",
@@ -2631,7 +2631,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1083-JUDIO",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-83-27",
@@ -2713,7 +2712,8 @@
       {
         "id": "vic-83-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-84",
@@ -2725,7 +2725,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1084-SPIKE",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-84-everblaze",
@@ -2780,7 +2779,8 @@
       {
         "id": "vic-84-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-85",
@@ -2792,7 +2792,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1085-THE1V",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-85-leaffy",
@@ -2850,7 +2849,8 @@
       {
         "id": "vic-85-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-86",
@@ -2862,7 +2862,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1086-WORLD",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-86-worldx",
@@ -2917,7 +2916,8 @@
       {
         "id": "vic-86-unlimited"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-87",
@@ -2929,7 +2929,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1087-JUMPZ",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-87-nebula",
@@ -2972,7 +2971,8 @@
       {
         "id": "vic-87-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-88",
@@ -2984,7 +2984,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1088-PAIN2",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-88-"
@@ -3044,7 +3043,8 @@
       {
         "id": "vic-88-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-89",
@@ -3056,7 +3056,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1089-LOSTU",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-89-bestegg",
@@ -3101,7 +3100,8 @@
       {
         "id": "vic-89-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-90",
@@ -3113,7 +3113,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1090-JAPID",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-90-27",
@@ -3189,7 +3188,8 @@
       {
         "id": "vic-90-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-91",
@@ -3201,7 +3201,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1091-CLUBD",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-91-breadfish"
@@ -3225,7 +3224,8 @@
       {
         "id": "vic-91-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-92",
@@ -3237,7 +3237,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1092-NEXTL",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-92-atomic"
@@ -3291,7 +3290,8 @@
       {
         "id": "vic-92-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-93",
@@ -3303,7 +3303,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1093-CRATE",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-93-everblaze",
@@ -3316,7 +3315,8 @@
       {
         "id": "vic-93-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-94",
@@ -3328,7 +3328,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1094-SPIKY",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-94-leaffy",
@@ -3407,7 +3406,8 @@
       {
         "id": "vic-94-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-95",
@@ -3419,7 +3419,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1095-THEEX",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-95-hihiha"
@@ -3488,7 +3487,8 @@
       {
         "id": "vic-95-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-96",
@@ -3500,7 +3500,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1096-IFYOU",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-96-shadowsurf",
@@ -3546,7 +3545,8 @@
       {
         "id": "vic-96-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-97",
@@ -3558,7 +3558,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1097-PRECA",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-97-breadfish"
@@ -3587,7 +3586,8 @@
       {
         "id": "vic-97-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-98",
@@ -3599,7 +3599,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1098-KAIZO",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-98-shadowsurf",
@@ -3644,7 +3643,8 @@
       {
         "id": "vic-98-yggsdrul"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-99",
@@ -3656,7 +3656,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1099-DUNGE",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-99-atomic"
@@ -3728,7 +3727,8 @@
       {
         "id": "vic-99-yggsdrul"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-100",
@@ -3740,7 +3740,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1100-666KA",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-100-atomic"
@@ -3806,7 +3805,8 @@
       {
         "id": "vic-100-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-101",
@@ -3818,7 +3818,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1101-CRYST",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-101-everblaze",
@@ -3840,7 +3839,8 @@
       {
         "id": "vic-101-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-102",
@@ -3852,7 +3852,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1102-STICK",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-102-breadfish"
@@ -3930,7 +3929,8 @@
       {
         "id": "vic-102-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-103",
@@ -3942,7 +3942,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1103-ATHEI",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-103-everblaze",
@@ -3979,7 +3978,8 @@
       {
         "id": "vic-103-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-104",
@@ -3991,7 +3991,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1104-BAXTU",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-104-",
@@ -4028,7 +4027,8 @@
       {
         "id": "vic-104-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-105",
@@ -4040,7 +4040,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1105-MYKAI",
     "difficulty": "Mid Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-105-smoothbanana",
@@ -4056,7 +4055,8 @@
       {
         "id": "vic-105-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-106",
@@ -4068,7 +4068,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1106-AMETH",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-106-shadowsurf",
@@ -4102,7 +4101,8 @@
       {
         "id": "vic-106-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-107",
@@ -4114,7 +4114,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1107-VERTI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-107-breadfish",
@@ -4172,7 +4171,8 @@
       {
         "id": "vic-107-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-108",
@@ -4184,7 +4184,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1108-DONUH",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-108-dantheman",
@@ -4209,7 +4208,8 @@
       {
         "id": "vic-108-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-109",
@@ -4221,7 +4221,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1109-MOCHI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-109-"
@@ -4253,7 +4252,8 @@
       {
         "id": "vic-109-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-110",
@@ -4265,7 +4265,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1110-BRIDG",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-110-breadfish",
@@ -4287,7 +4286,8 @@
       {
         "id": "vic-110-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-111",
@@ -4299,7 +4299,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1111-VENGA",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-111-bestegg",
@@ -4329,7 +4328,8 @@
       {
         "id": "vic-111-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-112",
@@ -4341,7 +4341,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1112-PHANT",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-112-everblaze",
@@ -4366,7 +4365,8 @@
       {
         "id": "vic-112-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-113",
@@ -4378,7 +4378,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1113-THEGO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-113-everblaze",
@@ -4400,7 +4399,8 @@
       {
         "id": "vic-113-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-114",
@@ -4412,7 +4412,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1114-JUMPY",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-114-everblaze",
@@ -4440,7 +4439,8 @@
       {
         "id": "vic-114-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-115",
@@ -4452,7 +4452,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1115-CATCH",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-115-sambodi",
@@ -4480,7 +4479,8 @@
       {
         "id": "vic-115-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-116",
@@ -4492,7 +4492,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1116-ICYKA",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-116-worldx",
@@ -4511,7 +4510,8 @@
       {
         "id": "vic-116-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-117",
@@ -4523,7 +4523,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1117-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-117-nebula",
@@ -4554,7 +4553,8 @@
       {
         "id": "vic-117-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-118",
@@ -4566,7 +4566,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1118-DEATH",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-118-shadowsurf",
@@ -4606,7 +4605,8 @@
       {
         "id": "vic-118-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-119",
@@ -4618,7 +4618,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1119-ESCAP",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-119-shadowsurf",
@@ -4649,7 +4648,8 @@
       {
         "id": "vic-119-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-120",
@@ -4661,7 +4661,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1120-THECL",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-120-everblaze",
@@ -4719,7 +4718,8 @@
       {
         "id": "vic-120-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-121",
@@ -4731,7 +4731,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1121-MYKAI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-121-"
@@ -4773,7 +4772,8 @@
       {
         "id": "vic-121-tojsomeone27"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-122",
@@ -4785,7 +4785,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1122-ICEKA",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-122-breadfish"
@@ -4830,7 +4829,8 @@
       {
         "id": "vic-122-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-123",
@@ -4842,7 +4842,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1123-EDIBL",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-123-bestegg",
@@ -4887,7 +4886,8 @@
       {
         "id": "vic-123-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-124",
@@ -4899,7 +4899,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1124-THINK",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-124-shadowsurf",
@@ -4939,7 +4938,8 @@
       {
         "id": "vic-124-yggsdrul"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-125",
@@ -4951,7 +4951,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1125-EVERB",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-125-goobernut",
@@ -4979,7 +4978,8 @@
       {
         "id": "vic-125-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-126",
@@ -4991,7 +4991,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1126-MOVER",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-126-leaffy",
@@ -5016,7 +5015,8 @@
       {
         "id": "vic-126-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-127",
@@ -5028,7 +5028,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1127-MOMEN",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-127-nebula",
@@ -5059,7 +5058,8 @@
       {
         "id": "vic-127-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-128",
@@ -5071,7 +5071,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1128-DUNGE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-128-breadfish"
@@ -5113,7 +5112,8 @@
       {
         "id": "vic-128-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-129",
@@ -5125,7 +5125,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1129-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-129-shadowsurf",
@@ -5183,7 +5182,8 @@
       {
         "id": "vic-129-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-130",
@@ -5195,7 +5195,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1130-MYKAI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-130-atomic"
@@ -5246,7 +5245,8 @@
       {
         "id": "vic-130-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-131",
@@ -5258,7 +5258,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1131-IMPOS",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-131-hihiha",
@@ -5316,7 +5315,8 @@
       {
         "id": "vic-131-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-132",
@@ -5328,7 +5328,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1132-THISI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-132-leaffy",
@@ -5377,7 +5376,8 @@
       {
         "id": "vic-132-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-133",
@@ -5389,7 +5389,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1133-STARS",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-133-omegagodzilla",
@@ -5417,7 +5416,8 @@
       {
         "id": "vic-133-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-134",
@@ -5429,7 +5429,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1134-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-134-shadowsurf",
@@ -5475,7 +5474,8 @@
       {
         "id": "vic-134-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-135",
@@ -5487,7 +5487,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1135-RAZOR",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-135-mezzo",
@@ -5515,7 +5514,8 @@
       {
         "id": "vic-135-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-136",
@@ -5527,7 +5527,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1136-CLOUD",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-136-atomic"
@@ -5608,7 +5607,8 @@
       {
         "id": "vic-136-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-137",
@@ -5620,7 +5620,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1137-VOLCA",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-137-sheerfails",
@@ -5660,7 +5659,8 @@
       {
         "id": "vic-137-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-138",
@@ -5672,7 +5672,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1138-THEAS",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-138-everblaze",
@@ -5715,7 +5714,8 @@
       {
         "id": "vic-138-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-139",
@@ -5727,7 +5727,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1139-UNTIT",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-139-shadowsurf",
@@ -5778,7 +5777,8 @@
       {
         "id": "vic-139-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-140",
@@ -5790,7 +5790,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1140-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-140-shadowsurf",
@@ -5830,7 +5829,8 @@
       {
         "id": "vic-140-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-141",
@@ -5842,7 +5842,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1141-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-141-breadfish"
@@ -5899,7 +5898,8 @@
       {
         "id": "vic-141-yggsdrul"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-142",
@@ -5911,7 +5911,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1142-CLAWS",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-142-leaffy",
@@ -5951,7 +5950,8 @@
       {
         "id": "vic-142-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-143",
@@ -5963,7 +5963,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1143-XXXRE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-143-breadfish"
@@ -6010,7 +6009,8 @@
       {
         "id": "vic-143-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-144",
@@ -6022,7 +6022,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1144-ACCUR",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-144-leaffy",
@@ -6056,7 +6055,8 @@
       {
         "id": "vic-144-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-145",
@@ -6068,7 +6068,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1145-TOWER",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-145-twilightphi",
@@ -6102,7 +6101,8 @@
       {
         "id": "vic-145-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-146",
@@ -6114,7 +6114,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1146-THEJU",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-146-twilightphi",
@@ -6139,7 +6138,8 @@
       {
         "id": "vic-146-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-147",
@@ -6151,7 +6151,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1147-SSHWA",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-147-everblaze",
@@ -6176,7 +6175,8 @@
       {
         "id": "vic-147-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-148",
@@ -6188,7 +6188,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1148-IAMSE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-148-everblaze",
@@ -6207,7 +6206,8 @@
       {
         "id": "vic-148-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-149",
@@ -6219,7 +6219,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1149-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-149-breadfish"
@@ -6255,7 +6254,8 @@
       {
         "id": "vic-149-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-150",
@@ -6267,7 +6267,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1150-CLIFF",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-150-shadowsurf",
@@ -6334,7 +6333,8 @@
       {
         "id": "vic-150-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-151",
@@ -6346,7 +6346,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1151-THINS",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-151-leaffy",
@@ -6377,7 +6376,8 @@
       {
         "id": "vic-151-yggsdrul"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-152",
@@ -6389,7 +6389,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1152-MAZEO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-152-breadfish"
@@ -6422,7 +6421,8 @@
       {
         "id": "vic-152-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-153",
@@ -6434,7 +6434,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1153-ALIGN",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-153-shadowsurf",
@@ -6468,7 +6467,8 @@
       {
         "id": "vic-153-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-154",
@@ -6480,7 +6480,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1154-KAIZI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-154-shadowsurf",
@@ -6523,7 +6522,8 @@
       {
         "id": "vic-154-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-155",
@@ -6535,7 +6535,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1155-GDEMO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-155-shadowsurf",
@@ -6572,7 +6571,8 @@
       {
         "id": "vic-155-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-156",
@@ -6584,7 +6584,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1156-STRAN",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-156-breadfish"
@@ -6605,7 +6604,8 @@
       {
         "id": "vic-156-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-157",
@@ -6617,7 +6617,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1157-TOWER",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-157-twilightphi",
@@ -6651,7 +6650,8 @@
       {
         "id": "vic-157-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-158",
@@ -6663,7 +6663,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1158-FINAL",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-158-sheerfails",
@@ -6709,7 +6708,8 @@
       {
         "id": "vic-158-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-159",
@@ -6721,7 +6721,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1159-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-159-breadfish"
@@ -6763,7 +6762,8 @@
       {
         "id": "vic-159-twilightphi"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-160",
@@ -6775,7 +6775,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1160-MYKAI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-160-27"
@@ -6838,7 +6837,8 @@
       {
         "id": "vic-160-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-161",
@@ -6850,7 +6850,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1161-SUPER",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-161-mmediocre",
@@ -6885,7 +6884,8 @@
       {
         "id": "vic-161-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-162",
@@ -6897,7 +6897,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1162-DEMON",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-162-legendof3",
@@ -6973,7 +6972,8 @@
       {
         "id": "vic-162-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-163",
@@ -6985,7 +6985,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1163-GUBER",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-163-shadowsurf",
@@ -7043,7 +7042,8 @@
       {
         "id": "vic-163-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-164",
@@ -7055,7 +7055,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1164-MYKAI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-164-alexpaquetta"
@@ -7115,7 +7114,8 @@
       {
         "id": "vic-164-williwonky"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-165",
@@ -7127,7 +7127,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1165-LIMIT",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-165-leaffy",
@@ -7185,7 +7184,8 @@
       {
         "id": "vic-165-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-166",
@@ -7197,7 +7197,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1166-PAINF",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-166-atheism",
@@ -7258,7 +7257,8 @@
       {
         "id": "vic-166-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-167",
@@ -7270,7 +7270,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1167-GOOBE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-167-everblaze",
@@ -7349,7 +7348,8 @@
       {
         "id": "vic-167-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-168",
@@ -7361,7 +7361,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1168-THETR",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-168-shimobri",
@@ -7446,7 +7445,8 @@
       {
         "id": "vic-168-yggsdrul"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-169",
@@ -7458,7 +7458,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1169-BLACK",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-169-sambodi",
@@ -7486,7 +7485,8 @@
       {
         "id": "vic-169-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-170",
@@ -7498,7 +7498,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1170-WITHE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-170-twilightphi",
@@ -7535,7 +7534,8 @@
       {
         "id": "vic-170-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-171",
@@ -7547,7 +7547,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1171-MYKAI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-171-27"
@@ -7634,7 +7633,8 @@
       {
         "id": "vic-171-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-172",
@@ -7646,7 +7646,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1172-THETO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-172-alexpaquetta"
@@ -7718,7 +7717,8 @@
       {
         "id": "vic-172-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-173",
@@ -7730,7 +7730,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1173-THEMA",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-173-shadowsurf",
@@ -7773,7 +7772,8 @@
       {
         "id": "vic-173-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-174",
@@ -7785,7 +7785,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1174-YASEI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-174-nebula",
@@ -7822,7 +7821,8 @@
       {
         "id": "vic-174-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-175",
@@ -7834,7 +7834,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1175-AGATH",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-175-twilightphi",
@@ -7919,7 +7918,8 @@
       {
         "id": "vic-175-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-176",
@@ -7931,7 +7931,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1176-DEMON",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-176-everblaze",
@@ -7974,7 +7973,8 @@
       {
         "id": "vic-176-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-177",
@@ -7986,7 +7986,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1177-MYKAI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-177-breadfish"
@@ -8049,7 +8048,8 @@
       {
         "id": "vic-177-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-178",
@@ -8061,7 +8061,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1178-THEMA",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-178-alexpaquetta"
@@ -8118,7 +8117,8 @@
       {
         "id": "vic-178-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-179",
@@ -8130,7 +8130,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1179-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-179-"
@@ -8169,7 +8168,8 @@
       {
         "id": "vic-179-tojsomeone27"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-180",
@@ -8181,7 +8181,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1180-TOWER",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-180-twilightphi",
@@ -8233,7 +8232,8 @@
       {
         "id": "vic-180-tojsomeone27"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-181",
@@ -8245,7 +8245,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1181-NOGRO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-181-matrixical",
@@ -8270,7 +8269,8 @@
       {
         "id": "vic-181-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-182",
@@ -8282,7 +8282,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1182-TOWER",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-182-yggsdrul",
@@ -8331,7 +8330,8 @@
       {
         "id": "vic-182-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-183",
@@ -8343,7 +8343,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1183-BLUEP",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-183-shadowsurf",
@@ -8407,7 +8406,8 @@
       {
         "id": "vic-183-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-184",
@@ -8419,7 +8419,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1184-TIDAL",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-184-breadfish"
@@ -8452,7 +8451,8 @@
       {
         "id": "vic-184-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-185",
@@ -8464,7 +8464,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1185-ONLYU",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-185-leaffy",
@@ -8492,7 +8491,8 @@
       {
         "id": "vic-185-sigmundfreud"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-186",
@@ -8504,7 +8504,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1186-DEMON",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-186-shimobri",
@@ -8586,7 +8585,8 @@
       {
         "id": "vic-186-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-187",
@@ -8598,7 +8598,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1187-CUSED",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-187-shadowsurf",
@@ -8662,7 +8661,8 @@
       {
         "id": "vic-187-yggsdrul"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-188",
@@ -8674,7 +8674,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1188-EPICP",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-188-alexpaquetta"
@@ -8761,7 +8760,8 @@
       {
         "id": "vic-188-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-189",
@@ -8773,7 +8773,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1189-TERMI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-189-yggsdrul",
@@ -8822,7 +8821,8 @@
       {
         "id": "vic-189-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-190",
@@ -8834,7 +8834,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1190-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-190-breadfish"
@@ -8876,7 +8875,8 @@
       {
         "id": "vic-190-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-191",
@@ -8888,7 +8888,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1191-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-191-worldx",
@@ -8976,7 +8975,8 @@
       {
         "id": "vic-191-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-192",
@@ -8988,7 +8988,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1192-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-192-bestegg"
@@ -9060,7 +9059,8 @@
       {
         "id": "vic-192-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-193",
@@ -9072,7 +9072,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1193-RISEF",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-193-shimobri",
@@ -9181,7 +9180,8 @@
       {
         "id": "vic-193-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-194",
@@ -9193,7 +9193,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1194-SOURN",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-194-nebula",
@@ -9290,7 +9289,8 @@
       {
         "id": "vic-194-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-195",
@@ -9302,7 +9302,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1195-DASHJ",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-195-everblaze",
@@ -9402,7 +9401,8 @@
       {
         "id": "vic-195-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-196",
@@ -9414,7 +9414,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1196-AGOOF",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-196-worldx",
@@ -9463,7 +9462,8 @@
       {
         "id": "vic-196-tojsomeone27"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-197",
@@ -9475,7 +9475,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1197-TESTK",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-197-shadowsurf",
@@ -9545,7 +9544,8 @@
       {
         "id": "vic-197-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-198",
@@ -9557,7 +9557,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1198-ASCEN",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-198-atomic"
@@ -9614,7 +9613,8 @@
       {
         "id": "vic-198-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-199",
@@ -9626,7 +9626,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1199-MARRO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-199-ez"
@@ -9669,7 +9668,8 @@
       {
         "id": "vic-199-tojsomeone27"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-200",
@@ -9681,7 +9681,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1200-MADDE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-200-everblaze",
@@ -9724,7 +9723,8 @@
       {
         "id": "vic-200-tojsomeone27"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-201",
@@ -9736,7 +9736,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1201-VELVE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-201-worldx",
@@ -9794,7 +9793,8 @@
       {
         "id": "vic-201-twilightphi"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-202",
@@ -9806,7 +9806,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1202-SOURN",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-202-nebula",
@@ -9891,7 +9890,8 @@
       {
         "id": "vic-202-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-203",
@@ -9903,7 +9903,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1203-SWEET",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-203-nebula",
@@ -10009,7 +10008,8 @@
       {
         "id": "vic-203-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-204",
@@ -10021,7 +10021,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1204-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-204-uldm",
@@ -10082,7 +10081,8 @@
       {
         "id": "vic-204-twilightphi"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-205",
@@ -10094,7 +10094,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1205-VISIB",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-205-ez"
@@ -10146,7 +10145,8 @@
       {
         "id": "vic-205-uldm"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-206",
@@ -10158,7 +10158,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1206-JUMPS",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-206-shadowsurf",
@@ -10228,7 +10227,8 @@
       {
         "id": "vic-206-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-207",
@@ -10240,7 +10240,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1207-RBRTU",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-207-everblaze",
@@ -10304,7 +10303,8 @@
       {
         "id": "vic-207-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-208",
@@ -10316,7 +10316,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1208-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-208-breadfish"
@@ -10388,7 +10387,8 @@
       {
         "id": "vic-208-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-209",
@@ -10400,7 +10400,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1209-JOSHU",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-209-twilightphi",
@@ -10446,7 +10445,8 @@
       {
         "id": "vic-209-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-210",
@@ -10458,7 +10458,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1210-TWIST",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-210-atomic"
@@ -10512,7 +10511,8 @@
       {
         "id": "vic-210-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-211",
@@ -10524,7 +10524,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1211-SLAUG",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-211-alexpaquetta"
@@ -10620,7 +10619,8 @@
       {
         "id": "vic-211-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-212",
@@ -10632,7 +10632,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1212-STRAI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-212-uldm",
@@ -10699,7 +10698,8 @@
       {
         "id": "vic-212-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-213",
@@ -10711,7 +10711,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1213-MAZEE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-213-hihiha",
@@ -10805,7 +10804,8 @@
       {
         "id": "vic-213-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-214",
@@ -10817,7 +10817,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1214-GEOME",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-214-breadfish"
@@ -10865,7 +10864,8 @@
       {
         "id": "vic-214-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-215",
@@ -10877,7 +10877,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1215-BLIND",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-215-shadowsurf",
@@ -10964,7 +10963,8 @@
       {
         "id": "vic-215-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-216",
@@ -10976,7 +10976,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1216-THECA",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-216-alexpaquetta"
@@ -11069,7 +11068,8 @@
       {
         "id": "vic-216-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-217",
@@ -11081,7 +11081,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1217-PATHO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-217-breadfish"
@@ -11120,7 +11119,8 @@
       {
         "id": "vic-217-twilightphi"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-218",
@@ -11132,7 +11132,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1218-MAGIC",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-218-shadowsurf",
@@ -11208,7 +11207,8 @@
       {
         "id": "vic-218-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-219",
@@ -11220,7 +11220,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1219-ROCKS",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-219-breadfish"
@@ -11259,7 +11258,8 @@
       {
         "id": "vic-219-tojsomeone27"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-220",
@@ -11271,7 +11271,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1220-SAWBL",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-220-breadfish"
@@ -11337,7 +11336,8 @@
       {
         "id": "vic-220-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-221",
@@ -11349,7 +11349,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1221-AMAZI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-221-shadowsurf",
@@ -11461,7 +11460,8 @@
       {
         "id": "vic-221-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-222",
@@ -11473,7 +11473,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1222-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-222-breadfish"
@@ -11548,7 +11547,8 @@
       {
         "id": "vic-222-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-223",
@@ -11560,7 +11560,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1223-EZKAI",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-223-shadowsurf",
@@ -11675,7 +11674,8 @@
       {
         "id": "vic-223-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-224",
@@ -11687,7 +11687,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1224-TOWER",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-224-everblaze",
@@ -11784,7 +11783,8 @@
       {
         "id": "vic-224-yggsdrul"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-225",
@@ -11796,7 +11796,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1225-ARMAG",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-225-alexpaquetta"
@@ -11889,7 +11888,8 @@
       {
         "id": "vic-225-xsetdantesandwic"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-226",
@@ -11901,7 +11901,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1226-NICED",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-226-sambodi",
@@ -11935,7 +11934,8 @@
       {
         "id": "vic-226-worldx"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-227",
@@ -11947,7 +11947,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1227-KAIZO",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-227-alexpaquetta"
@@ -12046,7 +12045,8 @@
       {
         "id": "vic-227-xsetdantesandwic"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-228",
@@ -12058,7 +12058,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1228-ICYDE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-228-alexpaquetta"
@@ -12190,7 +12189,8 @@
       {
         "id": "vic-228-yoyble"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-229",
@@ -12202,7 +12202,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1229-PITCH",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-229-everblaze",
@@ -12341,7 +12340,8 @@
       {
         "id": "vic-229-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   },
   {
     "id": "level-230",
@@ -12353,7 +12353,6 @@
     "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=GB-1230-MADDE",
     "difficulty": "Entry Kaizo",
     "thumbnailUrl": null,
-    "length": "0:35",
     "victors": [
       {
         "id": "vic-230-twilightphi",
@@ -12504,6 +12503,7 @@
       {
         "id": "vic-230-yurmom"
       }
-    ]
+    ],
+    "skills": ""
   }
 ]

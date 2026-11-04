@@ -8,7 +8,6 @@
       "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=ae8b9ced-b8fa-4a75-a9f0-1b935ea96a88",
       "imageFit": "cover",
       "verifier": "",
-      "length": "3:00",
       "name": "light work js lock in",
       "difficulty": "Impossible Kaizo",
       "rank": 1,
@@ -16,7 +15,8 @@
       "id": "level-1793318070444",
       "creator": "Gaming Beast",
       "victors": [],
-      "worldRecord": "-"
+      "worldRecord": "-",
+      "skills": ""
     },
     {
       "id": "level-1793318048135",
@@ -24,16 +24,15 @@
       "isLegacy": false,
       "rank": 2,
       "worldRecord": "-",
-      "length": "5:00",
       "imageFit": "cover",
       "victors": [],
       "creator": "twilightphi",
       "difficulty": "Impossible Kaizo",
       "directPlayUrl": "https://jellycade.com/en/games/goober-dash?g_play=160f830b-6cfd-4693-b316-3d2e36ce1ded",
-      "verifier": ""
+      "verifier": "",
+      "skills": ""
     },
     {
-      "length": "14:00:00",
       "isLegacy": false,
       "worldRecord": "-",
       "creator": "Nebula",
@@ -44,7 +43,8 @@
       "rank": 3,
       "directPlayUrl": "https://jellycade.com/en/games/goober-dash?g_play=0ba38717-2091-47f0-ad2a-bc16ebc26585",
       "imageFit": "cover",
-      "id": "level-1793318015274"
+      "id": "level-1793318015274",
+      "skills": ""
     },
     {
       "id": "level-1793317985371",
@@ -53,32 +53,31 @@
       "rank": 4,
       "name": "Laser Tower v2",
       "difficulty": "Impossible Kaizo",
-      "length": "3:04:00",
       "verifier": "",
       "imageFit": "cover",
       "victors": [],
       "creator": "Worldx",
-      "directPlayUrl": "https://jellycade.com/en/games/goober-dash?g_play=ada66fa3-bce9-44f5-a18e-60e0640e84b5"
+      "directPlayUrl": "https://jellycade.com/en/games/goober-dash?g_play=ada66fa3-bce9-44f5-a18e-60e0640e84b5",
+      "skills": ""
     },
     {
       "isLegacy": false,
       "worldRecord": "-",
       "difficulty": "Impossible Kaizo",
       "directPlayUrl": "https://jellycade.com/en/games/goober-dash?g_play=1ee7d578-1fe5-4933-91be-b912a21e0528",
-      "length": "4:00",
       "rank": 5,
       "victors": [],
       "creator": "twilightphi",
       "verifier": "",
       "id": "level-1793317952357",
       "imageFit": "cover",
-      "name": "wistfully"
+      "name": "wistfully",
+      "skills": ""
     },
     {
       "verifier": "",
       "worldRecord": "-",
       "difficulty": "Impossible Kaizo",
-      "length": "16:00",
       "id": "level-1793317921882",
       "imageFit": "cover",
       "rank": 6,
@@ -86,7 +85,8 @@
       "directPlayUrl": "https://jellycade.com/games/goober-dash",
       "name": "13th Reason Twi",
       "creator": "Yoyble",
-      "victors": []
+      "victors": [],
+      "skills": ""
     },
     {
       "difficulty": "Impossible Kaizo",
@@ -94,13 +94,13 @@
       "worldRecord": "-",
       "imageFit": "cover",
       "id": "level-1793317896109",
-      "length": "0:50",
       "rank": 7,
       "isLegacy": false,
       "directPlayUrl": "https://jellycade.com/games/goober-dash",
       "name": "Worldscapes",
       "victors": [],
-      "creator": "Worldx"
+      "creator": "Worldx",
+      "skills": ""
     },
     {
       "difficulty": "Impossible Kaizo",
@@ -109,18 +109,17 @@
       "rank": 8,
       "directPlayUrl": "https://jellycade.com/games/goober-dash",
       "id": "level-1793317878217",
-      "length": "0:50",
       "creator": "Breadfish",
       "victors": [],
       "imageFit": "cover",
       "worldRecord": "-",
-      "verifier": ""
+      "verifier": "",
+      "skills": ""
     },
     {
       "verifier": "",
       "id": "level-1793317847734",
       "name": "Escaping Portrait Mode",
-      "length": "0:50",
       "difficulty": "Impossible Kaizo",
       "rank": 9,
       "creator": "Breadfish",
@@ -128,11 +127,11 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/?play=25f0542d-98dc-40c0-9487-8824767fbf7c",
       "imageFit": "cover",
       "isLegacy": false,
-      "worldRecord": "-"
+      "worldRecord": "-",
+      "skills": ""
     },
     {
       "imageFit": "cover",
-      "length": "0:50",
       "rank": 10,
       "victors": [],
       "creator": "Worldx",
@@ -142,7 +141,8 @@
       "worldRecord": "-",
       "directPlayUrl": "https://jellycade.com/games/goober-dash",
       "isLegacy": false,
-      "difficulty": "Silent Kaizo"
+      "difficulty": "Silent Kaizo",
+      "skills": ""
     },
     {
       "imageFit": "cover",
@@ -152,14 +152,13 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/?play=50facfc8-cc2c-4502-9693-8cb456cca387",
       "rank": 11,
       "difficulty": "Silent Kaizo",
-      "length": "0:50",
       "worldRecord": "-",
       "name": "Starry Night",
       "id": "level-1793317790982",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
-      "length": "0:50",
       "verifier": "",
       "id": "level-1793317739851",
       "directPlayUrl": "https://gooberdash.winterpixel.io?play=02e1c637-ef03-4b48-8e52-b381824c99c6",
@@ -170,7 +169,8 @@
       "isLegacy": false,
       "name": "Cybernetic Catastrophe",
       "victors": [],
-      "creator": "twilightphi"
+      "creator": "twilightphi",
+      "skills": ""
     },
     {
       "imageFit": "cover",
@@ -179,14 +179,14 @@
       "creator": "twilightphi",
       "id": "level-1793287799406",
       "levelId": "a",
-      "length": "50:45",
       "rank": 13,
       "difficulty": "Silent Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelCode": "GB-NEW-KAIZO",
       "worldRecord": "-",
       "name": "Heliopolis",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "victors": [],
@@ -194,18 +194,17 @@
       "imageFit": "cover",
       "directPlayUrl": "https://jellycade.com/games/goober-dash",
       "verifier": "",
-      "length": "0:50",
       "worldRecord": "-",
       "rank": 14,
       "id": "level-1793317663345",
       "isLegacy": false,
       "name": "Sacrosanct",
-      "difficulty": "Silent Kaizo"
+      "difficulty": "Silent Kaizo",
+      "skills": ""
     },
     {
       "isLegacy": false,
       "difficulty": "Silent Kaizo",
-      "length": "0:50",
       "worldRecord": "-",
       "verifier": "",
       "rank": 15,
@@ -214,7 +213,8 @@
       "name": "BreadRooms",
       "victors": [],
       "creator": "Breadfish",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -225,24 +225,24 @@
       "id": "level-1793317455437",
       "creator": "twilightphi",
       "victors": [],
-      "length": "0:50",
       "name": "bubbaboba",
       "difficulty": "Extreme Kaizo",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "rank": 17,
       "isLegacy": false,
       "name": "silent agatha corridor",
       "directPlayUrl": "http://redirect.viglink.com/?key=71fe2139a887ad501313cd8cce3053c5&subId=7419781&u=https%3A//gooberdash.winterpixel.io/%3Fplay%3D8a913162-fda5-4ad4-8abe-07f41c20a853",
-      "length": "0:35",
       "difficulty": "Extreme Kaizo",
       "verifier": "",
       "creator": "twilightphi",
       "victors": [],
       "worldRecord": "-",
       "imageFit": "cover",
-      "id": "level-1793317503425"
+      "id": "level-1793317503425",
+      "skills": ""
     },
     {
       "difficulty": "Extreme Kaizo",
@@ -271,7 +271,6 @@
       ],
       "levelCode": "GB-1001-PIXEL",
       "isLegacy": false,
-      "length": "0:67",
       "rank": 18,
       "levelId": "",
       "worldRecord": "BestEgg",
@@ -279,7 +278,8 @@
       "verifier": "Everblaze",
       "name": "Pixel Perfect Hell",
       "id": "level-1",
-      "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=58b70141-e33e-4451-86b6-111e4b87747f"
+      "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=58b70141-e33e-4451-86b6-111e4b87747f",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -289,7 +289,6 @@
       "difficulty": "Extreme Kaizo",
       "verifier": "Breadfish",
       "rank": 19,
-      "length": "2:50:00",
       "id": "level-2",
       "levelCode": "GB-1002-THESE",
       "directPlayUrl": "https://jellycade.com/games/goober-dash?g_play=048daa76-753d-408f-97bf-83b437da102e",
@@ -308,7 +307,8 @@
         {
           "id": "vic-2-sigmundfreud"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/?play=b887e886-e471-4b65-88fe-4dc34ead97ef",
@@ -321,8 +321,8 @@
       "creator": "yggsdrul",
       "victors": [],
       "difficulty": "Extreme Kaizo",
-      "length": "0:50",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "verifier": "Everblaze",
@@ -349,8 +349,8 @@
       "worldRecord": "Everblaze",
       "id": "level-3",
       "difficulty": "Extreme Kaizo",
-      "length": "0:50",
-      "name": "Fluorescence"
+      "name": "Fluorescence",
+      "skills": ""
     },
     {
       "difficulty": "Extreme Kaizo",
@@ -382,7 +382,6 @@
       ],
       "creator": "Worldx",
       "isLegacy": false,
-      "length": "3:20:00",
       "levelCode": "GB-1004-AFROZ",
       "rank": 22,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -390,7 +389,8 @@
       "imageFit": "cover",
       "verifier": "Breadfish",
       "name": "A Frozen Galaxy",
-      "id": "level-4"
+      "id": "level-4",
+      "skills": ""
     },
     {
       "imageFit": "cover",
@@ -399,7 +399,6 @@
       "rank": 23,
       "levelId": "",
       "verifier": "Everblaze",
-      "length": "0:45",
       "id": "level-5",
       "worldRecord": "Everblaze",
       "victors": [
@@ -412,7 +411,8 @@
       "creator": "Everblaze",
       "levelCode": "GB-1005-BULLE",
       "isLegacy": false,
-      "difficulty": "Extreme Kaizo"
+      "difficulty": "Extreme Kaizo",
+      "skills": ""
     },
     {
       "rank": 24,
@@ -432,10 +432,10 @@
       "id": "level-1793317547245",
       "imageFit": "cover",
       "difficulty": "Extreme Kaizo",
-      "length": "0:50",
       "verifier": "Breadfish",
       "directPlayUrl": "https://jellycade.com/games/goober-dash",
-      "worldRecord": "-"
+      "worldRecord": "-",
+      "skills": ""
     },
     {
       "imageFit": "cover",
@@ -456,7 +456,6 @@
         }
       ],
       "creator": "Everblaze",
-      "length": "0:19",
       "difficulty": "Extreme Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "verifier": "Everblaze",
@@ -465,7 +464,8 @@
       "rank": 25,
       "levelId": "",
       "isLegacy": false,
-      "name": "Riptide"
+      "name": "Riptide",
+      "skills": ""
     },
     {
       "difficulty": "Extreme Kaizo",
@@ -490,13 +490,13 @@
         }
       ],
       "creator": "ShadowSurf",
-      "length": "30:00",
       "levelId": "",
       "verifier": "ShadowSurf",
       "name": "Dragon Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "rank": 26,
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "rank": 27,
@@ -504,13 +504,13 @@
       "name": "The Easiest Kaizo That You'll Ever Try",
       "verifier": "",
       "directPlayUrl": "https://jellycade.com/games/goober-dash",
-      "length": "0:50",
       "victors": [],
       "creator": "Atheism",
       "id": "level-1793317378325",
       "worldRecord": "-",
       "isLegacy": false,
-      "difficulty": "Extreme Kaizo"
+      "difficulty": "Extreme Kaizo",
+      "skills": ""
     },
     {
       "verifier": "Nebula",
@@ -536,9 +536,9 @@
       "creator": "Nebula",
       "rank": 28,
       "id": "level-8",
-      "length": "50:00",
       "name": "BLACKLOTUS",
-      "difficulty": "Extreme Kaizo"
+      "difficulty": "Extreme Kaizo",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -550,7 +550,6 @@
       "name": "Tower of Reflection",
       "worldRecord": "Breadfish",
       "levelId": "",
-      "length": "1:40:00",
       "creator": "MEZZO",
       "victors": [
         {
@@ -560,12 +559,12 @@
         }
       ],
       "verifier": "Breadfish",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "id": "level-10",
       "levelCode": "GB-1010-RAHHH",
-      "length": "0:40",
       "rank": 30,
       "imageFit": "cover",
       "name": "rahhhhj]dh",
@@ -585,7 +584,8 @@
       "levelId": "",
       "difficulty": "Extreme Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "id": "level-11",
@@ -603,11 +603,11 @@
       "levelCode": "GB-1011-SUPER",
       "imageFit": "cover",
       "rank": 31,
-      "length": "0:50",
       "levelId": "",
       "worldRecord": "Breadfish",
       "name": "super korea mode",
-      "verifier": "Breadfish"
+      "verifier": "Breadfish",
+      "skills": ""
     },
     {
       "creator": "twilightphi",
@@ -633,9 +633,9 @@
       "verifier": "Breadfish",
       "isLegacy": false,
       "levelCode": "GB-1012-UNNER",
-      "length": "0:50",
       "worldRecord": "Everblaze",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "name": "SUPERHATEMEWORLD",
@@ -655,19 +655,18 @@
       "difficulty": "Insane Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "rank": 33,
-      "length": "0:50",
       "verifier": "Breadfish",
       "imageFit": "cover",
       "levelId": "",
       "levelCode": "GB-1013-SUPER",
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "levelId": "",
       "difficulty": "Insane Kaizo",
       "worldRecord": "Breadfish",
       "id": "level-14",
-      "length": "0:50",
       "isLegacy": false,
       "name": "Neutrino (updated)",
       "imageFit": "cover",
@@ -682,12 +681,12 @@
         }
       ],
       "creator": "TheHermit",
-      "levelCode": "GB-1014-NEUTR"
+      "levelCode": "GB-1014-NEUTR",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io?play=bbfc917e-c960-490d-a60f-e0e07f1c22f9",
       "verifier": "",
-      "length": "0:50",
       "imageFit": "cover",
       "worldRecord": "-",
       "id": "level-1793317288887",
@@ -696,12 +695,12 @@
       "creator": "Everblaze",
       "difficulty": "Insane Kaizo",
       "rank": 35,
-      "name": "BlackFire"
+      "name": "BlackFire",
+      "skills": ""
     },
     {
       "levelId": "",
       "difficulty": "Insane Kaizo",
-      "length": "0:50",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "isLegacy": false,
       "worldRecord": "Everblaze",
@@ -724,7 +723,8 @@
         {
           "id": "vic-15-sigmundfreud"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
       "id": "level-16",
@@ -750,14 +750,13 @@
       "name": "KRAZY KRUEL KAWJROP KAIZO",
       "worldRecord": "Everblaze",
       "imageFit": "cover",
-      "length": "0:50",
       "levelId": "",
-      "verifier": "ToJ SigmundFreud"
+      "verifier": "ToJ SigmundFreud",
+      "skills": ""
     },
     {
       "levelId": "",
       "isLegacy": false,
-      "length": "0:50",
       "levelCode": "GB-1017-MOREI",
       "verifier": "Breadfish",
       "rank": 38,
@@ -777,14 +776,14 @@
       "difficulty": "Insane Kaizo",
       "name": "more impossible harder",
       "id": "level-17",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "levelCode": "GB-1018-OBELI",
       "rank": 39,
       "worldRecord": "Everblaze",
       "verifier": "Everblaze",
-      "length": "0:50",
       "imageFit": "cover",
       "levelId": "",
       "name": "Obelisk of Painful Sadness",
@@ -805,7 +804,8 @@
         }
       ],
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "difficulty": "Insane Kaizo"
+      "difficulty": "Insane Kaizo",
+      "skills": ""
     },
     {
       "victors": [
@@ -821,7 +821,6 @@
       "creator": "twilightphi",
       "verifier": "Breadfish",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:50",
       "imageFit": "cover",
       "difficulty": "Insane Kaizo",
       "isLegacy": false,
@@ -830,7 +829,8 @@
       "rank": 40,
       "worldRecord": "Everblaze",
       "id": "level-19",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "creator": "Yoyo",
@@ -854,8 +854,8 @@
       "rank": 41,
       "worldRecord": "Everblaze",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:50",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "id": "level-21",
@@ -864,7 +864,6 @@
       "worldRecord": "ToJ ToJ SigmundFreud",
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:50",
       "name": "6 rooms of hell",
       "imageFit": "cover",
       "isLegacy": false,
@@ -891,7 +890,8 @@
           "id": "vic-21-sigmundfreud"
         }
       ],
-      "creator": "sunboy"
+      "creator": "sunboy",
+      "skills": ""
     },
     {
       "id": "level-22",
@@ -901,7 +901,6 @@
       "levelId": "",
       "rank": 43,
       "worldRecord": "RoyalUnicorn",
-      "length": "0:50",
       "imageFit": "cover",
       "creator": "twilightphi",
       "victors": [
@@ -931,7 +930,8 @@
       ],
       "difficulty": "Insane Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "verifier": "Breadfish"
+      "verifier": "Breadfish",
+      "skills": ""
     },
     {
       "rank": 44,
@@ -949,11 +949,11 @@
       "creator": "DanTheMan",
       "name": "Green Bullet",
       "verifier": "DanTheMan",
-      "length": "0:50",
       "id": "level-23",
       "worldRecord": "DanTheMan",
       "levelId": "",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "verifier": "Gaming Beast",
@@ -998,8 +998,8 @@
       "isLegacy": false,
       "worldRecord": "Everblaze",
       "difficulty": "Insane Kaizo",
-      "length": "0:50",
-      "rank": 45
+      "rank": 45,
+      "skills": ""
     },
     {
       "id": "level-25",
@@ -1009,7 +1009,6 @@
       "worldRecord": "Everblaze",
       "levelId": "",
       "imageFit": "cover",
-      "length": "0:50",
       "verifier": "Worldx",
       "rank": 46,
       "levelCode": "GB-1025-ECHOE",
@@ -1036,7 +1035,8 @@
         }
       ],
       "creator": "Nebula",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "levelCode": "GB-1026-THE5G",
@@ -1066,8 +1066,8 @@
       "creator": "Everblaze",
       "worldRecord": "Everblaze",
       "isLegacy": false,
-      "length": "0:50",
-      "difficulty": "Insane Kaizo"
+      "difficulty": "Insane Kaizo",
+      "skills": ""
     },
     {
       "imageFit": "cover",
@@ -1100,11 +1100,11 @@
       "worldRecord": "ToJ ToJ SigmundFreud",
       "verifier": "Breadfish",
       "rank": 48,
-      "length": "0:50",
       "name": "Not-IMMACULATE PRECISION",
       "isLegacy": false,
       "levelId": "",
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "difficulty": "Insane Kaizo",
@@ -1142,9 +1142,9 @@
       "levelId": "",
       "worldRecord": "Everblaze",
       "imageFit": "cover",
-      "length": "0:50",
       "verifier": "Worldx",
-      "id": "level-28"
+      "id": "level-28",
+      "skills": ""
     },
     {
       "difficulty": "Insane Kaizo",
@@ -1176,9 +1176,9 @@
         }
       ],
       "isLegacy": false,
-      "length": "0:50",
       "id": "level-29",
-      "worldRecord": "Leck Sibbi"
+      "worldRecord": "Leck Sibbi",
+      "skills": ""
     },
     {
       "levelCode": "GB-1030-EXTRE",
@@ -1224,9 +1224,9 @@
       "creator": "skibidi rizzlr",
       "id": "level-30",
       "isLegacy": false,
-      "length": "0:50",
       "rank": 51,
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -1285,12 +1285,11 @@
       "levelCode": "GB-1031-JUDIO",
       "imageFit": "cover",
       "name": "JUDIO DELUXE DEMON",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "difficulty": "High Kaizo",
       "isLegacy": false,
-      "length": "0:35",
       "rank": 53,
       "levelId": "",
       "name": "Sakupen Saws",
@@ -1328,14 +1327,14 @@
       "verifier": "Worldx",
       "id": "level-32",
       "imageFit": "cover",
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "difficulty": "High Kaizo",
       "verifier": "Breadfish",
       "id": "level-33",
       "imageFit": "cover",
-      "length": "0:35",
       "levelId": "",
       "levelCode": "GB-1033-CLIMB",
       "isLegacy": false,
@@ -1359,10 +1358,10 @@
       "creator": "LEAFFY",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "rank": 54,
-      "name": "Climber harder"
+      "name": "Climber harder",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelId": "",
       "worldRecord": "Everblaze",
@@ -1390,7 +1389,8 @@
           "id": "vic-34-uldm"
         }
       ],
-      "id": "level-34"
+      "id": "level-34",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -1400,7 +1400,6 @@
       "levelCode": "GB-1035-GAMIN",
       "rank": 56,
       "difficulty": "High Kaizo",
-      "length": "0:35",
       "isLegacy": false,
       "worldRecord": "Breadfish",
       "id": "level-35",
@@ -1421,7 +1420,8 @@
           "id": "vic-35-worldx"
         }
       ],
-      "name": "Gaming Beats old"
+      "name": "Gaming Beats old",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -1429,7 +1429,6 @@
       "imageFit": "cover",
       "levelCode": "GB-1036-PIXEL",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "rank": 57,
       "isLegacy": false,
       "difficulty": "High Kaizo",
@@ -1452,7 +1451,8 @@
           "id": "vic-36-everblaze"
         }
       ],
-      "id": "level-36"
+      "id": "level-36",
+      "skills": ""
     },
     {
       "creator": "KingHenrik",
@@ -1492,9 +1492,9 @@
       "rank": 58,
       "imageFit": "cover",
       "name": "The Fifth Eclipse",
-      "length": "0:35",
       "verifier": "Abahat",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "levelCode": "GB-1038-THEVO",
@@ -1504,7 +1504,6 @@
       "isLegacy": false,
       "worldRecord": "SardineSlayer24",
       "levelId": "",
-      "length": "0:35",
       "imageFit": "cover",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "victors": [
@@ -1517,12 +1516,12 @@
       ],
       "creator": "SardineSlayer24",
       "difficulty": "High Kaizo",
-      "verifier": "SardineSlayer24"
+      "verifier": "SardineSlayer24",
+      "skills": ""
     },
     {
       "difficulty": "High Kaizo",
       "isLegacy": false,
-      "length": "0:35",
       "rank": 60,
       "levelId": "",
       "name": "._.",
@@ -1551,7 +1550,8 @@
       "verifier": "ShadowSurf",
       "id": "level-39",
       "imageFit": "cover",
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "worldRecord": "matrixical",
@@ -1582,9 +1582,9 @@
         }
       ],
       "id": "level-40",
-      "length": "0:35",
       "name": "KRUSHERZ OF DOOM!!!11!",
-      "levelCode": "GB-1040-KRUSH"
+      "levelCode": "GB-1040-KRUSH",
+      "skills": ""
     },
     {
       "levelCode": "GB-1041-ELEGA",
@@ -1630,13 +1630,12 @@
       "id": "level-41",
       "verifier": "Breadfish",
       "difficulty": "High Kaizo",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "isLegacy": false,
       "worldRecord": "Everblaze",
       "rank": 63,
-      "length": "0:35",
       "id": "level-42",
       "name": "Path of poop",
       "levelId": "",
@@ -1661,14 +1660,14 @@
       "verifier": "ShadowSurf",
       "imageFit": "cover",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "difficulty": "High Kaizo"
+      "difficulty": "High Kaizo",
+      "skills": ""
     },
     {
       "rank": 64,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "difficulty": "High Kaizo",
       "imageFit": "cover",
-      "length": "0:35",
       "name": "21 Platforms Kaizo",
       "verifier": "Breadfish",
       "creator": "DanTheMan",
@@ -1686,12 +1685,12 @@
       "levelId": "",
       "worldRecord": "Everblaze",
       "levelCode": "GB-1043-21PLA",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "verifier": "Goobernut",
       "name": "Super Jump Kaizo eee",
-      "length": "0:35",
       "id": "level-44",
       "rank": 65,
       "imageFit": "cover",
@@ -1714,7 +1713,8 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "isLegacy": false,
       "levelCode": "GB-1044-SUPER",
-      "difficulty": "High Kaizo"
+      "difficulty": "High Kaizo",
+      "skills": ""
     },
     {
       "creator": "LEAFFY",
@@ -1740,7 +1740,6 @@
           "id": "vic-45-worldx"
         }
       ],
-      "length": "0:35",
       "isLegacy": false,
       "imageFit": "cover",
       "difficulty": "High Kaizo",
@@ -1751,7 +1750,8 @@
       "levelCode": "GB-1045-BRIAN",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "verifier": "LEAFFY",
-      "name": "Brians_swansong harder"
+      "name": "Brians_swansong harder",
+      "skills": ""
     },
     {
       "worldRecord": "Everblaze",
@@ -1796,14 +1796,13 @@
         }
       ],
       "levelId": "",
-      "length": "0:35",
       "imageFit": "cover",
       "id": "level-46",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "verifier": "LEAFFY"
+      "verifier": "LEAFFY",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "name": "Journey to the Center of the Earth",
       "worldRecord": "Everblaze",
       "levelId": "",
@@ -1828,7 +1827,8 @@
           "isWorldRecord": true
         }
       ],
-      "creator": "Atheism"
+      "creator": "Atheism",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -1855,13 +1855,12 @@
       ],
       "creator": "ShadowSurf",
       "levelCode": "GB-1048-SINGL",
-      "length": "0:35",
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "verifier": "ShadowSurf",
       "name": "TMTS J0526B",
-      "length": "0:35",
       "id": "level-49",
       "rank": 70,
       "imageFit": "cover",
@@ -1884,7 +1883,8 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "isLegacy": false,
       "levelCode": "GB-1049-TMTSJ",
-      "difficulty": "High Kaizo"
+      "difficulty": "High Kaizo",
+      "skills": ""
     },
     {
       "id": "level-50",
@@ -1902,13 +1902,13 @@
         }
       ],
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "levelId": "",
       "verifier": "Everblaze",
       "worldRecord": "-",
       "levelCode": "GB-1050-KAIZO",
       "difficulty": "High Kaizo",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "difficulty": "High Kaizo",
@@ -1920,7 +1920,6 @@
       "id": "level-51",
       "rank": 72,
       "isLegacy": false,
-      "length": "0:35",
       "imageFit": "cover",
       "verifier": "Everblaze",
       "creator": "Everblaze",
@@ -1957,7 +1956,8 @@
         {
           "id": "vic-51-worldx"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -1978,7 +1978,6 @@
           "id": "vic-52-omegagodzilla"
         }
       ],
-      "length": "0:35",
       "difficulty": "High Kaizo",
       "isLegacy": false,
       "imageFit": "cover",
@@ -1988,7 +1987,8 @@
       "levelId": "",
       "verifier": "ShadowSurf",
       "worldRecord": "Everblaze",
-      "name": "The Pinnacle of Memory"
+      "name": "The Pinnacle of Memory",
+      "skills": ""
     },
     {
       "worldRecord": "Unlimited",
@@ -2019,16 +2019,15 @@
       "levelCode": "GB-1053-VULTU",
       "imageFit": "cover",
       "verifier": "Goobernut",
-      "length": "0:35",
       "name": "Vulture Bobs totally normal playground",
       "difficulty": "High Kaizo",
-      "id": "level-53"
+      "id": "level-53",
+      "skills": ""
     },
     {
       "isLegacy": false,
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "id": "level-54",
       "levelCode": "GB-1054-TOWER",
       "rank": 75,
@@ -2053,7 +2052,8 @@
       "creator": "ShadowSurf",
       "difficulty": "High Kaizo",
       "worldRecord": "Everblaze",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -2071,14 +2071,14 @@
         }
       ],
       "levelCode": "GB-1055-MYCOR",
-      "length": "0:35",
       "worldRecord": "Everblaze",
       "difficulty": "High Kaizo",
       "verifier": "Breadfish",
       "name": "My corridor at night",
       "levelId": "",
       "rank": 76,
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -2098,7 +2098,6 @@
       ],
       "creator": "Breadfish",
       "name": "Wind Training",
-      "length": "0:35",
       "rank": 77,
       "id": "level-56",
       "levelCode": "GB-1056-WINDT",
@@ -2106,7 +2105,8 @@
       "verifier": "Breadfish",
       "imageFit": "cover",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "id": "level-57",
@@ -2128,13 +2128,13 @@
       ],
       "rank": 78,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "levelId": "",
       "verifier": "Worldx",
       "levelCode": "GB-1057-MINUS",
       "worldRecord": "Everblaze",
       "difficulty": "High Kaizo",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -2162,7 +2162,7 @@
       "worldRecord": "Everblaze",
       "levelCode": "GB-1058-THETA",
       "name": "The Taste of Hell",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -2200,9 +2200,9 @@
       "id": "level-59",
       "levelCode": "GB-1059-ARAHR",
       "levelId": "",
-      "length": "0:35",
       "rank": 80,
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -2211,7 +2211,6 @@
       "levelCode": "GB-1060-CIRCU",
       "verifier": "Sheerfails",
       "name": "Circus Hell",
-      "length": "0:35",
       "id": "level-60",
       "difficulty": "High Kaizo",
       "creator": "Sheerfails",
@@ -2233,7 +2232,8 @@
       ],
       "rank": 81,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "creator": "ShadowSurf",
@@ -2282,7 +2282,6 @@
       ],
       "isLegacy": false,
       "imageFit": "cover",
-      "length": "0:35",
       "rank": 82,
       "worldRecord": "Breadfish",
       "id": "level-61",
@@ -2291,7 +2290,8 @@
       "levelCode": "GB-1061-V14TH",
       "difficulty": "High Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "verifier": "Breadfish"
+      "verifier": "Breadfish",
+      "skills": ""
     },
     {
       "creator": "ShadowSurf",
@@ -2316,13 +2316,13 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "worldRecord": "Everblaze",
       "difficulty": "High Kaizo",
-      "length": "0:35",
       "id": "level-62",
       "levelCode": "GB-1062-SLAUG",
       "rank": 83,
       "isLegacy": false,
       "levelId": "",
-      "name": "Slaughterballs"
+      "name": "Slaughterballs",
+      "skills": ""
     },
     {
       "worldRecord": "Breadfish",
@@ -2354,15 +2354,14 @@
       "difficulty": "High Kaizo",
       "levelId": "",
       "verifier": "Goobernut",
-      "length": "0:35",
       "imageFit": "cover",
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "name": "Fallen Symphony",
       "isLegacy": false,
       "levelId": "",
-      "length": "0:35",
       "rank": 85,
       "creator": "Nebula",
       "victors": [
@@ -2399,7 +2398,8 @@
       "levelCode": "GB-1064-FALLE",
       "difficulty": "High Kaizo",
       "verifier": "Breadfish",
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -2409,7 +2409,6 @@
       "worldRecord": "Everblaze",
       "id": "level-65",
       "imageFit": "cover",
-      "length": "0:35",
       "name": "Kaizo for Dokkaebi",
       "verifier": "Everblaze",
       "levelCode": "GB-1065-KAIZO",
@@ -2442,7 +2441,8 @@
           "id": "vic-65-uldm"
         }
       ],
-      "rank": 86
+      "rank": 86,
+      "skills": ""
     },
     {
       "difficulty": "High Kaizo",
@@ -2486,9 +2486,9 @@
         }
       ],
       "name": "Extremely Difficult Default New Level",
-      "length": "0:35",
       "worldRecord": "BestEgg",
-      "levelCode": "GB-1066-EXTRE"
+      "levelCode": "GB-1066-EXTRE",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -2499,7 +2499,6 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "worldRecord": "Everblaze",
       "rank": 88,
-      "length": "0:35",
       "victors": [
         {
           "isVerifier": true,
@@ -2534,7 +2533,8 @@
       "creator": "Everblaze",
       "imageFit": "cover",
       "levelCode": "GB-1067-KAIZO",
-      "name": "KaizoRacer SpikeSprint"
+      "name": "KaizoRacer SpikeSprint",
+      "skills": ""
     },
     {
       "rank": 89,
@@ -2594,11 +2594,11 @@
         }
       ],
       "creator": "Everblaze",
-      "length": "0:35",
       "verifier": "Everblaze",
       "imageFit": "cover",
       "difficulty": "High Kaizo",
-      "id": "level-68"
+      "id": "level-68",
+      "skills": ""
     },
     {
       "worldRecord": "Everblaze",
@@ -2627,12 +2627,11 @@
       "difficulty": "High Kaizo",
       "levelId": "",
       "verifier": "ShadowSurf",
-      "length": "0:35",
       "imageFit": "cover",
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "levelId": "",
       "imageFit": "cover",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -2660,7 +2659,8 @@
           "id": "vic-70-sigmundfreud"
         }
       ],
-      "id": "level-70"
+      "id": "level-70",
+      "skills": ""
     },
     {
       "difficulty": "High Kaizo",
@@ -2687,11 +2687,11 @@
       "name": "Genesis",
       "isLegacy": false,
       "levelCode": "GB-1071-GENES",
-      "length": "0:35",
       "levelId": "",
       "imageFit": "cover",
       "id": "level-71",
-      "verifier": "Everblaze"
+      "verifier": "Everblaze",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -2702,7 +2702,6 @@
       "name": "Valkyrie",
       "imageFit": "cover",
       "verifier": "Yoyble",
-      "length": "0:35",
       "creator": "twilightphi",
       "victors": [
         {
@@ -2725,7 +2724,8 @@
       ],
       "rank": 93,
       "difficulty": "High Kaizo",
-      "id": "level-72"
+      "id": "level-72",
+      "skills": ""
     },
     {
       "victors": [
@@ -2762,10 +2762,9 @@
       "levelId": "",
       "levelCode": "GB-1073-TOWER",
       "verifier": "twilightphi",
-      "length": "0:35"
+      "skills": ""
     },
     {
-      "length": "0:35",
       "difficulty": "High Kaizo",
       "levelId": "",
       "imageFit": "cover",
@@ -2798,7 +2797,8 @@
           "id": "vic-74-uldm"
         }
       ],
-      "creator": "ShadowSurf"
+      "creator": "ShadowSurf",
+      "skills": ""
     },
     {
       "levelCode": "GB-1075-SOUL",
@@ -2828,11 +2828,11 @@
         }
       ],
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "difficulty": "High Kaizo",
       "name": "Soul",
       "id": "level-75",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "verifier": "HowDoIDash",
@@ -2861,11 +2861,11 @@
       "id": "level-76",
       "name": "Kaizo Box 4 - The Summit",
       "levelId": "",
-      "length": "0:35",
       "difficulty": "Mid Kaizo",
       "worldRecord": "Everblaze",
       "levelCode": "GB-1076-KAIZO",
-      "rank": 97
+      "rank": 97,
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -2923,15 +2923,14 @@
       "verifier": "dmfjsndfnsdf",
       "worldRecord": "Everblaze",
       "levelId": "",
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "name": "Metadata",
       "difficulty": "Mid Kaizo",
       "isLegacy": false,
-      "length": "0:35",
       "id": "level-78",
       "rank": 99,
       "victors": [
@@ -2989,11 +2988,11 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelCode": "GB-1078-METAD",
       "levelId": "",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "imageFit": "cover",
-      "length": "0:35",
       "victors": [
         {
           "id": "vic-79-breadfish",
@@ -3020,7 +3019,8 @@
       "isLegacy": false,
       "levelId": "",
       "levelCode": "GB-1079-THEAC",
-      "name": "The Acts"
+      "name": "The Acts",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -3028,7 +3028,6 @@
       "worldRecord": "Everblaze",
       "difficulty": "Mid Kaizo",
       "levelCode": "GB-1080-EXALT",
-      "length": "0:35",
       "verifier": "twilightphi",
       "id": "level-80",
       "rank": 101,
@@ -3087,11 +3086,11 @@
       ],
       "creator": "twilightphi",
       "name": "Exaltation",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "worldRecord": "Everblaze",
       "isLegacy": false,
       "difficulty": "Mid Kaizo",
@@ -3154,7 +3153,8 @@
       ],
       "rank": 102,
       "id": "level-81",
-      "verifier": "LEAFFY"
+      "verifier": "LEAFFY",
+      "skills": ""
     },
     {
       "rank": 103,
@@ -3193,11 +3193,11 @@
         }
       ],
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "verifier": "Nebula",
       "imageFit": "cover",
       "worldRecord": "Everblaze",
-      "id": "level-82"
+      "id": "level-82",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -3208,7 +3208,6 @@
       "name": "JUDIO DELUXE",
       "imageFit": "cover",
       "verifier": "27",
-      "length": "0:35",
       "creator": "27",
       "victors": [
         {
@@ -3294,7 +3293,8 @@
       ],
       "rank": 104,
       "difficulty": "Mid Kaizo",
-      "id": "level-83"
+      "id": "level-83",
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -3355,7 +3355,6 @@
           "id": "vic-84-worldx"
         }
       ],
-      "length": "0:35",
       "levelCode": "GB-1084-SPIKE",
       "rank": 105,
       "id": "level-84",
@@ -3364,7 +3363,8 @@
       "imageFit": "cover",
       "levelId": "",
       "difficulty": "Mid Kaizo",
-      "worldRecord": "BestEgg"
+      "worldRecord": "BestEgg",
+      "skills": ""
     },
     {
       "creator": "LEAFFY",
@@ -3429,7 +3429,6 @@
       "id": "level-85",
       "isLegacy": false,
       "worldRecord": "Everblaze",
-      "length": "0:35",
       "verifier": "LEAFFY",
       "name": "The 1v1s but harder harder",
       "levelCode": "GB-1085-THE1V",
@@ -3437,7 +3436,8 @@
       "imageFit": "cover",
       "difficulty": "Mid Kaizo",
       "levelId": "",
-      "rank": 106
+      "rank": 106,
+      "skills": ""
     },
     {
       "difficulty": "Mid Kaizo",
@@ -3501,13 +3501,13 @@
           "id": "vic-86-unlimited"
         }
       ],
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "id": "level-86",
       "verifier": "Worldx",
       "levelId": "",
       "imageFit": "cover",
-      "levelCode": "GB-1086-WORLD"
+      "levelCode": "GB-1086-WORLD",
+      "skills": ""
     },
     {
       "creator": "Nebula",
@@ -3565,7 +3565,7 @@
       "name": "Jump Zone Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelId": "",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "id": "level-88",
@@ -3638,9 +3638,9 @@
       "levelId": "",
       "imageFit": "cover",
       "verifier": "JusticeYoutube",
-      "length": "0:35",
       "difficulty": "Mid Kaizo",
-      "name": "Pain22222"
+      "name": "Pain22222",
+      "skills": ""
     },
     {
       "imageFit": "cover",
@@ -3696,14 +3696,13 @@
       ],
       "levelCode": "GB-1089-LOSTU",
       "levelId": "",
-      "length": "0:35",
       "rank": 110,
       "id": "level-89",
       "isLegacy": false,
-      "name": "Lost Umbrella"
+      "name": "Lost Umbrella",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "name": "japi dagor",
       "worldRecord": "Leck Sibbi",
       "verifier": "27",
@@ -3791,7 +3790,8 @@
       "id": "level-90",
       "levelId": "",
       "difficulty": "Mid Kaizo",
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -3800,7 +3800,6 @@
       "levelCode": "GB-1091-CLUBD",
       "difficulty": "Mid Kaizo",
       "isLegacy": false,
-      "length": "0:35",
       "id": "level-91",
       "imageFit": "cover",
       "name": "Clubdash",
@@ -3830,7 +3829,8 @@
         {
           "id": "vic-91-worldx"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
       "difficulty": "Mid Kaizo",
@@ -3894,19 +3894,18 @@
           "id": "vic-92-worldx"
         }
       ],
-      "length": "0:35",
       "id": "level-92",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "verifier": "Legend of 3",
       "levelId": "",
       "imageFit": "cover",
-      "levelCode": "GB-1092-NEXTL"
+      "levelCode": "GB-1092-NEXTL",
+      "skills": ""
     },
     {
       "levelId": "",
       "levelCode": "GB-1093-CRATE",
       "imageFit": "cover",
-      "length": "0:35",
       "verifier": "Everblaze",
       "name": "Crate Jump Mini-kaizo",
       "id": "level-93",
@@ -3928,12 +3927,12 @@
         }
       ],
       "creator": "Everblaze",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "rank": 115,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "imageFit": "cover",
       "difficulty": "Mid Kaizo",
       "name": "Spiky Frosty Frustration",
@@ -4021,7 +4020,8 @@
       "levelId": "",
       "worldRecord": "Everblaze",
       "id": "level-94",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "verifier": "Hihiha",
@@ -4104,9 +4104,9 @@
       "id": "level-95",
       "difficulty": "Mid Kaizo",
       "worldRecord": "Everblaze",
-      "length": "0:35",
       "name": "the extreme extremys",
-      "levelCode": "GB-1095-THEEX"
+      "levelCode": "GB-1095-THEEX",
+      "skills": ""
     },
     {
       "levelCode": "GB-1096-IFYOU",
@@ -4164,14 +4164,13 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "imageFit": "cover",
       "worldRecord": "Everblaze",
-      "length": "0:35",
       "id": "level-96",
       "verifier": "ShadowSurf",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "isLegacy": false,
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "rank": 118,
       "worldRecord": "Dumboy102",
@@ -4211,10 +4210,10 @@
       ],
       "creator": "Dumboy102",
       "verifier": "Dumboy102",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "levelCode": "GB-1098-KAIZO",
       "isLegacy": false,
       "victors": [
@@ -4271,7 +4270,8 @@
       "levelId": "",
       "worldRecord": "i hate kestrel",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "rank": 119
+      "rank": 119,
+      "skills": ""
     },
     {
       "verifier": "Plate",
@@ -4280,7 +4280,6 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelId": "",
       "imageFit": "cover",
-      "length": "0:35",
       "rank": 120,
       "isLegacy": false,
       "victors": [
@@ -4363,7 +4362,8 @@
       "creator": "Plate",
       "name": "Dungeon Doom",
       "id": "level-99",
-      "levelCode": "GB-1099-DUNGE"
+      "levelCode": "GB-1099-DUNGE",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -4373,7 +4373,6 @@
       "levelId": "",
       "worldRecord": "Everblaze",
       "difficulty": "Mid Kaizo",
-      "length": "0:35",
       "levelCode": "GB-1100-666KA",
       "creator": "Sheerfails",
       "victors": [
@@ -4457,10 +4456,10 @@
       ],
       "verifier": "Sheerfails",
       "imageFit": "cover",
-      "id": "level-100"
+      "id": "level-100",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "name": "Crystal Cascade",
       "worldRecord": "Everblaze",
       "levelId": "",
@@ -4494,10 +4493,10 @@
           "id": "vic-101-worldx"
         }
       ],
-      "creator": "Everblaze"
+      "creator": "Everblaze",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "levelId": "",
       "verifier": "SPG_ADR13N",
       "id": "level-102",
@@ -4587,7 +4586,8 @@
         {
           "id": "vic-102-worldx"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
       "imageFit": "cover",
@@ -4596,7 +4596,6 @@
       "rank": 124,
       "levelId": "",
       "verifier": "Everblaze",
-      "length": "0:35",
       "id": "level-103",
       "worldRecord": "Everblaze",
       "victors": [
@@ -4639,7 +4638,8 @@
       "creator": "Atheism",
       "levelCode": "GB-1103-ATHEI",
       "isLegacy": false,
-      "difficulty": "Mid Kaizo"
+      "difficulty": "Mid Kaizo",
+      "skills": ""
     },
     {
       "id": "level-104",
@@ -4687,11 +4687,11 @@
       "rank": 125,
       "worldRecord": ". .",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "verifier": "Unknown Player",
       "imageFit": "cover",
       "levelId": "",
-      "levelCode": "GB-1104-BAXTU"
+      "levelCode": "GB-1104-BAXTU",
+      "skills": ""
     },
     {
       "creator": "SmoothBanana.Nxbc",
@@ -4715,7 +4715,6 @@
           "isWorldRecord": false
         }
       ],
-      "length": "0:35",
       "isLegacy": false,
       "imageFit": "cover",
       "difficulty": "Mid Kaizo",
@@ -4726,13 +4725,13 @@
       "levelCode": "GB-1105-MYKAI",
       "verifier": "SmoothBanana.NXbc",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "name": "My Kaizo #8"
+      "name": "My Kaizo #8",
+      "skills": ""
     },
     {
       "id": "level-106",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "rank": 127,
-      "length": "0:35",
       "victors": [
         {
           "id": "vic-106-shadowsurf",
@@ -4775,10 +4774,10 @@
       "imageFit": "cover",
       "verifier": "ShadowSurf",
       "difficulty": "Entry Kaizo",
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "isLegacy": false,
       "worldRecord": "BestEgg",
       "id": "level-107",
@@ -4853,7 +4852,8 @@
       "difficulty": "Entry Kaizo",
       "levelId": "",
       "rank": 128,
-      "levelCode": "GB-1107-VERTI"
+      "levelCode": "GB-1107-VERTI",
+      "skills": ""
     },
     {
       "victors": [
@@ -4879,7 +4879,6 @@
         }
       ],
       "creator": "DanTheMan",
-      "length": "0:35",
       "isLegacy": false,
       "imageFit": "cover",
       "difficulty": "Entry Kaizo",
@@ -4890,7 +4889,8 @@
       "levelCode": "GB-1108-DONUH",
       "verifier": "DanTheMan",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "name": "Donuh Kaizo"
+      "name": "Donuh Kaizo",
+      "skills": ""
     },
     {
       "verifier": "mochita",
@@ -4898,7 +4898,6 @@
       "id": "level-109",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "imageFit": "cover",
-      "length": "0:35",
       "rank": 130,
       "difficulty": "Entry Kaizo",
       "isLegacy": false,
@@ -4937,7 +4936,8 @@
       ],
       "creator": "mochita",
       "name": "Mochita kaizo!!!",
-      "worldRecord": "GOOB3R"
+      "worldRecord": "GOOB3R",
+      "skills": ""
     },
     {
       "verifier": "Breadfish",
@@ -4946,7 +4946,6 @@
       "name": "Bridge Over Instant Death",
       "imageFit": "cover",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "isLegacy": false,
       "levelCode": "GB-1110-BRIDG",
       "creator": "Everblaze",
@@ -4974,7 +4973,8 @@
       ],
       "difficulty": "Entry Kaizo",
       "id": "level-110",
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "worldRecord": "BestEgg",
@@ -5017,9 +5017,9 @@
         }
       ],
       "id": "level-111",
-      "length": "0:35",
       "name": "Vengance",
-      "levelCode": "GB-1111-VENGA"
+      "levelCode": "GB-1111-VENGA",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -5028,7 +5028,6 @@
       "id": "level-112",
       "verifier": "Everblaze",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "name": "PHANTOM PHASER",
       "difficulty": "Entry Kaizo",
       "worldRecord": "Breadfish",
@@ -5059,7 +5058,8 @@
         }
       ],
       "creator": "Everblaze",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "creator": "MEZZO",
@@ -5087,7 +5087,6 @@
       ],
       "verifier": "Everblaze",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "imageFit": "cover",
       "difficulty": "Entry Kaizo",
       "isLegacy": false,
@@ -5096,13 +5095,13 @@
       "rank": 134,
       "worldRecord": "Everblaze",
       "id": "level-113",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "levelId": "",
       "difficulty": "Entry Kaizo",
       "worldRecord": "Everblaze",
-      "length": "0:35",
       "isLegacy": false,
       "id": "level-114",
       "rank": 135,
@@ -5139,7 +5138,8 @@
       ],
       "creator": "Atomic",
       "imageFit": "cover",
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "creator": "Sambodi",
@@ -5182,13 +5182,12 @@
       "levelCode": "GB-1115-CATCH",
       "isLegacy": false,
       "levelId": "",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "isLegacy": false,
       "worldRecord": "Everblaze",
       "rank": 137,
-      "length": "0:35",
       "id": "level-116",
       "name": "Icy Kaizo",
       "levelId": "",
@@ -5216,7 +5215,8 @@
       "verifier": "Worldx",
       "imageFit": "cover",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "worldRecord": "Everblaze",
@@ -5258,11 +5258,11 @@
       ],
       "isLegacy": false,
       "levelId": "",
-      "length": "0:35",
       "imageFit": "cover",
       "id": "level-117",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "verifier": "Nebula"
+      "verifier": "Nebula",
+      "skills": ""
     },
     {
       "verifier": "ShadowSurf",
@@ -5310,14 +5310,14 @@
         }
       ],
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "levelId": "",
       "id": "level-118",
       "isLegacy": false,
       "name": "Death Spinners - v5",
       "worldRecord": "Everblaze",
       "rank": 139,
-      "levelCode": "GB-1118-DEATH"
+      "levelCode": "GB-1118-DEATH",
+      "skills": ""
     },
     {
       "id": "level-119",
@@ -5361,12 +5361,11 @@
       ],
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "isLegacy": false,
-      "length": "0:35",
       "difficulty": "Entry Kaizo",
-      "rank": 140
+      "rank": 140,
+      "skills": ""
     },
     {
-      "length": "0:35",
       "isLegacy": false,
       "worldRecord": "Everblaze",
       "victors": [
@@ -5436,7 +5435,8 @@
       "rank": 141,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "imageFit": "cover",
-      "id": "level-120"
+      "id": "level-120",
+      "skills": ""
     },
     {
       "id": "level-121",
@@ -5446,7 +5446,6 @@
       "levelId": "",
       "rank": 142,
       "worldRecord": "Everblaze",
-      "length": "0:35",
       "imageFit": "cover",
       "victors": [
         {
@@ -5498,14 +5497,14 @@
       "creator": "SmoothBanana.NXbc",
       "difficulty": "Entry Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "verifier": "SmoothBanana.NXbc"
+      "verifier": "SmoothBanana.NXbc",
+      "skills": ""
     },
     {
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "imageFit": "cover",
       "verifier": "BOOMBASTIC",
-      "length": "0:35",
       "name": "Ice Kaizo 2.0 !",
       "levelCode": "GB-1122-ICEKA",
       "difficulty": "Entry Kaizo",
@@ -5558,7 +5557,8 @@
           "id": "vic-122-worldx"
         }
       ],
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "name": "edible moss",
@@ -5569,7 +5569,6 @@
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "worldRecord": "BestEgg",
-      "length": "0:35",
       "imageFit": "cover",
       "creator": "wifi4",
       "victors": [
@@ -5623,7 +5622,8 @@
         }
       ],
       "difficulty": "Entry Kaizo",
-      "verifier": "wifi4"
+      "verifier": "wifi4",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -5631,7 +5631,6 @@
       "id": "level-124",
       "rank": 145,
       "isLegacy": false,
-      "length": "0:35",
       "levelCode": "GB-1124-THINK",
       "imageFit": "cover",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -5678,10 +5677,10 @@
         {
           "id": "vic-124-yggsdrul"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
-      "length": "0:35",
       "id": "level-125",
       "levelId": "",
       "name": "Everblaze is bad at Kaizo",
@@ -5721,7 +5720,8 @@
         {
           "id": "vic-125-worldx"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
       "creator": "LEAFFY",
@@ -5754,14 +5754,14 @@
       "imageFit": "cover",
       "id": "level-126",
       "rank": 147,
-      "length": "0:35",
       "levelId": "",
       "levelCode": "GB-1126-MOVER",
       "name": "Movers perfectly harder",
       "worldRecord": "Everblaze",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "verifier": "LEAFFY",
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "rank": 148,
@@ -5769,7 +5769,6 @@
       "levelId": "",
       "id": "level-127",
       "name": "moment: 2026",
-      "length": "0:35",
       "levelCode": "GB-1127-MOMEN",
       "worldRecord": "Everblaze",
       "imageFit": "cover",
@@ -5807,7 +5806,8 @@
           "id": "vic-127-worldx"
         }
       ],
-      "creator": "Nebula"
+      "creator": "Nebula",
+      "skills": ""
     },
     {
       "levelCode": "GB-1128-DUNGE",
@@ -5864,7 +5864,7 @@
       "id": "level-128",
       "verifier": "chockydocky",
       "difficulty": "Entry Kaizo",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "levelCode": "GB-1129-KAIZO",
@@ -5930,19 +5930,18 @@
       "rank": 150,
       "isLegacy": false,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "name": "Kaizo Tower",
       "worldRecord": "Everblaze",
       "imageFit": "cover",
       "id": "level-129",
       "verifier": "ShadowSurf",
       "levelId": "",
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
       "isLegacy": false,
-      "length": "0:35",
       "rank": 151,
       "levelId": "",
       "name": "My Kaizo #5",
@@ -6008,7 +6007,8 @@
       "verifier": "SmoothBanana.NXbc",
       "id": "level-130",
       "imageFit": "cover",
-      "worldRecord": "Breadfish"
+      "worldRecord": "Breadfish",
+      "skills": ""
     },
     {
       "levelCode": "GB-1131-IMPOS",
@@ -6077,11 +6077,11 @@
       "difficulty": "Entry Kaizo",
       "rank": 152,
       "imageFit": "cover",
-      "length": "0:35",
       "name": "impossible extremys",
       "worldRecord": "Everblaze",
       "verifier": "hihiha",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "levelCode": "GB-1132-THISI",
@@ -6141,11 +6141,11 @@
       "isLegacy": false,
       "imageFit": "cover",
       "rank": 153,
-      "length": "0:35",
       "id": "level-132",
       "name": "This is",
       "levelId": "",
-      "verifier": "LEAFFY"
+      "verifier": "LEAFFY",
+      "skills": ""
     },
     {
       "verifier": "Omega Godzilla",
@@ -6185,10 +6185,10 @@
       "id": "level-133",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "difficulty": "Entry Kaizo",
-      "length": "0:35",
       "isLegacy": false,
       "name": "Star Spike Kaizo",
-      "rank": 154
+      "rank": 154,
+      "skills": ""
     },
     {
       "levelId": "",
@@ -6199,7 +6199,6 @@
       "rank": 155,
       "difficulty": "Entry Kaizo",
       "isLegacy": false,
-      "length": "0:35",
       "worldRecord": "Everblaze",
       "id": "level-134",
       "creator": "ShadowSurf",
@@ -6249,7 +6248,8 @@
           "id": "vic-134-worldx"
         }
       ],
-      "name": "Kaizo City"
+      "name": "Kaizo City",
+      "skills": ""
     },
     {
       "victors": [
@@ -6291,8 +6291,8 @@
       "name": "Razor",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelCode": "GB-1135-RAZOR",
-      "length": "0:35",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "creator": "sleeper",
@@ -6387,15 +6387,14 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "name": "Cloud",
       "levelCode": "GB-1136-CLOUD",
-      "length": "0:35",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "levelCode": "GB-1137-VOLCA",
       "name": "Volcano.",
       "worldRecord": "Everblaze",
       "isLegacy": false,
-      "length": "0:35",
       "rank": 158,
       "levelId": "",
       "difficulty": "Entry Kaizo",
@@ -6448,7 +6447,8 @@
       "creator": "Sheerfails",
       "id": "level-137",
       "verifier": "Sheerfails",
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "name": "The Ascent",
@@ -6508,10 +6508,10 @@
       "difficulty": "Entry Kaizo",
       "levelCode": "GB-1138-THEAS",
       "isLegacy": false,
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "worldRecord": "Everblaze",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
@@ -6575,14 +6575,14 @@
       "creator": "ShadowSurf",
       "isLegacy": false,
       "levelCode": "GB-1139-UNTIT",
-      "length": "0:35",
       "rank": 160,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelId": "",
       "imageFit": "cover",
       "verifier": "ShadowSurf",
       "name": "Untitled",
-      "id": "level-139"
+      "id": "level-139",
+      "skills": ""
     },
     {
       "verifier": "ShadowSurf",
@@ -6637,12 +6637,11 @@
           "id": "vic-140-worldx"
         }
       ],
-      "length": "0:35"
+      "skills": ""
     },
     {
       "rank": 162,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "name": "KaizoNut",
       "levelCode": "GB-1141-KAIZO",
       "victors": [
@@ -6715,7 +6714,8 @@
       "levelId": "",
       "imageFit": "cover",
       "difficulty": "Entry Kaizo",
-      "verifier": "Goobernut"
+      "verifier": "Goobernut",
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
@@ -6768,9 +6768,9 @@
       "levelId": "",
       "worldRecord": "Everblaze",
       "imageFit": "cover",
-      "length": "0:35",
       "verifier": "LEAFFY",
-      "id": "level-142"
+      "id": "level-142",
+      "skills": ""
     },
     {
       "verifier": "NoisyPoop.EJxP",
@@ -6831,15 +6831,14 @@
       "worldRecord": "NoisyPoop.EJxP",
       "id": "level-143",
       "difficulty": "Entry Kaizo",
-      "length": "0:35",
-      "name": "XXX Reaper XXX"
+      "name": "XXX Reaper XXX",
+      "skills": ""
     },
     {
       "rank": 165,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "imageFit": "cover",
       "difficulty": "Entry Kaizo",
-      "length": "0:35",
       "name": "Accuracy Training pt 0",
       "verifier": "LEAFFY",
       "victors": [
@@ -6881,7 +6880,8 @@
       "levelId": "",
       "worldRecord": "Everblaze",
       "levelCode": "GB-1144-ACCUR",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "worldRecord": "Everblaze",
@@ -6927,10 +6927,10 @@
       "name": "Tower V",
       "imageFit": "cover",
       "id": "level-145",
-      "length": "0:35",
       "difficulty": "Entry Kaizo",
       "levelId": "",
-      "verifier": "twilightphi"
+      "verifier": "twilightphi",
+      "skills": ""
     },
     {
       "verifier": "twilightphi",
@@ -6970,11 +6970,10 @@
         }
       ],
       "id": "level-146",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "imageFit": "cover",
-      "length": "0:35",
       "levelCode": "GB-1147-SSHWA",
       "levelId": "",
       "verifier": "Everblaze",
@@ -7010,7 +7009,8 @@
       "creator": "Everblaze",
       "isLegacy": false,
       "rank": 168,
-      "id": "level-147"
+      "id": "level-147",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -7041,10 +7041,10 @@
       "imageFit": "cover",
       "id": "level-148",
       "levelCode": "GB-1148-IAMSE",
-      "length": "0:35",
       "worldRecord": "Everblaze",
       "verifier": "Everblaze",
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "victors": [
@@ -7093,9 +7093,9 @@
       "rank": 170,
       "imageFit": "cover",
       "name": "Kaizo Box 3 - The Slant",
-      "length": "0:35",
       "verifier": "HowDoIDash",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
@@ -7106,7 +7106,6 @@
       "levelCode": "GB-1150-CLIFF",
       "worldRecord": "Everblaze",
       "rank": 171,
-      "length": "0:35",
       "isLegacy": false,
       "victors": [
         {
@@ -7182,7 +7181,8 @@
       ],
       "creator": "ShadowSurf",
       "name": "Cliffhanger - v5.5",
-      "id": "level-150"
+      "id": "level-150",
+      "skills": ""
     },
     {
       "verifier": "LEAFFY",
@@ -7228,7 +7228,7 @@
       "id": "level-151",
       "name": "Thin Spike Wall :/",
       "worldRecord": "Everblaze",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "worldRecord": "Everblaze",
@@ -7275,8 +7275,8 @@
       "id": "level-152",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelCode": "GB-1152-MAZEO",
-      "length": "0:35",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "levelId": "",
@@ -7287,7 +7287,6 @@
       "name": "Alignment Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "verifier": "ShadowSurf",
-      "length": "0:35",
       "difficulty": "Entry Kaizo",
       "creator": "ShadowSurf",
       "victors": [
@@ -7325,7 +7324,8 @@
         }
       ],
       "id": "level-153",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "id": "level-154",
@@ -7336,7 +7336,6 @@
       "verifier": "ShadowSurf",
       "name": "Kaizinio - v6",
       "worldRecord": "Everblaze",
-      "length": "0:35",
       "levelCode": "GB-1154-KAIZI",
       "creator": "ShadowSurf",
       "victors": [
@@ -7383,7 +7382,8 @@
         }
       ],
       "isLegacy": false,
-      "rank": 175
+      "rank": 175,
+      "skills": ""
     },
     {
       "levelCode": "GB-1155-GDEMO",
@@ -7393,7 +7393,6 @@
       "worldRecord": "Everblaze",
       "isLegacy": false,
       "levelId": "",
-      "length": "0:35",
       "imageFit": "cover",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "difficulty": "Entry Kaizo",
@@ -7435,7 +7434,8 @@
           "id": "vic-155-worldx"
         }
       ],
-      "verifier": "ShadowSurf"
+      "verifier": "ShadowSurf",
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -7470,8 +7470,8 @@
       "verifier": "yggsdrul",
       "id": "level-156",
       "imageFit": "cover",
-      "length": "0:35",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -7479,7 +7479,6 @@
       "id": "level-157",
       "difficulty": "Entry Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "name": "Tower III",
       "imageFit": "cover",
       "victors": [
@@ -7520,7 +7519,8 @@
       "rank": 178,
       "levelCode": "GB-1157-TOWER",
       "worldRecord": "Everblaze",
-      "verifier": "twilightphi"
+      "verifier": "twilightphi",
+      "skills": ""
     },
     {
       "levelCode": "GB-1158-FINAL",
@@ -7579,20 +7579,19 @@
       "worldRecord": "Sheerfails",
       "rank": 179,
       "isLegacy": false,
-      "length": "0:35",
       "id": "level-158",
       "name": "FINAL CHALLENGE",
       "imageFit": "cover",
       "difficulty": "Entry Kaizo",
       "verifier": "Sheerfails",
       "levelId": "",
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "name": "Kaizo Sky-Tower",
       "verifier": "AzedUp119",
       "id": "level-159",
-      "length": "0:35",
       "rank": 180,
       "imageFit": "cover",
       "victors": [
@@ -7643,7 +7642,8 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelCode": "GB-1159-KAIZO",
       "isLegacy": false,
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -7718,7 +7718,6 @@
       "creator": "SmoothBanana.NXbc",
       "name": "My Kaizo #2",
       "difficulty": "Entry Kaizo",
-      "length": "0:35",
       "rank": 181,
       "id": "level-160",
       "verifier": "SmoothBanana.NXbc",
@@ -7726,13 +7725,13 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelCode": "GB-1160-MYKAI",
       "worldRecord": "Everblaze",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "levelCode": "GB-1161-SUPER",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "isLegacy": false,
-      "length": "0:35",
       "levelId": "",
       "imageFit": "cover",
       "victors": [
@@ -7777,13 +7776,13 @@
       "difficulty": "Entry Kaizo",
       "name": "Super Cyberspace Kaizo",
       "verifier": "mmediocre",
-      "rank": 182
+      "rank": 182,
+      "skills": ""
     },
     {
       "rank": 183,
       "imageFit": "cover",
       "worldRecord": "Everblaze",
-      "length": "0:35",
       "levelCode": "GB-1162-DEMON",
       "name": "Demon of Insanity",
       "verifier": "Legend of 3",
@@ -7868,7 +7867,8 @@
       "levelId": "",
       "id": "level-162",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "id": "level-163",
@@ -7938,13 +7938,12 @@
       "rank": 184,
       "worldRecord": "Everblaze",
       "levelCode": "GB-1163-GUBER",
-      "length": "0:35",
       "isLegacy": false,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "rank": 185,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "name": "My Kaizo #3",
@@ -8021,7 +8020,8 @@
       "imageFit": "cover",
       "worldRecord": "Everblaze",
       "difficulty": "Entry Kaizo",
-      "verifier": "SmoothBanana.NXbc"
+      "verifier": "SmoothBanana.NXbc",
+      "skills": ""
     },
     {
       "id": "level-165",
@@ -8029,7 +8029,6 @@
       "levelId": "",
       "imageFit": "cover",
       "difficulty": "Entry Kaizo",
-      "length": "0:35",
       "verifier": "LEAFFY",
       "rank": 186,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -8099,7 +8098,8 @@
       ],
       "creator": "LEAFFY",
       "isLegacy": false,
-      "levelCode": "GB-1165-LIMIT"
+      "levelCode": "GB-1165-LIMIT",
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -8172,7 +8172,6 @@
           "id": "vic-1793395143158-smoothbanananxbc"
         }
       ],
-      "length": "0:35",
       "id": "level-166",
       "levelId": "",
       "verifier": "Atheism",
@@ -8180,7 +8179,8 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "difficulty": "Entry Kaizo",
       "worldRecord": "Everblaze",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "victors": [
@@ -8268,7 +8268,6 @@
         }
       ],
       "creator": "Everblaze",
-      "length": "0:35",
       "verifier": "Everblaze",
       "imageFit": "cover",
       "id": "level-167",
@@ -8279,7 +8278,8 @@
       "name": "GOOBER PRIVILEGES REVOKED",
       "levelId": "",
       "rank": 188,
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "levelCode": "GB-1168-THETR",
@@ -8374,7 +8374,6 @@
           "verifiedByCreator": false
         }
       ],
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "verifier": "shimobri",
       "imageFit": "cover",
@@ -8384,7 +8383,8 @@
       "levelId": "",
       "id": "level-168",
       "rank": 189,
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "rank": 190,
@@ -8427,7 +8427,7 @@
       "imageFit": "cover",
       "id": "level-169",
       "verifier": "Sambodi",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "rank": 191,
@@ -8479,7 +8479,7 @@
       "worldRecord": "Everblaze",
       "id": "level-170",
       "isLegacy": false,
-      "length": "0:35"
+      "skills": ""
     },
     {
       "rank": 192,
@@ -8586,12 +8586,11 @@
       "worldRecord": "Everblaze",
       "id": "level-171",
       "isLegacy": false,
-      "length": "0:35"
+      "skills": ""
     },
     {
       "isLegacy": false,
       "name": "The Tower XXII",
-      "length": "0:35",
       "creator": "Yrax",
       "victors": [
         {
@@ -8673,14 +8672,14 @@
       "levelCode": "GB-1172-THETO",
       "imageFit": "cover",
       "levelId": "",
-      "id": "level-172"
+      "id": "level-172",
+      "skills": ""
     },
     {
       "worldRecord": "Everblaze",
       "id": "level-173",
       "imageFit": "cover",
       "levelId": "",
-      "length": "0:35",
       "verifier": "ShadowSurf",
       "levelCode": "GB-1173-THEMA",
       "name": "The Maze of Nightmares",
@@ -8731,12 +8730,12 @@
         }
       ],
       "isLegacy": false,
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "id": "level-174",
       "imageFit": "cover",
-      "length": "0:35",
       "verifier": "Nebula",
       "creator": "Nebula",
       "victors": [
@@ -8783,12 +8782,12 @@
       "rank": 195,
       "worldRecord": "Everblaze",
       "name": "Yasei",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
       "levelCode": "GB-1175-AGATH",
-      "length": "0:35",
       "victors": [
         {
           "isVerifier": true,
@@ -8888,7 +8887,8 @@
       "name": "agatha corridor",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelId": "",
-      "rank": 196
+      "rank": 196,
+      "skills": ""
     },
     {
       "levelId": "",
@@ -8900,7 +8900,6 @@
       "verifier": "Everblaze",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "worldRecord": "Everblaze",
-      "length": "0:35",
       "imageFit": "cover",
       "creator": "Everblaze",
       "victors": [
@@ -8946,7 +8945,8 @@
           "id": "vic-176-yoyble"
         }
       ],
-      "id": "level-176"
+      "id": "level-176",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -9028,8 +9028,8 @@
       "id": "level-177",
       "levelId": "",
       "difficulty": "Entry Kaizo",
-      "length": "0:35",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "verifier": "ShadowSurf",
@@ -9092,7 +9092,6 @@
         }
       ],
       "creator": "ShadowSurf",
-      "length": "0:35",
       "imageFit": "cover",
       "id": "level-178",
       "name": "The Maze of Blood",
@@ -9101,7 +9100,8 @@
       "worldRecord": "Everblaze",
       "isLegacy": false,
       "rank": 199,
-      "levelCode": "GB-1178-THEMA"
+      "levelCode": "GB-1178-THEMA",
+      "skills": ""
     },
     {
       "victors": [
@@ -9144,7 +9144,6 @@
         }
       ],
       "creator": "i hate kestrel",
-      "length": "0:35",
       "verifier": "i hate kestrel",
       "imageFit": "cover",
       "id": "level-179",
@@ -9155,7 +9154,8 @@
       "name": "Kaizo of tight rooms",
       "levelId": "",
       "rank": 200,
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -9164,7 +9164,6 @@
       "isLegacy": false,
       "worldRecord": "Everblaze",
       "verifier": "twilightphi",
-      "length": "0:35",
       "rank": 201,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "imageFit": "cover",
@@ -9222,7 +9221,8 @@
           "id": "vic-180-tojsomeone27"
         }
       ],
-      "name": "Tower II"
+      "name": "Tower II",
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
@@ -9260,9 +9260,9 @@
       ],
       "worldRecord": "Everblaze",
       "rank": 202,
-      "length": "0:35",
       "isLegacy": false,
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -9324,9 +9324,9 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "id": "level-182",
       "difficulty": "Entry Kaizo",
-      "length": "0:35",
       "imageFit": "cover",
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
@@ -9405,7 +9405,7 @@
       "id": "level-183",
       "verifier": "ShadowSurf",
       "worldRecord": "Everblaze",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "id": "level-184",
@@ -9447,13 +9447,13 @@
       "worldRecord": "Everblaze",
       "verifier": "Guest6136",
       "imageFit": "cover",
-      "length": "0:35",
       "isLegacy": false,
       "levelCode": "GB-1184-TIDAL",
       "name": "tidal wave",
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "rank": 205
+      "rank": 205,
+      "skills": ""
     },
     {
       "levelId": "",
@@ -9465,7 +9465,6 @@
       "imageFit": "cover",
       "id": "level-185",
       "isLegacy": false,
-      "length": "0:35",
       "difficulty": "Entry Kaizo",
       "victors": [
         {
@@ -9496,7 +9495,8 @@
         }
       ],
       "creator": "LEAFFY",
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "id": "level-186",
@@ -9594,8 +9594,8 @@
       "levelId": "",
       "difficulty": "Entry Kaizo",
       "levelCode": "GB-1186-DEMON",
-      "length": "0:35",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "verifier": "ShadowSurf",
@@ -9674,7 +9674,7 @@
           "id": "vic-187-yggsdrul"
         }
       ],
-      "length": "0:35"
+      "skills": ""
     },
     {
       "verifier": "99th Goober",
@@ -9781,14 +9781,13 @@
           "isWorldRecord": false
         }
       ],
-      "length": "0:35"
+      "skills": ""
     },
     {
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "imageFit": "cover",
       "verifier": "yggsdrul",
-      "length": "0:35",
       "name": "termination",
       "levelCode": "GB-1189-TERMI",
       "difficulty": "Entry Kaizo",
@@ -9845,7 +9844,8 @@
           "id": "vic-189-worldx"
         }
       ],
-      "creator": "yggsdrul"
+      "creator": "yggsdrul",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -9855,7 +9855,6 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "isLegacy": false,
       "imageFit": "cover",
-      "length": "0:35",
       "name": "Kaizo Box 2 - The Ridge",
       "worldRecord": "Everblaze",
       "verifier": "HowDoIDash",
@@ -9902,7 +9901,8 @@
           "id": "vic-190-worldx"
         }
       ],
-      "rank": 211
+      "rank": 211,
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -9911,7 +9911,6 @@
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "rank": 212,
-      "length": "0:35",
       "levelCode": "GB-1191-KAIZO",
       "creator": "worldx",
       "victors": [
@@ -10010,7 +10009,8 @@
       "verifier": "Worldx",
       "id": "level-191",
       "imageFit": "cover",
-      "name": "Kaizo para Bloxd Elements"
+      "name": "Kaizo para Bloxd Elements",
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
@@ -10097,7 +10097,7 @@
       ],
       "worldRecord": "Everblaze",
       "name": "Kaizo Freestyle 1",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "levelCode": "GB-1193-RISEF",
@@ -10220,8 +10220,8 @@
       "isLegacy": false,
       "id": "level-193",
       "rank": 214,
-      "length": "0:35",
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "id": "level-194",
@@ -10332,8 +10332,8 @@
       "levelId": "",
       "difficulty": "Entry Kaizo",
       "levelCode": "GB-1194-SOURN",
-      "length": "0:35",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "worldRecord": "BestEgg",
@@ -10453,7 +10453,7 @@
       "verifier": "Everblaze",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "difficulty": "Entry Kaizo",
-      "length": "0:35"
+      "skills": ""
     },
     {
       "levelId": "",
@@ -10461,7 +10461,6 @@
       "isLegacy": false,
       "difficulty": "Entry Kaizo",
       "imageFit": "cover",
-      "length": "0:35",
       "name": "a goofy lil kaizo",
       "id": "level-196",
       "verifier": "Worldx",
@@ -10517,12 +10516,12 @@
         }
       ],
       "creator": "theovergoober",
-      "levelCode": "GB-1196-AGOOF"
+      "levelCode": "GB-1196-AGOOF",
+      "skills": ""
     },
     {
       "worldRecord": "Everblaze",
       "isLegacy": false,
-      "length": "0:35",
       "creator": "ShadowSurf",
       "victors": [
         {
@@ -10602,13 +10601,13 @@
       "levelId": "",
       "id": "level-197",
       "difficulty": "Entry Kaizo",
-      "rank": 218
+      "rank": 218,
+      "skills": ""
     },
     {
       "rank": 219,
       "levelId": "",
       "verifier": "GoofyGooberYea",
-      "length": "0:35",
       "levelCode": "GB-1198-ASCEN",
       "name": "Ascending to Impossible",
       "imageFit": "cover",
@@ -10674,7 +10673,8 @@
       ],
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "worldRecord": "Everblaze",
-      "id": "level-198"
+      "id": "level-198",
+      "skills": ""
     },
     {
       "rank": 220,
@@ -10686,7 +10686,6 @@
       "id": "level-199",
       "levelCode": "GB-1199-MARRO",
       "difficulty": "Entry Kaizo",
-      "length": "0:35",
       "creator": "MEZZO",
       "victors": [
         {
@@ -10732,12 +10731,12 @@
         }
       ],
       "isLegacy": false,
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "rank": 221,
       "verifier": "Everblaze",
-      "length": "0:35",
       "imageFit": "cover",
       "levelId": "",
       "name": "madden 20",
@@ -10790,7 +10789,8 @@
           "id": "vic-200-tojsomeone27"
         }
       ],
-      "levelCode": "GB-1200-MADDE"
+      "levelCode": "GB-1200-MADDE",
+      "skills": ""
     },
     {
       "name": "Velvet Violence",
@@ -10800,7 +10800,6 @@
       "levelId": "",
       "levelCode": "GB-1201-VELVE",
       "verifier": "Worldx",
-      "length": "0:35",
       "worldRecord": "Everblaze",
       "creator": "Worldx",
       "victors": [
@@ -10863,7 +10862,8 @@
       ],
       "id": "level-201",
       "isLegacy": false,
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "name": "Sour Needle",
@@ -10873,7 +10873,6 @@
       "levelId": "",
       "levelCode": "GB-1202-SOURN",
       "verifier": "Nebula",
-      "length": "0:35",
       "worldRecord": "Everblaze",
       "creator": "Nebula",
       "victors": [
@@ -10971,7 +10970,8 @@
       ],
       "id": "level-202",
       "isLegacy": false,
-      "directPlayUrl": "https://gooberdash.winterpixel.io/"
+      "directPlayUrl": "https://gooberdash.winterpixel.io/",
+      "skills": ""
     },
     {
       "worldRecord": "Worldx",
@@ -11095,9 +11095,9 @@
       "verifier": "Nebula",
       "levelCode": "GB-1203-SWEET",
       "levelId": "",
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "levelCode": "GB-1204-KAIZO",
@@ -11105,7 +11105,6 @@
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelId": "",
       "imageFit": "cover",
-      "length": "0:35",
       "verifier": "Uldm",
       "rank": 225,
       "difficulty": "Entry Kaizo",
@@ -11178,14 +11177,14 @@
         }
       ],
       "creator": "Uldm",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "levelId": "",
       "id": "level-205",
       "difficulty": "Entry Kaizo",
       "isLegacy": false,
-      "length": "0:35",
       "name": "Visibility v2",
       "worldRecord": "Everblaze",
       "imageFit": "cover",
@@ -11245,7 +11244,8 @@
         {
           "id": "vic-205-uldm"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
       "levelCode": "GB-1206-JUMPS",
@@ -11330,10 +11330,9 @@
       "isLegacy": false,
       "id": "level-206",
       "levelId": "",
-      "length": "0:35"
+      "skills": ""
     },
     {
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelId": "",
       "levelCode": "GB-1207-RBRTU",
@@ -11414,11 +11413,11 @@
           "name": "SmoothBanana.NXbc"
         }
       ],
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "imageFit": "cover",
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "name": "Kaizo 8 Stars",
       "levelId": "",
@@ -11506,7 +11505,8 @@
       "id": "level-208",
       "levelCode": "GB-1208-KAIZO",
       "isLegacy": false,
-      "worldRecord": "Everblaze"
+      "worldRecord": "Everblaze",
+      "skills": ""
     },
     {
       "rank": 230,
@@ -11562,19 +11562,18 @@
       ],
       "name": "Joshua Tower",
       "isLegacy": false,
-      "length": "0:35",
       "levelId": "",
       "imageFit": "cover",
       "verifier": "twilightphi",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "levelCode": "GB-1209-JOSHU"
+      "levelCode": "GB-1209-JOSHU",
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
       "rank": 231,
       "levelId": "",
       "verifier": "ShadowSurf",
-      "length": "0:35",
       "levelCode": "GB-1210-TWIST",
       "name": "Twisted Terrain - v5",
       "imageFit": "cover",
@@ -11636,7 +11635,8 @@
           "id": "vic-210-worldx"
         }
       ],
-      "id": "level-210"
+      "id": "level-210",
+      "skills": ""
     },
     {
       "levelId": "",
@@ -11648,7 +11648,6 @@
       "verifier": "DDanya_",
       "rank": 232,
       "worldRecord": "Everblaze",
-      "length": "0:35",
       "creator": "DDanya_",
       "victors": [
         {
@@ -11752,7 +11751,8 @@
         }
       ],
       "imageFit": "cover",
-      "name": "SLAUGHTER HOUSE HELL"
+      "name": "SLAUGHTER HOUSE HELL",
+      "skills": ""
     },
     {
       "victors": [
@@ -11838,15 +11838,14 @@
       "verifier": "Uldm",
       "id": "level-212",
       "imageFit": "cover",
-      "length": "0:35",
-      "levelId": ""
+      "levelId": "",
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
       "levelId": "",
       "rank": 234,
       "verifier": "hihiha",
-      "length": "0:35",
       "levelCode": "GB-1213-MAZEE",
       "name": "maze extremys",
       "imageFit": "cover",
@@ -11953,10 +11952,10 @@
           "id": "vic-1793395541087-smoothbanananxbc"
         }
       ],
-      "id": "level-213"
+      "id": "level-213",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelId": "",
       "worldRecord": "Everblaze",
@@ -12016,10 +12015,10 @@
         {
           "id": "vic-214-worldx"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "levelId": "",
       "worldRecord": "Sheerfails",
@@ -12118,7 +12117,8 @@
         {
           "id": "vic-215-worldx"
         }
-      ]
+      ],
+      "skills": ""
     },
     {
       "verifier": "THE CARVER",
@@ -12230,8 +12230,8 @@
       "isLegacy": false,
       "levelId": "",
       "name": "THE CARVERS Kaizo",
-      "length": "0:35",
-      "rank": 237
+      "rank": 237,
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
@@ -12280,12 +12280,12 @@
       ],
       "name": "Path of pain",
       "isLegacy": false,
-      "length": "0:35",
       "levelCode": "GB-1217-PATHO",
       "levelId": "",
       "imageFit": "cover",
       "id": "level-217",
-      "verifier": "Nhte ( Bob the Lorax III )"
+      "verifier": "Nhte ( Bob the Lorax III )",
+      "skills": ""
     },
     {
       "rank": 239,
@@ -12376,15 +12376,14 @@
       ],
       "name": "Magic Mushroom Mini Kaizo",
       "isLegacy": false,
-      "length": "0:35",
       "levelId": "",
       "imageFit": "cover",
       "verifier": "ShadowSurf",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "levelCode": "GB-1218-MAGIC"
+      "levelCode": "GB-1218-MAGIC",
+      "skills": ""
     },
     {
-      "length": "0:35",
       "difficulty": "Entry Kaizo",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "isLegacy": false,
@@ -12435,7 +12434,8 @@
       "worldRecord": "Everblaze",
       "rank": 240,
       "imageFit": "cover",
-      "id": "level-219"
+      "id": "level-219",
+      "skills": ""
     },
     {
       "difficulty": "Entry Kaizo",
@@ -12516,18 +12516,17 @@
       "verifier": "Flamebot.CuSl",
       "imageFit": "cover",
       "rank": 241,
-      "length": "0:35",
       "isLegacy": false,
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "id": "level-220",
       "levelId": "",
-      "worldRecord": "RoyalUnicorn"
+      "worldRecord": "RoyalUnicorn",
+      "skills": ""
     },
     {
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "difficulty": "Entry Kaizo",
-      "length": "0:35",
       "isLegacy": false,
       "worldRecord": "Everblaze",
       "id": "level-221",
@@ -12653,7 +12652,8 @@
           "name": "SmoothBanana.NXbc",
           "isWorldRecord": false
         }
-      ]
+      ],
+      "skills": ""
     },
     {
       "isLegacy": false,
@@ -12741,16 +12741,15 @@
       ],
       "verifier": "HowDoIDash",
       "name": "Kaizo Box 1 - The Base",
-      "length": "0:35",
       "difficulty": "Entry Kaizo",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     },
     {
       "worldRecord": "Everblaze",
       "difficulty": "Entry Kaizo",
       "verifier": "ShadowSurf",
       "imageFit": "cover",
-      "length": "0:35",
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "isLegacy": false,
@@ -12878,7 +12877,8 @@
       "id": "level-223",
       "rank": 244,
       "levelCode": "GB-1223-EZKAI",
-      "name": "EZ KAIZINIONAONIO"
+      "name": "EZ KAIZINIONAONIO",
+      "skills": ""
     },
     {
       "levelCode": "GB-1224-TOWER",
@@ -12991,11 +12991,11 @@
       "worldRecord": "Everblaze",
       "verifier": "Everblaze",
       "rank": 245,
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "name": "Tower I",
       "levelId": "",
-      "isLegacy": false
+      "isLegacy": false,
+      "skills": ""
     },
     {
       "id": "level-225",
@@ -13004,7 +13004,6 @@
       "worldRecord": "Everblaze",
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "name": "Armageddon Kaizo",
       "imageFit": "cover",
       "isLegacy": false,
@@ -13108,7 +13107,8 @@
           "id": "vic-1793395713290-smoothbanananxbc"
         }
       ],
-      "levelCode": "GB-1225-ARMAG"
+      "levelCode": "GB-1225-ARMAG",
+      "skills": ""
     },
     {
       "imageFit": "cover",
@@ -13152,17 +13152,16 @@
       "name": "(Nice Dream)",
       "verifier": "Sambodi",
       "id": "level-226",
-      "length": "0:35",
       "worldRecord": "Everblaze",
       "levelId": "",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "isLegacy": false,
-      "levelCode": "GB-1226-NICED"
+      "levelCode": "GB-1226-NICED",
+      "skills": ""
     },
     {
       "id": "level-227",
       "levelId": "",
-      "length": "0:35",
       "isLegacy": false,
       "worldRecord": "Everblaze",
       "levelCode": "GB-1227-KAIZO",
@@ -13276,7 +13275,8 @@
         }
       ],
       "creator": "GenesisX",
-      "difficulty": "Entry Kaizo"
+      "difficulty": "Entry Kaizo",
+      "skills": ""
     },
     {
       "verifier": "SPG_ADR13N",
@@ -13428,11 +13428,10 @@
       "worldRecord": "Omega Godzilla, Everblaze, Sheerfails, Kittyofconfetti, ToJ ToJ SigmundFreud",
       "difficulty": "Entry Kaizo",
       "rank": 249,
-      "length": "0:35"
+      "skills": ""
     },
     {
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
-      "length": "0:35",
       "rank": 250,
       "verifier": "Everblaze",
       "imageFit": "cover",
@@ -13592,7 +13591,8 @@
           "videoProofUrl": null
         }
       ],
-      "id": "level-229"
+      "id": "level-229",
+      "skills": ""
     },
     {
       "id": "level-230",
@@ -13759,11 +13759,11 @@
       "verifier": "twilightphi",
       "levelCode": "GB-1230-MADDE",
       "levelId": "",
-      "length": "0:35",
       "directPlayUrl": "https://gooberdash.winterpixel.io/",
       "worldRecord": "Breadfish",
       "difficulty": "Entry Kaizo",
-      "imageFit": "cover"
+      "imageFit": "cover",
+      "skills": ""
     }
   ]
 }

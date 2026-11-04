@@ -29,7 +29,7 @@
         "difficulty": { "type": "string" },
         "thumbnailUrl": { "type": "string" },
         "imageFit": { "type": "string" },
-        "length": { "type": "string" },
+        "skills": { "type": "string" },
         "victors": { "type": "array" },
         "isLegacy": { "type": "boolean" }
       },

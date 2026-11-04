@@ -27,7 +27,8 @@ import {
   getChunkIdForLevel,
   LevelsBundleData,
   auth,
-  googleProvider
+  googleProvider,
+  syncUserUidMapping
 } from '../lib/firebase';
 import { ChangelogTab } from './ChangelogTab';
 import { PendingSubmissions } from './PendingSubmissions';
@@ -136,6 +137,24 @@ export const EditListTab: React.FC<EditListTabProps> = ({
   const [submissions, setSubmissions] = useState<ProofSubmission[]>([]);
   const [authorizedUsers, setAuthorizedUsers] = useState<User[]>([]);
 
+  const uniqueAuthorizedHelpers = useMemo(() => {
+    const userMap = new Map<string, User>();
+    authorizedUsers.forEach((u) => {
+      if (u && u.email) {
+        const clean = u.email.toLowerCase().trim();
+        if (clean !== 'tomatosauceman500@gmail.com') {
+          const existing = userMap.get(clean);
+          if (!existing) {
+            userMap.set(clean, { ...u, email: clean });
+          } else if (u.name && u.name !== 'List Helper' && existing.name === 'List Helper') {
+            userMap.set(clean, { ...existing, name: u.name });
+          }
+        }
+      }
+    });
+    return Array.from(userMap.values());
+  }, [authorizedUsers]);
+
   // List Helper Authentication State
   const [user, setUser] = useState<any>(null);
   const [playerName, setPlayerName] = useState('List Helper');
@@ -169,6 +188,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
         if (authorized) {
           const name = await getPlayerNameByEmail(currentUser.email);
           setPlayerName(name);
+          await syncUserUidMapping(currentUser);
         }
       } else {
         setIsAuthorized(false);
@@ -335,7 +355,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
   const [editVerifier, setEditVerifier] = useState('');
   const [editDirectPlayUrl, setEditDirectPlayUrl] = useState('');
   const [editDifficulty, setEditDifficulty] = useState<KaizoLevel['difficulty']>('Extreme Kaizo');
-  const [editLength, setEditLength] = useState('0:50');
+  const [editSkills, setEditSkills] = useState('');
   const [editImageInputType, setEditImageInputType] = useState<'url' | 'file' | 'paste'>('url');
   const [editImageUrl, setEditImageUrl] = useState('');
   const [editImagePreview, setEditImagePreview] = useState<string | null>(null);
@@ -380,7 +400,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
   const [addLevelImageInputType, setAddLevelImageInputType] = useState<'url' | 'file' | 'paste'>('url');
   const [addLevelImage, setAddLevelImage] = useState('');
   const [addLevelImagePreview, setAddLevelImagePreview] = useState<string | null>(null);
-  const [addLevelLength, setAddLevelLength] = useState('0:50');
+  const [addLevelSkills, setAddLevelSkills] = useState('');
   const [isAddingLevel, setIsAddingLevel] = useState(false);
 
   // Players directory state
@@ -472,7 +492,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
     setEditVerifier(level.verifier || '');
     setEditDirectPlayUrl(level.directPlayUrl || '');
     setEditDifficulty(level.difficulty || 'Extreme Kaizo');
-    setEditLength(level.length || '0:50');
+    setEditSkills(level.skills || '');
     setEditImageUrl(level.thumbnailUrl || '');
     setEditImagePreview(level.thumbnailUrl || null);
     setEditImageModified(false);
@@ -685,7 +705,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
         verifier: editVerifier.trim(),
         directPlayUrl: editDirectPlayUrl.trim() || 'https://jellycade.com/games/goober-dash',
         difficulty: editDifficulty,
-        length: editLength.trim() || '0:50',
+        skills: editSkills.trim(),
         victors: editVictors,
         rank: currentLevel?.rank,
         imageChunkId: currentLevel?.imageChunkId || getChunkIdForLevel(levelId, currentLevel?.rank),
@@ -818,14 +838,14 @@ export const EditListTab: React.FC<EditListTabProps> = ({
           });
         }
 
-        // Level Length diffing
-        if ((currentLevel.length || '').trim() !== editLength.trim()) {
+        // Skills diffing
+        if ((currentLevel.skills || '').trim() !== editSkills.trim()) {
           changes.push({
-            field: 'length',
-            label: 'Level Length',
-            oldValue: currentLevel.length || '0:50',
-            newValue: editLength.trim() || '0:50',
-            description: `Level length changed from ${currentLevel.length || '0:50'} to ${editLength.trim()}`,
+            field: 'skills',
+            label: 'Skills',
+            oldValue: currentLevel.skills || 'None',
+            newValue: editSkills.trim() || 'None',
+            description: `Skills updated from "${currentLevel.skills || 'None'}" to "${editSkills.trim() || 'None'}"`,
             type: 'modified'
           });
         }
@@ -1148,7 +1168,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
         verifier: addLevelVerifier.trim(),
         directPlayUrl: addLevelPlayUrl.trim() || 'https://jellycade.com/games/goober-dash',
         difficulty: addLevelDifficulty,
-        length: addLevelLength.trim() || '0:50',
+        skills: addLevelSkills.trim(),
         thumbnailUrl: addLevelImagePreview || addLevelImage.trim() || null,
         victors: []
       };
@@ -1186,12 +1206,12 @@ export const EditListTab: React.FC<EditListTabProps> = ({
           type: 'added'
         });
       }
-      if (addLevelLength.trim()) {
+      if (addLevelSkills.trim()) {
         addChanges.push({
-          field: 'length',
-          label: 'Level Length',
-          newValue: addLevelLength.trim(),
-          description: `Length: ${addLevelLength.trim()}`,
+          field: 'skills',
+          label: 'Skills',
+          newValue: addLevelSkills.trim(),
+          description: `Skills: ${addLevelSkills.trim()}`,
           type: 'added'
         });
       }
@@ -1221,7 +1241,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
       setAddLevelPlayUrl('');
       setAddLevelImage('');
       setAddLevelImagePreview(null);
-      setAddLevelLength('0:50');
+      setAddLevelSkills('');
       setIsAddLevelModalOpen(false);
     } catch (err) {
       console.error(err);
@@ -2068,16 +2088,16 @@ export const EditListTab: React.FC<EditListTabProps> = ({
 
                             <div>
                               <label className="block text-xs font-bold text-slate-200 mb-1 uppercase tracking-wider">
-                                Estimated Duration
+                                Skills:
                               </label>
                               <div className="relative">
-                                <Clock className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                                <Sparkles className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                                 <input
                                   type="text"
-                                  value={editLength}
-                                  onChange={(e) => setEditLength(e.target.value)}
+                                  value={editSkills}
+                                  onChange={(e) => setEditSkills(e.target.value)}
                                   className="w-full bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl pl-9 pr-3.5 py-2 text-xs text-white"
-                                  placeholder="e.g. 0:50"
+                                  placeholder="e.g. timing, memory"
                                 />
                               </div>
                             </div>
@@ -2812,15 +2832,18 @@ export const EditListTab: React.FC<EditListTabProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-slate-200 mb-1 uppercase tracking-wider">
-                  Estimated Duration
+                  Skills:
                 </label>
-                <input
-                  type="text"
-                  value={addLevelLength}
-                  onChange={(e) => setAddLevelLength(e.target.value)}
-                  placeholder="e.g. 0:50"
-                  className="w-full bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl px-3.5 py-2.5 text-xs text-white"
-                />
+                <div className="relative">
+                  <Sparkles className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    value={addLevelSkills}
+                    onChange={(e) => setAddLevelSkills(e.target.value)}
+                    placeholder="e.g. timing, memory"
+                    className="w-full bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-slate-500"
+                  />
+                </div>
               </div>
 
               <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
@@ -3145,8 +3168,8 @@ export const EditListTab: React.FC<EditListTabProps> = ({
                   </div>
                 </div>
 
-                {authorizedUsers.filter(u => u.email !== 'tomatosauceman500@gmail.com').map((helper) => (
-                  <div key={helper.id} className="bg-[#0b0f17] border border-slate-800 p-4 rounded-xl flex items-center justify-between hover:border-slate-700 transition-colors group">
+                {uniqueAuthorizedHelpers.map((helper) => (
+                  <div key={helper.email} className="bg-[#0b0f17] border border-slate-800 p-4 rounded-xl flex items-center justify-between hover:border-slate-700 transition-colors group">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-slate-900 rounded-full flex items-center justify-center text-slate-400 border border-slate-800 group-hover:text-amber-400 group-hover:border-amber-400/30 transition-colors">
                         <Users className="w-5 h-5" />
@@ -3167,7 +3190,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
                 ))}
               </div>
               
-              {authorizedUsers.filter(u => u.email !== 'tomatosauceman500@gmail.com').length === 0 && (
+              {uniqueAuthorizedHelpers.length === 0 && (
                 <div className="p-10 text-center border-2 border-dashed border-slate-800 rounded-2xl">
                    <p className="text-sm text-slate-500 italic">No additional helpers authorized.</p>
                 </div>
