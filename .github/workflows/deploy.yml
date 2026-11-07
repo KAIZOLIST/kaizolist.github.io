@@ -33,11 +33,11 @@ jobs:
         # Added --legacy-peer-deps to ignore version conflicts
         run: npm install --legacy-peer-deps
 
-      - name: Build
-        run: npm run build
-
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
+      - name: Build
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
