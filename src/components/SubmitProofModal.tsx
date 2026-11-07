@@ -72,7 +72,6 @@ export const SubmitProofModal: React.FC<SubmitProofModalProps> = ({
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [copiedSnippet, setCopiedSnippet] = useState(false);
 
   useEffect(() => {
     if (preselectedLevelId) {
@@ -223,25 +222,6 @@ export const SubmitProofModal: React.FC<SubmitProofModalProps> = ({
     setIsSuccess(true);
   };
 
-  const getVictorJsonSnippet = () => {
-    return JSON.stringify(
-      {
-        id: `vic-${Date.now()}`,
-        name: player.trim() || 'PlayerName',
-        videoProofUrl: proofUrl.trim() || screenshotDataUrl ? 'Screenshot Uploaded' : 'https://...',
-        verifiedByCreator: true
-      },
-      null,
-      2
-    );
-  };
-
-  const handleCopySnippet = () => {
-    navigator.clipboard.writeText(getVictorJsonSnippet());
-    setCopiedSnippet(true);
-    setTimeout(() => setCopiedSnippet(false), 2000);
-  };
-
   if (!isOpen) return null;
 
   return (
@@ -284,29 +264,11 @@ export const SubmitProofModal: React.FC<SubmitProofModalProps> = ({
               </p>
             </div>
 
-            <div className="text-left bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono text-slate-400">
-                  Victor JSON snippet:
-                </span>
-                <button
-                  type="button"
-                  onClick={handleCopySnippet}
-                  className="text-xs text-amber-400 hover:text-amber-300 font-medium transition-colors"
-                >
-                  {copiedSnippet ? 'Copied!' : 'Copy snippet'}
-                </button>
-              </div>
-              <pre className="text-[11px] font-mono text-amber-300/90 overflow-x-auto max-h-32">
-                {getVictorJsonSnippet()}
-              </pre>
-            </div>
-
             <div className="p-3 bg-[#5865F2]/10 border border-[#5865F2]/30 rounded-xl flex items-center justify-between gap-3 text-left">
               <div className="flex items-center gap-2">
                 <DiscordIcon className="w-4 h-4 text-[#8ea1e1] shrink-0" />
                 <span className="text-xs text-slate-300">
-                  Want updates or chat with the verifiers?
+                  Join our discord server!
                 </span>
               </div>
               <a

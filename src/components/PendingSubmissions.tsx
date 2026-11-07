@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { ProofSubmission, KaizoLevel, Victor, ChangeDetail } from '../types/kaizo';
 import { Check, X, Video, Image as ImageIcon, ExternalLink, Eye } from 'lucide-react';
-import { updateLevelData, addChangelogItem, db } from '../lib/firebase';
-import { deleteDoc, doc } from 'firebase/firestore';
+import { updateLevelData, addChangelogItem, removeSubmissionFromFirestore } from '../lib/firebase';
+import { getVictorName } from '../utils/kaizoUtils';
 
 interface PendingSubmissionsProps {
   submissions: ProofSubmission[];
@@ -19,6 +19,7 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
 }) => {
   const pending = submissions.filter((s) => s.status === 'pending');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [attachProof, setAttachProof] = useState<Record<string, boolean>>({});
 
   const handleApprove = async (sub: ProofSubmission) => {
     const level = levels.find((l) => l.id === sub.levelId);
@@ -27,14 +28,32 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
       return;
     }
 
-    const proofUrl = sub.screenshotUrl || sub.videoUrl;
-    const newVictor: Victor = {
-      id: `vic-${Date.now()}-${sub.player.toLowerCase().replace(/[^a-z0-9]/g, '')}`,
-      name: sub.player,
-      videoProofUrl: proofUrl,
-    };
+    const shouldAttachProof = Boolean(attachProof[sub.id]);
+    const proofUrl = (sub.screenshotUrl || sub.videoUrl || '').trim();
 
-    const updatedVictors = [...(level.victors || []), newVictor];
+    const existingVictors = level.victors || [];
+    const existingIndex = existingVictors.findIndex(
+      (v) => getVictorName(v).trim().toLowerCase() === sub.player.trim().toLowerCase()
+    );
+
+    let updatedVictors: Victor[];
+    if (existingIndex >= 0) {
+      if (shouldAttachProof && proofUrl) {
+        updatedVictors = existingVictors.map((v, idx) =>
+          idx === existingIndex ? { ...v, videoProofUrl: proofUrl } : v
+        );
+      } else {
+        updatedVictors = existingVictors;
+      }
+    } else {
+      const pSlug = sub.player.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+      const newVictor: Victor = {
+        id: `vic-${Date.now()}-${pSlug}`,
+        name: sub.player.trim(),
+        ...(shouldAttachProof && proofUrl ? { videoProofUrl: proofUrl } : {})
+      };
+      updatedVictors = [...existingVictors, newVictor];
+    }
 
     try {
       const approveChanges: ChangeDetail[] = [
@@ -45,13 +64,17 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
           description: `Added verified completion for ${sub.player} on level "${level.name}" (Rank #${level.rank})`,
           type: 'added'
         },
-        {
-          field: 'proof',
-          label: sub.proofType === 'screenshot' ? 'Screenshot Proof' : 'Proof Link',
-          newValue: proofUrl.startsWith('data:') ? 'Uploaded Screenshot Data' : proofUrl,
-          description: `Verified completion proof`,
-          type: 'added'
-        },
+        ...(shouldAttachProof && proofUrl
+          ? [
+              {
+                field: 'proof',
+                label: sub.proofType === 'screenshot' ? 'Screenshot Proof' : 'Proof Link',
+                newValue: proofUrl.startsWith('data:') ? 'Uploaded Screenshot Data' : proofUrl,
+                description: `Verified completion proof`,
+                type: 'added' as const
+              }
+            ]
+          : []),
         {
           field: 'status',
           label: 'Submission Queue',
@@ -63,7 +86,7 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
       ];
 
       await updateLevelData(level.id, { victors: updatedVictors });
-      await deleteDoc(doc(db, 'submissions', sub.id));
+      await removeSubmissionFromFirestore(sub.id);
       await addChangelogItem(
         'Completion Added',
         `Completion added for ${sub.player} on "${level.name}" (Rank #${level.rank})`,
@@ -71,7 +94,11 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
         approveChanges,
         { levelId: level.id, levelName: level.name }
       );
-      onToast(`Approved submission for ${sub.player}`);
+      onToast(
+        shouldAttachProof
+          ? `Approved submission for ${sub.player} (proof linked)`
+          : `Approved submission for ${sub.player}`
+      );
     } catch (err) {
       console.error(err);
       onToast('Failed to approve submission.');
@@ -92,7 +119,7 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
         }
       ];
 
-      await deleteDoc(doc(db, 'submissions', subId));
+      await removeSubmissionFromFirestore(subId);
       await addChangelogItem(
         'Submission Rejected',
         `Rejected completion submission from ${sub?.player || 'player'} on "${sub?.levelName || 'level'}"`,
@@ -167,6 +194,18 @@ export const PendingSubmissions: React.FC<PendingSubmissionsProps> = ({
                       </a>
                     )}
                   </div>
+
+                  <label className="flex items-center gap-1.5 mt-2 text-[11px] text-slate-400 hover:text-slate-200 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={Boolean(attachProof[sub.id])}
+                      onChange={(e) =>
+                        setAttachProof((prev) => ({ ...prev, [sub.id]: e.target.checked }))
+                      }
+                      className="w-3.5 h-3.5 rounded bg-slate-900 border-slate-700 text-amber-400 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-amber-400"
+                    />
+                    <span>Attach proof link to completion</span>
+                  </label>
                 </div>
               </div>
 

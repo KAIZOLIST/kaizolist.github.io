@@ -33,6 +33,7 @@ import {
 import { ChangelogTab } from './ChangelogTab';
 import { PendingSubmissions } from './PendingSubmissions';
 import { FirestoreReadMonitor } from './FirestoreReadMonitor';
+import { LevelCardPreview } from './LevelCardPreview';
 import { PLAYER_SLUG_NAME_MAP, getPointsForRank, getVictorName, extractPlayerSlug, isLevelVerified, getVerifiedPlacements, getLevelIdFromLink } from '../utils/kaizoUtils';
 import {
   Pencil,
@@ -2198,20 +2199,22 @@ export const EditListTab: React.FC<EditListTabProps> = ({
                             )}
 
                             {editImagePreview && (
-                              <div className="relative w-full h-32 bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
-                                <img src={editImagePreview} alt="Preview" className="w-full h-full object-cover" />
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    setEditImagePreview(null);
-                                    setEditImageUrl('');
-                                    setEditImageModified(true);
-                                  }}
-                                  className="absolute top-2 right-2 bg-slate-950/80 hover:bg-red-500 text-white p-1 rounded-lg text-xs"
-                                >
-                                  <X className="w-3.5 h-3.5" />
-                                </button>
-                              </div>
+                              <LevelCardPreview
+                                name={editName}
+                                rank={lvl.rank}
+                                creator={editCreator}
+                                verifier={editVerifier}
+                                difficulty={editDifficulty}
+                                thumbnailUrl={editImagePreview}
+                                directPlayUrl={editDirectPlayUrl}
+                                victors={editVictors}
+                                skills={editSkills}
+                                onRemoveImage={() => {
+                                  setEditImagePreview(null);
+                                  setEditImageUrl('');
+                                  setEditImageModified(true);
+                                }}
+                              />
                             )}
                           </div>
 
@@ -2814,19 +2817,21 @@ export const EditListTab: React.FC<EditListTabProps> = ({
                 )}
 
                 {addLevelImagePreview && (
-                  <div className="relative w-full h-32 bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
-                    <img src={addLevelImagePreview} alt="Preview" className="w-full h-full object-cover" />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setAddLevelImagePreview(null);
-                        setAddLevelImage('');
-                      }}
-                      className="absolute top-2 right-2 bg-slate-950/80 hover:bg-red-500 text-white p-1 rounded-lg text-xs"
-                    >
-                      <X className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                  <LevelCardPreview
+                    name={addLevelName}
+                    rank={addLevelPlacement}
+                    creator={addLevelCreator}
+                    verifier={addLevelVerifier}
+                    difficulty={addLevelDifficulty}
+                    thumbnailUrl={addLevelImagePreview}
+                    directPlayUrl={addLevelPlayUrl}
+                    victors={[]}
+                    skills={addLevelSkills}
+                    onRemoveImage={() => {
+                      setAddLevelImagePreview(null);
+                      setAddLevelImage('');
+                    }}
+                  />
                 )}
               </div>
 

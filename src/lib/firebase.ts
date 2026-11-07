@@ -1254,6 +1254,26 @@ export async function addSubmissionToFirestore(submission: ProofSubmission) {
   }
 }
 
+// Remove submission from Firestore in bundles/submissions
+export async function removeSubmissionFromFirestore(submissionId: string) {
+  const current = cachedSubmissionsList || [];
+  const updated = current.filter((s) => s.id !== submissionId);
+  cachedSubmissionsList = updated;
+  const bundleRef = doc(db, 'bundles', 'submissions');
+  const payload: SubmissionsBundleData = {
+    id: 'submissions',
+    updatedAt: new Date().toISOString(),
+    submissions: updated
+  };
+  try {
+    await trackedSetDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true }, 'removeSubmissionFromFirestore');
+    await deleteDoc(doc(db, 'submissions', submissionId)).catch(() => {});
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, 'bundles/submissions');
+    throw error;
+  }
+}
+
 // Add/update Player profile in Firestore (writes to bundles/players in 1 write)
 export async function addPlayerToFirestore(player: PlayerProfile) {
   const current = cachedPlayersList || [];
