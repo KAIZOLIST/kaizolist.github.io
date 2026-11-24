@@ -28,7 +28,9 @@ import {
   LevelsBundleData,
   auth,
   googleProvider,
-  syncUserUidMapping
+  syncUserUidMapping,
+  stripUnusedLevelFields,
+  cleanupUnusedLevelFieldsInFirestore
 } from '../lib/firebase';
 import { ChangelogTab } from './ChangelogTab';
 import { PendingSubmissions } from './PendingSubmissions';
@@ -190,6 +192,10 @@ export const EditListTab: React.FC<EditListTabProps> = ({
           const name = await getPlayerNameByEmail(currentUser.email);
           setPlayerName(name);
           await syncUserUidMapping(currentUser);
+          const cleaned = await cleanupUnusedLevelFieldsInFirestore();
+          if (cleaned) {
+            onToast('Synced level schema updates to Firestore.');
+          }
         }
       } else {
         setIsAuthorized(false);
@@ -305,7 +311,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
       if (!bundleData || !bundleData.levels || bundleData.levels.length === 0) {
         const sorted = [...levels].sort((a, b) => a.rank - b.rank);
         const levelsWithoutImages = sorted.map((lvl) => {
-          const { thumbnailUrl: _omitted, ...rest } = lvl;
+          const { thumbnailUrl: _omitted, ...rest } = stripUnusedLevelFields(lvl as KaizoLevel & Record<string, any>);
           return rest as KaizoLevel;
         });
         bundleData = {
@@ -357,6 +363,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
   const [editDirectPlayUrl, setEditDirectPlayUrl] = useState('');
   const [editDifficulty, setEditDifficulty] = useState<KaizoLevel['difficulty']>('Extreme Kaizo');
   const [editSkills, setEditSkills] = useState('');
+  const [editInfo, setEditInfo] = useState('');
   const [editImageInputType, setEditImageInputType] = useState<'url' | 'file' | 'paste'>('url');
   const [editImageUrl, setEditImageUrl] = useState('');
   const [editImagePreview, setEditImagePreview] = useState<string | null>(null);
@@ -368,7 +375,6 @@ export const EditListTab: React.FC<EditListTabProps> = ({
   const [newVictorVideo, setNewVictorVideo] = useState('');
   const [newVictorIsVerifier, setNewVictorIsVerifier] = useState(false);
   const [newVictorIsWR, setNewVictorIsWR] = useState(false);
-  const [newVictorVerifiedByCreator, setNewVictorVerifiedByCreator] = useState(false);
 
   // Saving state
   const [isSaving, setIsSaving] = useState(false);
@@ -402,6 +408,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
   const [addLevelImage, setAddLevelImage] = useState('');
   const [addLevelImagePreview, setAddLevelImagePreview] = useState<string | null>(null);
   const [addLevelSkills, setAddLevelSkills] = useState('');
+  const [addLevelInfo, setAddLevelInfo] = useState('');
   const [isAddingLevel, setIsAddingLevel] = useState(false);
 
   // Players directory state
@@ -494,6 +501,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
     setEditDirectPlayUrl(level.directPlayUrl || '');
     setEditDifficulty(level.difficulty || 'Extreme Kaizo');
     setEditSkills(level.skills || '');
+    setEditInfo(level.info || '');
     setEditImageUrl(level.thumbnailUrl || '');
     setEditImagePreview(level.thumbnailUrl || null);
     setEditImageModified(false);
@@ -512,7 +520,6 @@ export const EditListTab: React.FC<EditListTabProps> = ({
     setNewVictorVideo('');
     setNewVictorIsVerifier(false);
     setNewVictorIsWR(false);
-    setNewVictorVerifiedByCreator(false);
   };
 
   const handleCancelEdit = () => {
@@ -638,8 +645,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
       name: newVictorName.trim(),
       videoProofUrl: newVictorVideo.trim() || undefined,
       isVerifier: newVictorIsVerifier,
-      isWorldRecord: newVictorIsWR,
-      verifiedByCreator: newVictorVerifiedByCreator
+      isWorldRecord: newVictorIsWR
     };
 
     setEditVictors([...editVictors, newVictor]);
@@ -647,7 +653,6 @@ export const EditListTab: React.FC<EditListTabProps> = ({
     setNewVictorVideo('');
     setNewVictorIsVerifier(false);
     setNewVictorIsWR(false);
-    setNewVictorVerifiedByCreator(false);
     onToast(`Added completion for "${newVictorName.trim()}"`);
   };
 
@@ -664,7 +669,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
     setEditVictors(updated);
   };
 
-  const handleToggleVictorFlag = (index: number, flag: 'isVerifier' | 'isWorldRecord' | 'verifiedByCreator') => {
+  const handleToggleVictorFlag = (index: number, flag: 'isVerifier' | 'isWorldRecord') => {
     const updated = [...editVictors];
     updated[index] = { ...updated[index], [flag]: !updated[index][flag] };
     setEditVictors(updated);
@@ -707,6 +712,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
         directPlayUrl: editDirectPlayUrl.trim() || 'https://jellycade.com/games/goober-dash',
         difficulty: editDifficulty,
         skills: editSkills.trim(),
+        info: editInfo.trim(),
         victors: editVictors,
         rank: currentLevel?.rank,
         imageChunkId: currentLevel?.imageChunkId || getChunkIdForLevel(levelId, currentLevel?.rank),
@@ -847,6 +853,18 @@ export const EditListTab: React.FC<EditListTabProps> = ({
             oldValue: currentLevel.skills || 'None',
             newValue: editSkills.trim() || 'None',
             description: `Skills updated from "${currentLevel.skills || 'None'}" to "${editSkills.trim() || 'None'}"`,
+            type: 'modified'
+          });
+        }
+
+        // Info diffing
+        if ((currentLevel.info || '').trim() !== editInfo.trim()) {
+          changes.push({
+            field: 'info',
+            label: 'Info',
+            oldValue: currentLevel.info || 'None',
+            newValue: editInfo.trim() || 'None',
+            description: `Info updated from "${currentLevel.info || 'None'}" to "${editInfo.trim() || 'None'}"`,
             type: 'modified'
           });
         }
@@ -1170,6 +1188,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
         directPlayUrl: addLevelPlayUrl.trim() || 'https://jellycade.com/games/goober-dash',
         difficulty: addLevelDifficulty,
         skills: addLevelSkills.trim(),
+        info: addLevelInfo.trim(),
         thumbnailUrl: addLevelImagePreview || addLevelImage.trim() || null,
         victors: []
       };
@@ -1216,6 +1235,15 @@ export const EditListTab: React.FC<EditListTabProps> = ({
           type: 'added'
         });
       }
+      if (addLevelInfo.trim()) {
+        addChanges.push({
+          field: 'info',
+          label: 'Info',
+          newValue: addLevelInfo.trim(),
+          description: `Info: ${addLevelInfo.trim()}`,
+          type: 'added'
+        });
+      }
       if (addLevelPlayUrl.trim()) {
         addChanges.push({
           field: 'directPlayUrl',
@@ -1243,6 +1271,7 @@ export const EditListTab: React.FC<EditListTabProps> = ({
       setAddLevelImage('');
       setAddLevelImagePreview(null);
       setAddLevelSkills('');
+      setAddLevelInfo('');
       setIsAddLevelModalOpen(false);
     } catch (err) {
       console.error(err);
@@ -2102,6 +2131,19 @@ export const EditListTab: React.FC<EditListTabProps> = ({
                                 />
                               </div>
                             </div>
+
+                            <div className="md:col-span-2 lg:col-span-3">
+                              <label className="block text-xs font-bold text-slate-200 mb-1 uppercase tracking-wider">
+                                Info <span className="text-slate-500 font-normal lowercase">(displayed directly next to skills)</span>
+                              </label>
+                              <input
+                                type="text"
+                                value={editInfo}
+                                onChange={(e) => setEditInfo(e.target.value)}
+                                className="w-full bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500"
+                                placeholder="e.g. World Record: 45.044 seconds or level description"
+                              />
+                            </div>
                           </div>
 
                           {/* Thumbnail Upload Section */}
@@ -2849,6 +2891,19 @@ export const EditListTab: React.FC<EditListTabProps> = ({
                     className="w-full bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-slate-500"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-200 mb-1 uppercase tracking-wider">
+                  Info <span className="text-slate-500 font-normal lowercase">(displayed directly next to skills)</span>
+                </label>
+                <input
+                  type="text"
+                  value={addLevelInfo}
+                  onChange={(e) => setAddLevelInfo(e.target.value)}
+                  placeholder="e.g. World Record: 45.044 seconds or level description"
+                  className="w-full bg-slate-900 border border-slate-700 focus:border-amber-400 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500"
+                />
               </div>
 
               <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">

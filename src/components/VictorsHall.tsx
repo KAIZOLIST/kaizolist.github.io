@@ -99,12 +99,6 @@ export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel,
       .map((s) => normalizePlayerName(s))
       .filter((k) => k && k !== '-' && k !== 'none');
 
-    // Case-insensitive WR keys for level
-    const levelWRKeys = (level.worldRecord || '')
-      .split(',')
-      .map((s) => normalizePlayerName(s))
-      .filter((k) => k && k !== '-' && k !== 'none');
-
     level.victors.forEach((victor) => {
       const rawName = getVictorName(victor);
       const vKey = normalizePlayerName(rawName);
@@ -119,11 +113,8 @@ export const VictorsHall: React.FC<VictorsHallProps> = ({ levels, onSelectLevel,
         levelVerifierKeys.includes(vKey) ||
         levelVerifierKeys.some((k) => k.includes(vKey) || vKey.includes(k));
 
-      // WR status: victor flag OR level WR match
-      const isWR =
-        Boolean(victor.isWorldRecord) ||
-        levelWRKeys.includes(vKey) ||
-        levelWRKeys.some((k) => k.includes(vKey) || vKey.includes(k));
+      // WR status: determined strictly by victor.isWorldRecord flag
+      const isWR = Boolean(victor.isWorldRecord);
 
       let earnedPoints = levelPoints;
       if (isVerifier) earnedPoints += levelPoints * 0.10;

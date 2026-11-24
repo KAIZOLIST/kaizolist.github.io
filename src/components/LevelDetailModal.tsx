@@ -11,7 +11,7 @@ import {
   Maximize2
 } from 'lucide-react';
 import { KaizoLevel } from '../types/kaizo';
-import { getPointsForRank, sortVictors, getVictorName, isLevelVerified, getLevelIdFromLink } from '../utils/kaizoUtils';
+import { getPointsForRank, sortVictors, getVictorName, isLevelVerified, getLevelIdFromLink, getWorldRecordHolders } from '../utils/kaizoUtils';
 import { fetchLevelThumbnail } from '../lib/firebase';
 
 interface LevelDetailModalProps {
@@ -59,6 +59,7 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
   const effectiveRank = displayRank ?? level.rank ?? 999;
   const points = pointsAwarded !== undefined ? pointsAwarded : (verified ? getPointsForRank(effectiveRank) : 0);
   const calculatedLevelId = getLevelIdFromLink(level.directPlayUrl);
+  const wrHolders = getWorldRecordHolders(level.victors);
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText(calculatedLevelId !== 'N/A' ? calculatedLevelId : level.directPlayUrl || '');
@@ -140,9 +141,22 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
                 ) : (
                   <> · <strong className="text-amber-400">Unverified</strong></>
                 )}
-                {level.worldRecord && level.worldRecord !== '-' && (
+                {wrHolders.length > 0 && (
                   <>
-                    {' '}· World Record: <strong className="text-cyan-300">{level.worldRecord}</strong>
+                    {' '}· World Record:{' '}
+                    {wrHolders.map((holder, idx) => (
+                      <React.Fragment key={holder}>
+                        {idx > 0 && ', '}
+                        <button
+                          type="button"
+                          onClick={() => onSelectPlayer?.(holder)}
+                          className="text-cyan-300 font-bold hover:text-cyan-200 hover:underline transition-colors"
+                          title={`View ${holder}'s profile`}
+                        >
+                          {holder}
+                        </button>
+                      </React.Fragment>
+                    ))}
                   </>
                 )}
               </p>
@@ -255,6 +269,12 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
                   <span className="text-slate-500">Skills:</span>
                   <span className="font-medium text-slate-200">{level.skills || level.length || 'None'}</span>
                 </div>
+
+                {level.info && level.info.trim() && (
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-medium text-slate-200">{level.info.trim()}</span>
+                  </div>
+                )}
               </div>
 
               {/* Direct Play Button */}
@@ -313,9 +333,7 @@ export const LevelDetailModal: React.FC<LevelDetailModalProps> = ({
                   const isVerifier =
                     Boolean(victor.isVerifier) ||
                     (level.verifier && level.verifier.toLowerCase().trim().includes(vNameLower));
-                  const isWR =
-                    Boolean(victor.isWorldRecord) ||
-                    (level.worldRecord && level.worldRecord.toLowerCase().trim().includes(vNameLower));
+                  const isWR = Boolean(victor.isWorldRecord);
 
                   return (
                     <div

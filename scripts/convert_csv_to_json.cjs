@@ -119,7 +119,6 @@ for (let i = headerRowIndex + 1; i < lines.length; i++) {
         completionDate: '2026',
         videoProofUrl: 'https://gooberdash.winterpixel.io/',
         notes: note || undefined,
-        verifiedByCreator: true,
         isVerifier,
         isWorldRecord: isWR
       });
@@ -137,23 +136,17 @@ for (let i = headerRowIndex + 1; i < lines.length; i++) {
     return a.name.localeCompare(b.name);
   });
 
-  // Level code
-  const codeSuffix = name.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 5) || 'LVL';
-  const levelCode = `GB-${1000 + rank}-${codeSuffix}`;
-
   levels.push({
     id: `level-${rank}`,
     rank,
     name,
     creator,
     verifier,
-    worldRecord,
-    levelCode,
     directPlayUrl: `https://gooberdash.winterpixel.io/`,
     difficulty,
     points,
     thumbnailUrl: null, // User can assign thumbnails
-    description: `Official Goober Dash Kaizo rating #${rank}. Points: ${points}. Verifier: ${verifier}. World Record: ${worldRecord}. Total verified completions: ${victors.length}.`,
+    description: `Official Goober Dash Kaizo rating #${rank}. Points: ${points}. Verifier: ${verifier}. Total verified completions: ${victors.length}.`,
     length: points >= 100 ? '0:50' : '0:35',
     releaseDate: '2026-01-01',
     victors

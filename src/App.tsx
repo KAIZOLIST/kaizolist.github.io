@@ -19,12 +19,15 @@ import initialLevelsData from './data/kaizoLevels.json';
 import { getSubmissions, saveSubmissions } from './utils/storage';
 import { getPointsForRank, isLevelVerified, getVerifiedPlacements, getLevelIdFromLink } from './utils/kaizoUtils';
 import {
-  subscribeToLevels,
   subscribeToLevelsBundle,
   subscribeToPlayers,
   subscribeToDeletedLevels,
   subscribeToDeletedPlayers,
-  syncLevelsToFirestore
+  auth,
+  onAuthStateChanged,
+  isUserAuthorized,
+  doesLevelsBundleHaveUnusedFields,
+  cleanupUnusedLevelFieldsInFirestore
 } from './lib/firebase';
 import { Sparkles, ExternalLink } from 'lucide-react';
 
@@ -61,6 +64,28 @@ export default function App() {
 
   // Connect to Firebase Firestore on boot
   useEffect(() => {
+    let isAuthorizedSession = false;
+
+    const tryCleanupBundle = async () => {
+      if (isAuthorizedSession && doesLevelsBundleHaveUnusedFields()) {
+        const cleaned = await cleanupUnusedLevelFieldsInFirestore();
+        if (cleaned) {
+          showToast('Updated Firestore levels bundle schema.');
+        }
+      }
+    };
+
+    const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser?.email) {
+        isAuthorizedSession = await isUserAuthorized(currentUser.email);
+        if (isAuthorizedSession) {
+          void tryCleanupBundle();
+        }
+      } else {
+        isAuthorizedSession = false;
+      }
+    });
+
     // Synchronously attach listeners so cleanups are reliable
     const unsubscribeDelLevels = subscribeToDeletedLevels((dSet) => {
       setDeletedLevelIds(dSet);
@@ -80,6 +105,7 @@ export default function App() {
           const sorted = [...bundleData.levels].sort((a, b) => a.rank - b.rank);
           setLevels(sorted);
           setIsFirestoreLive(true);
+          void tryCleanupBundle();
         }
       },
       (err) => {
@@ -88,6 +114,7 @@ export default function App() {
     );
 
     return () => {
+      unsubscribeAuth();
       unsubscribeDelLevels();
       unsubscribeDelPlayers();
       unsubscribePlayers();

@@ -917,6 +917,67 @@ export async function updateLevelThumbnail(
   }
 }
 
+let bundleHasUnusedFields = false;
+let cleanupUnusedFieldsPromise: Promise<boolean> | null = null;
+
+export function stripUnusedLevelFields(lvl: KaizoLevel & Record<string, any>): KaizoLevel {
+  if (!lvl || typeof lvl !== 'object') return lvl;
+  const {
+    isLegacy: _omittedLegacy,
+    levelCode: _omittedCode,
+    levelId: _omittedLevelId,
+    worldRecord: _omittedWorldRecord,
+    victors,
+    ...rest
+  } = lvl;
+  const cleanedVictors = Array.isArray(victors)
+    ? victors.map((v: any) => {
+        if (!v || typeof v !== 'object') return v;
+        const { verifiedByCreator: _omittedVerifiedByCreator, ...vRest } = v;
+        return vRest;
+      })
+    : [];
+  return {
+    ...rest,
+    info: typeof rest.info === 'string' ? rest.info : '',
+    victors: cleanedVictors
+  } as KaizoLevel;
+}
+
+export function hasUnusedLevelFields(levels: unknown): boolean {
+  if (!Array.isArray(levels)) return false;
+  return levels.some(
+    (lvl) =>
+      Boolean(lvl) &&
+      typeof lvl === 'object' &&
+      ('isLegacy' in lvl ||
+        'levelCode' in lvl ||
+        'levelId' in lvl ||
+        'worldRecord' in lvl ||
+        !('info' in lvl) ||
+        (Array.isArray((lvl as any).victors) &&
+          (lvl as any).victors.some((v: any) => v && typeof v === 'object' && 'verifiedByCreator' in v)))
+  );
+}
+
+export function doesLevelsBundleHaveUnusedFields(): boolean {
+  return bundleHasUnusedFields;
+}
+
+function normalizeLevelsBundleData(rawData: LevelsBundleData): LevelsBundleData {
+  const rawLevels = Array.isArray(rawData.levels) ? rawData.levels : [];
+  if (hasUnusedLevelFields(rawLevels)) {
+    bundleHasUnusedFields = true;
+  } else {
+    bundleHasUnusedFields = false;
+  }
+  const cleanedLevels = rawLevels.map((lvl) => stripUnusedLevelFields(lvl as KaizoLevel & Record<string, any>));
+  return {
+    ...rawData,
+    levels: cleanedLevels
+  };
+}
+
 function registerLevelsInCache(levels: KaizoLevel[]) {
   if (!Array.isArray(levels)) return;
   levelToChunkMap.clear();
@@ -945,9 +1006,9 @@ export async function fetchLevelsBundle(): Promise<LevelsBundleData | null> {
     try {
       const snap = await trackedGetDoc(bundleRef, 'fetchLevelsBundle');
       if (snap.exists()) {
-        const data = snap.data() as LevelsBundleData;
+        const data = normalizeLevelsBundleData(snap.data() as LevelsBundleData);
         cachedLevelsBundle = data;
-        if (data && Array.isArray(data.levels)) {
+        if (Array.isArray(data.levels)) {
           registerLevelsInCache(data.levels);
         }
         return data;
@@ -988,9 +1049,9 @@ export function subscribeToLevelsBundle(
       bundleRef,
       (snapshot: any) => {
         if (snapshot.exists()) {
-          const data = snapshot.data() as LevelsBundleData;
+          const data = normalizeLevelsBundleData(snapshot.data() as LevelsBundleData);
           cachedLevelsBundle = data;
-          if (data && Array.isArray(data.levels)) {
+          if (Array.isArray(data.levels)) {
             registerLevelsInCache(data.levels);
           }
           for (const sub of levelsBundleSubscribers) {
@@ -1014,12 +1075,12 @@ export function subscribeToLevelsBundle(
   };
 }
 
-// Update the consolidated levels bundle in Firestore (strips images)
+// Update the consolidated levels bundle in Firestore (strips images and deprecated fields)
 export async function updateLevelsBundleInFirestore(levels: KaizoLevel[]): Promise<void> {
   const bundleRef = doc(db, 'bundles', 'levels');
   const sorted = [...levels].sort((a, b) => a.rank - b.rank);
   const levelsWithoutImages = sorted.map((lvl) => {
-    const { thumbnailUrl: _omitted, ...rest } = lvl;
+    const { thumbnailUrl: _omitted, ...rest } = stripUnusedLevelFields(lvl as KaizoLevel & Record<string, any>);
     return rest as KaizoLevel;
   });
 
@@ -1033,10 +1094,49 @@ export async function updateLevelsBundleInFirestore(levels: KaizoLevel[]): Promi
 
   try {
     await trackedSetDoc(bundleRef, sanitizeFirestoreData(payload), { merge: true }, 'updateLevelsBundleInFirestore');
+    bundleHasUnusedFields = false;
+    cachedLevelsBundle = payload;
+    registerLevelsInCache(levelsWithoutImages);
   } catch (error) {
     handleFirestoreError(error, OperationType.WRITE, 'bundles/levels');
     throw error;
   }
+}
+
+/**
+ * Normalizes the live Firestore bundles/levels document when an authorized admin/helper
+ * session is active (removes deprecated fields and ensures the info field exists on every level).
+ */
+export async function cleanupUnusedLevelFieldsInFirestore(): Promise<boolean> {
+  if (!bundleHasUnusedFields) return false;
+  if (cleanupUnusedFieldsPromise) return cleanupUnusedFieldsPromise;
+
+  cleanupUnusedFieldsPromise = (async () => {
+    try {
+      const bundleRef = doc(db, 'bundles', 'levels');
+      const serverSnap = await getDocFromServer(bundleRef);
+      firestoreMonitor.logRead('getDoc', bundleRef.path, 1, 'cleanupUnusedLevelFieldsInFirestore');
+      if (!serverSnap.exists()) {
+        bundleHasUnusedFields = false;
+        return false;
+      }
+      const rawData = serverSnap.data() as LevelsBundleData;
+      const rawLevels = Array.isArray(rawData.levels) ? rawData.levels : [];
+      if (!hasUnusedLevelFields(rawLevels)) {
+        bundleHasUnusedFields = false;
+        return false;
+      }
+      await updateLevelsBundleInFirestore(rawLevels);
+      return true;
+    } catch (error) {
+      console.warn('Could not clean unused level fields in Firestore:', error);
+      return false;
+    } finally {
+      cleanupUnusedFieldsPromise = null;
+    }
+  })();
+
+  return cleanupUnusedFieldsPromise;
 }
 
 // Subscribe to Levels real-time: reads from the consolidated big file (bundles/levels) with 1 document read!

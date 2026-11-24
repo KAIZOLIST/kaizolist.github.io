@@ -2,7 +2,6 @@ export interface Victor {
   id: string;
   name?: string;
   videoProofUrl?: string;
-  verifiedByCreator?: boolean;
   isVerifier?: boolean;
   isWorldRecord?: boolean;
 }
@@ -13,15 +12,14 @@ export interface KaizoLevel {
   name: string;
   creator: string;
   verifier: string;
-  worldRecord?: string;
   directPlayUrl: string;
   difficulty: 'Impossible Kaizo' | 'Silent Kaizo' | 'Extreme Kaizo' | 'Insane Kaizo' | 'High Kaizo' | 'Mid Kaizo' | 'Entry Kaizo';
   thumbnailUrl: string | null;
   imageFit?: 'contain' | 'cover';
   skills?: string;
+  info?: string;
   length?: string;
   victors: Victor[];
-  isLegacy?: boolean;
   imageChunkId?: string;
 }
 

@@ -285,11 +285,6 @@ export function calculatePlayerLeaderboard(levels: KaizoLevel[]): PlayerStats[] 
       .map((s) => normalizePlayerName(s))
       .filter((k) => k && k !== '-' && k !== 'none');
 
-    const levelWRKeys = (level.worldRecord || '')
-      .split(',')
-      .map((s) => normalizePlayerName(s))
-      .filter((k) => k && k !== '-' && k !== 'none');
-
     const victorsList = Array.isArray(level.victors) ? level.victors : [];
     victorsList.forEach((victor) => {
       const rawName = getVictorName(victor);
@@ -304,10 +299,7 @@ export function calculatePlayerLeaderboard(levels: KaizoLevel[]): PlayerStats[] 
         levelVerifierKeys.includes(vKey) ||
         levelVerifierKeys.some((k) => k.includes(vKey) || vKey.includes(k));
 
-      const isWR =
-        Boolean(victor.isWorldRecord) ||
-        levelWRKeys.includes(vKey) ||
-        levelWRKeys.some((k) => k.includes(vKey) || vKey.includes(k));
+      const isWR = Boolean(victor.isWorldRecord);
 
       let earnedPoints = levelPoints;
       if (isVerifier) earnedPoints += levelPoints * 0.10;

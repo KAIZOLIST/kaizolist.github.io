@@ -104,6 +104,22 @@ export function getVictorName(victor?: { id?: string; name?: string }): string {
   return slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : 'Unknown Player';
 }
 
+export function getWorldRecordHolders(victors?: Victor[]): string[] {
+  if (!Array.isArray(victors)) return [];
+  const holders: string[] = [];
+  const seen = new Set<string>();
+  for (const victor of victors) {
+    if (!victor?.isWorldRecord) continue;
+    const name = getVictorName(victor);
+    const key = name.trim().toLowerCase();
+    if (name && !seen.has(key)) {
+      seen.add(key);
+      holders.push(name);
+    }
+  }
+  return holders;
+}
+
 /**
  * Preset point values for ranks 1 to 200.
  * Any verified rank beyond 200 awards 1 point.

@@ -8,7 +8,6 @@
         "id": { "type": "string" },
         "name": { "type": "string" },
         "videoProofUrl": { "type": "string" },
-        "verifiedByCreator": { "type": "boolean" },
         "isVerifier": { "type": "boolean" },
         "isWorldRecord": { "type": "boolean" }
       },
@@ -24,14 +23,14 @@
         "name": { "type": "string", "maxLength": 200 },
         "creator": { "type": "string", "maxLength": 100 },
         "verifier": { "type": "string", "maxLength": 100 },
-        "worldRecord": { "type": "string" },
         "directPlayUrl": { "type": "string" },
         "difficulty": { "type": "string" },
         "thumbnailUrl": { "type": "string" },
         "imageFit": { "type": "string" },
         "skills": { "type": "string" },
+        "info": { "type": "string" },
         "victors": { "type": "array" },
-        "isLegacy": { "type": "boolean" }
+        "imageChunkId": { "type": "string" }
       },
       "required": ["id", "rank", "name", "creator", "verifier", "directPlayUrl", "difficulty"]
     },
